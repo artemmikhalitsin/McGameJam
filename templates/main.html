@@ -1,23 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		<script type = "text/javascript" src = "{{ url_for('static', filename = 'jquery-latest.js') }}" ></script>
-		<script type = "text/javascript" src = "{{ url_for('static', filename = 'jquery.tablesorter.js') }}" ></script>
-		<script type = "text/javascript" src = "{{ url_for('static', filename = 'list.js') }}" ></script>
-		<script type = "text/javascript" src = "{{ url_for('static', filename = 'CollapsibleLists.js') }}" ></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="http://code.stephenmorley.org/javascript/collapsible-lists/CollapsibleLists.js"></script>
-	<title>ClickNCollect</title>
+<!doctype html>
 
-	<style>
-	</style>
-</head>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hello World</title>
+  </head>
 
-<body>
+    <script src="pixi.min.js"></script>
 
-<h1>{{message}}</h1>
+    <body>
+      <script type="text/javascript">
+      let type = "WebGL"
+      if(!PIXI.utils.isWebGLSupported()){
+        type = "canvas"
+      }
 
-</body>
+      PIXI.utils.sayHello(type)
+      </script>
+    </body>
 </html>
