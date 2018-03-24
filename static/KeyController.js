@@ -15,37 +15,47 @@ handle = (letter) => {
 }
 
 q.press = () => {
-  sprites.keyQ.visible = true;
+  sprites.keyQ.visible = false;
+  sprites.keyQPress.visible = true;
   handle('Q');
 };
 
 q.release = () => {
-  sprites.keyQ.visible = false;
+  sprites.keyQPress.visible = false;
+  sprites.keyQ.visible = true;
 };
 
 w.press = () => {
-  sprites.keyW.visible = true;
+  sprites.keyW.visible = false;
+  sprites.keyWPress.visible = true;
   handle('W');
 };
 
 w.release = () => {
-  sprites.keyW.visible = false;
+  sprites.keyWPress.visible = false;
+  sprites.keyW.visible = true;
+
 };
 
 e.press = () => {
-  sprites.keyE.visible = true;
+  sprites.keyE.visible = false;
+  sprites.keyEPress.visible = true;
   handle('E');
 };
 
 e.release = () => {
-  sprites.keyE.visible = false;
+  sprites.keyEPress.visible = false;
+  sprites.keyE.visible = true;
 };
 
 r.press = () => {
-  sprites.keyR.visible = true;
+  sprites.keyR.visible = false;
+  sprites.keyRPress.visible = true;
+
   handle('R');
 };
 
 r.release = () => {
-  sprites.keyR.visible = false;
+  sprites.keyRPress.visible = false;
+  sprites.keyR.visible = true;
 };

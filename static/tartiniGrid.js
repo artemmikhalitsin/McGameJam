@@ -2,7 +2,14 @@
 //This `setup` function will run when the image has loaded
 function tartiniSetup() {
   var gridTexture = PIXI.Texture.fromImage('static/images/test1.png')
-  var keyCapsTexture = PIXI.Texture.fromImage('static/images/KeyCaps.png')
+  var note1 = PIXI.Texture.fromImage('static/images/note1.png')
+  var note1Light = PIXI.Texture.fromImage('static/images/note1Light.png')
+  var note2 = PIXI.Texture.fromImage('static/images/note2.png')
+  var note2Light = PIXI.Texture.fromImage('static/images/note2Light.png')
+  var note3 = PIXI.Texture.fromImage('static/images/note3.png')
+  var note3Light = PIXI.Texture.fromImage('static/images/note3Light.png')
+  var note4 = PIXI.Texture.fromImage('static/images/note4.png')
+  var note4Light = PIXI.Texture.fromImage('static/images/note4Light.png')
   var charTexture = PIXI.Texture.fromImage('static/images/Tartini.png')
   var charTexture1 = PIXI.Texture.fromImage('static/images/Tartini1.png')
   var charTexture2 = PIXI.Texture.fromImage('static/images/Tartini2.png')
@@ -84,30 +91,54 @@ function tartiniSetup() {
 
 
   //KeyCaps row
-  sprites.keyQ = new PIXI.Sprite(keyCapsTexture);
+  sprites.keyQ = new PIXI.Sprite(note1);
   sprites.keyQ.x =130;
   sprites.keyQ.y = 600;
-  sprites.keyQ.visible = false;
+  sprites.keyQ.visible = true;
   sprites.keyQ.click = false;
 
+  sprites.keyQPress = new PIXI.Sprite(note1Light);
+  sprites.keyQPress.x =130;
+  sprites.keyQPress.y = 600;
+  sprites.keyQPress.visible = false;
+  sprites.keyQPress.click = false;
 
-  sprites.keyW = new PIXI.Sprite(keyCapsTexture);
+
+  sprites.keyW = new PIXI.Sprite(note2);
   sprites.keyW.x = 250;
   sprites.keyW.y = 600;
-  sprites.keyW.visible = false;
+  sprites.keyW.visible = true;
   sprites.keyW.click = false;
 
-  sprites.keyE = new PIXI.Sprite(keyCapsTexture);
+  sprites.keyWPress = new PIXI.Sprite(note2Light);
+  sprites.keyWPress.x = 250;
+  sprites.keyWPress.y = 600;
+  sprites.keyWPress.visible = false;
+  sprites.keyWPress.click = false;
+
+  sprites.keyE = new PIXI.Sprite(note3);
   sprites.keyE.x = 370;
   sprites.keyE.y = 600;
-  sprites.keyE.visible = false;
+  sprites.keyE.visible = true;
   sprites.keyE.click = false;
 
-  sprites.keyR = new PIXI.Sprite(keyCapsTexture);
+  sprites.keyEPress = new PIXI.Sprite(note3Light);
+  sprites.keyEPress.x = 370;
+  sprites.keyEPress.y = 600;
+  sprites.keyEPress.visible = false;
+  sprites.keyEPress.click = false;
+
+  sprites.keyR = new PIXI.Sprite(note4);
   sprites.keyR.x = 490;
   sprites.keyR.y = 600;
-  sprites.keyR.visible = false;
+  sprites.keyR.visible = true;
   sprites.keyR.click = false;
+
+  sprites.keyRPress = new PIXI.Sprite(note4Light);
+  sprites.keyRPress.x = 490;
+  sprites.keyRPress.y = 600;
+  sprites.keyRPress.visible = false;
+  sprites.keyRPress.click = false;
 
   //Player sprite//Grid top row
   sprites.player = new PIXI.Sprite(gridTexture);
@@ -123,6 +154,11 @@ function tartiniSetup() {
   app.stage.addChild(sprites.keyE);
   app.stage.addChild(sprites.keyR);
 
+  //Add the KeyCaps to the stage
+  app.stage.addChild(sprites.keyQPress);
+  app.stage.addChild(sprites.keyWPress);
+  app.stage.addChild(sprites.keyEPress);
+  app.stage.addChild(sprites.keyRPress);
   //Add player to the stage
   app.stage.addChild(sprites.player);
 
