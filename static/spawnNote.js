@@ -37,7 +37,7 @@ class musicManager{
     // Fixed note speed?
     this.noteSpeed = 6.0;
     // Initial drop distance
-    this.dropDistance = +this.noteTexture.height - (app.stage.height - 50)
+    this.dropDistance = +this.noteTexture.height - (app.stage.height - 50);
     // Is it really loaded????
     // Load a track
     this.track = PIXI.sound.Sound.from({
