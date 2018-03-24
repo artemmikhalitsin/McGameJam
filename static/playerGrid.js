@@ -7,18 +7,22 @@ function gridSetup() {
   let keyQ = new PIXI.Sprite(keyCapsTexture);
   keyQ.x = 50;
   keyQ.y = 700;
+  keyQ.visible = false;
 
   let keyW = new PIXI.Sprite(keyCapsTexture);
   keyW.x = 150;
   keyW.y = 700;
+  keyW.visible = false;
 
   let keyE = new PIXI.Sprite(keyCapsTexture);
   keyE.x = 250;
   keyE.y = 700;
+  keyE.visible = false;
 
   let keyR = new PIXI.Sprite(keyCapsTexture);
   keyR.x = 350;
   keyR.y = 700;
+  keyR.visible = false;
 
   //Grid top row
   let g00 = new PIXI.Sprite(gridTexture);
@@ -179,4 +183,54 @@ function gridSetup() {
     down.release = () => {
 
     };
+    //Capture the keyboard arrow keys
+      let q = keyboard(81),
+          w = keyboard(87),
+          e = keyboard(69),
+          r = keyboard(82);
+
+      //Left arrow key `press` method
+      q.press = () => {
+        //Change the cat's velocity when the key is pressed
+        keyQ.visible = true;
+      };
+
+      //Left arrow key `release` method
+      q.release = () => {
+        keyQ.visible = false;
+      };
+
+      //Left arrow key `press` method
+      w.press = () => {
+        //Change the cat's velocity when the key is pressed
+        keyW.visible = true;
+      };
+
+      //Left arrow key `release` method
+      w.release = () => {
+        keyW.visible = false;
+      };
+
+      //Left arrow key `press` method
+      e.press = () => {
+        //Change the cat's velocity when the key is pressed
+        keyE.visible = true;
+      };
+
+      //Left arrow key `release` method
+      e.release = () => {
+        keyE.visible = false;
+      };
+
+      //Left arrow key `press` method
+      r.press = () => {
+        //Change the cat's velocity when the key is pressed
+        keyR.visible = true;
+      };
+
+      //Left arrow key `release` method
+      r.release = () => {
+        keyR.visible = false;
+      };
+
   }
