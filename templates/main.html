@@ -80,11 +80,14 @@ var crashCheck = false;
 
         var MM = new musicManager();
         app.ticker.add((delta) => MM.update(delta));
-        MM.startTrack();
-        MM.pushNoteLane('Q', 3.0);
-        MM.pushNoteLane('W', 3.0);
-        MM.pushNoteLane('E', 3.0);
-        MM.pushNoteLane('R', 3.0);
+        MM.startTrack(144, ['0000001100000011',
+          '0000110000001100',
+          '0011000000110000',
+          '1100000011000000']);
+        // MM.pushNoteLane('Q', 3.0);
+        // MM.pushNoteLane('W', 3.0);
+        // MM.pushNoteLane('E', 3.0);
+        // MM.pushNoteLane('R', 3.0);
 
         function playRhythm(){
           //Q hit logic
