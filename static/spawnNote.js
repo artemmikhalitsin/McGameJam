@@ -30,15 +30,43 @@ class Note {
 // }
 
 class musicManager{
-  constructor() {
+  constructor(trackPath, sequenceQWER, bpm, noteSpeed) {
+    this.noteTexture = PIXI.Texture.fromImage('static/images/placeholder_note.png')
+    this.bpm = bpm;
+    this.fixedDelay = 1.0;
+    // Fixed note speed?
+    this.noteSpeed = 6.0;
+    // Initial drop distance
+    this.dropDistance = +this.noteTexture.height - (app.stage.height - 50)
+    // Is it really loaded????
+    // Load a track
+    this.track = PIXI.sound.Sound.from({
+      url: trackPath, // 'static/music/Tartini1.midi',
+      autoPlay: false,
+      complete: function() {
+          console.log('Track over');
+      }
+    })
+
+    // Parse sequence
+    this.sequences = this.parseSequences(sequenceQWER);
     this.allNotes = [];
     this.active = [];
-    this.sequences = [];
-    this.noteTexture = PIXI.Texture.fromImage('static/images/placeholder_note.png')
+  }
+
+  parseSequences(sequenceQWER){
+    let sequences = []
+    for (let i = 0; i < sequenceQWER.length; i++){
+      sequences[i] = [];
+      for (let j in sequenceQWER[i].split('')){
+        sequences[i].push(parseInt(sequenceQWER[i][j]))
+      }
+    }
+    return sequences;
   }
 
   // Push note by lane
-  pushNoteLane(lane, speed){
+  pushNoteLane(lane, speed, extraY){
     var x;
     switch (lane) {
       case 'Q':
@@ -58,7 +86,7 @@ class musicManager{
         return
     }
     this.allNotes.push(
-      new Note (this.noteTexture, x, -this.noteTexture.height, speed))
+      new Note (this.noteTexture, x, -this.noteTexture.height + extraY, speed))
     this.active.push(true);
   }
 
@@ -69,50 +97,16 @@ class musicManager{
   }
 
   startTrack(bpm, sequenceQWER, trackPath){
-    this.bpm = bpm;
-
-    // Fixed note speed?
-    this.noteSpeed = 6.0;
-
-    // Initial drop distance
-    this.dropDistance = +this.noteTexture.height - (app.stage.height - 50)
-
-    // Parse sequence
-    this.sequences = this.parseSequences(sequenceQWER);
-
     // Timing
-    this.clockTime = 0.0;
-    this.spawnProgress = 0.0;
+    this.clockTime = -this.fixedDelay;
+    this.spawnProgress = this.clockTime;
     this.sequenceIndex = 0;
     this.trackDelayTime = this.dropDistance / this.noteSpeed / 5.0;
     this.trackPlaying = false;
-
-    // Load a track
-    this.track = PIXI.sound.Sound.from({
-      url: trackPath, // 'static/music/Tartini1.midi',
-      autoPlay: false,
-      complete: function() {
-          console.log('Track over');
-      }
-    })
-
-    // Is it really loaded????
-
-  }
-
-  parseSequences(sequenceQWER){
-    let sequences = []
-    for (let i = 0; i < sequenceQWER.length; i++){
-      sequences[i] = [];
-      for (let j in sequenceQWER[i].split('')){
-        sequences[i].push(parseInt(sequenceQWER[i][j]))
-      }
-    }
-    return sequences;
   }
 
   update(delta){
-    console.log(delta - app.ticker.deltaTime)
+    // console.log(delta - app.ticker.deltaTime)
     // Update note position
     for (let i = 0; i < this.allNotes.length; i++){
       this.allNotes[i].sprite.y += this.allNotes[i].speed*delta;
@@ -140,7 +134,7 @@ class musicManager{
         if (this.sequences[track][this.sequenceIndex]){
           // Spawn
           const laneMapping = ['Q', 'W', 'E', 'R'];
-          this.pushNoteLane(laneMapping[track], this.noteSpeed);
+          this.pushNoteLane(laneMapping[track], this.noteSpeed, (this.spawnProgress - spawnTimer)*this.noteSpeed);
         }
       }
       this.spawnProgress -= spawnTimer;
@@ -149,18 +143,18 @@ class musicManager{
       this.sequenceIndex = this.sequenceIndex % this.sequences[0].length;
     }
 
-    // Test random spawn timer
-    if (false){
-      const randomSpawnTimer = 1.0;
-      while (this.spawnProgress >= randomSpawnTimer){
-        // Pick random lane and generate note
-        const laneMapping = ['Q', 'W', 'E', 'R'];
-        this.pushNoteLane(laneMapping[Math.floor(4*Math.random())], 3.0);
-        this.spawnProgress -= randomSpawnTimer;
-      }
-      // Spawn random note every second
-      console.log(this.allNotes.length);
-    }
+    // // Test random spawn timer
+    // if (false){
+    //   const randomSpawnTimer = 1.0;
+    //   while (this.spawnProgress >= randomSpawnTimer){
+    //     // Pick random lane and generate note
+    //     const laneMapping = ['Q', 'W', 'E', 'R'];
+    //     this.pushNoteLane(laneMapping[Math.floor(4*Math.random())], 3.0);
+    //     this.spawnProgress -= randomSpawnTimer;
+    //   }
+    //   // Spawn random note every second
+    //   console.log(this.allNotes.length);
+    // }
 
   }
 
