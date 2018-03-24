@@ -54,8 +54,20 @@ class musicManager{
         break;
       default:
         console.error('Yo your lane does not exist. Relinquish your property!');
-        return
+        return;
     }
+    // Try to recycle
+    for (let i = 0; i < this.active.length; i++){
+      if (!this.active[i]){
+        this.allNotes[i].sprite.x = x;
+        this.allNotes[i].sprite.y = -this.noteTexture.height;
+        this.allNotes[i].speed = speed;
+        this.active[i] = true;
+        this.allNotes[i].sprite.visible = true;
+        return;
+      }
+    }
+    // If recycling not possible, make new and push
     this.allNotes.push(
       new Note (this.noteTexture, x, -this.noteTexture.height, speed))
     this.active.push(true);
@@ -67,12 +79,29 @@ class musicManager{
     this.active.push(true);
   }
 
+  startTrack(){
+    this.clockTime = 0.0;
+    this.spawnProgress = 0.0;
+  }
+
   update(delta){
     // Update note position
     for (let i = 0; i < this.allNotes.length; i++){
       this.allNotes[i].sprite.y += this.allNotes[i].speed*delta;
     }
-    // console.log('Notes updated')
+    // Update internal clock for timely dispensing
+    this.clockTime += delta/60;
+    // console.log(this.clockTime/60);
+    this.spawnProgress += delta/60;
+    const randomSpawnTimer = 1.0;
+    while (this.spawnProgress >= randomSpawnTimer){
+      // Pick random lane and generate note
+      const laneMapping = ['Q', 'W', 'E', 'R'];
+      this.pushNoteLane(laneMapping[Math.floor(4*Math.random())], 3.0);
+      this.spawnProgress -= randomSpawnTimer;
+    }
+    // Spawn random note every second
+    console.log(this.allNotes.length);
   }
 
   // gameLoop(delta) {

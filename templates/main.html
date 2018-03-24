@@ -80,6 +80,7 @@ var crashCheck = false;
 
         var MM = new musicManager();
         app.ticker.add((delta) => MM.update(delta));
+        MM.startTrack();
         MM.pushNoteLane('Q', 3.0);
         MM.pushNoteLane('W', 3.0);
         MM.pushNoteLane('E', 3.0);
