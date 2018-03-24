@@ -9,7 +9,7 @@ function gridSetup() {
 
 
   hendrix = new PIXI.Sprite(hendrixTexture);
-  hendrix.x = 600;
+  hendrix.x = 700;
   hendrix.y = 50;
   hendrix.height = 400;
   hendrix.width = 300;
@@ -17,33 +17,33 @@ function gridSetup() {
 
   //KeyCaps row
   sprites.keyQ = new PIXI.Sprite(keyCapsTexture);
-  sprites.keyQ.x =50;
+  sprites.keyQ.x =55;
   sprites.keyQ.y = 600;
   sprites.keyQ.visible = false;
   sprites.keyQ.click = false;
 
 
   sprites.keyW = new PIXI.Sprite(keyCapsTexture);
-  sprites.keyW.x = 150;
+  sprites.keyW.x = 185;
   sprites.keyW.y = 600;
   sprites.keyW.visible = false;
   sprites.keyW.click = false;
 
   sprites.keyE = new PIXI.Sprite(keyCapsTexture);
-  sprites.keyE.x = 250;
+  sprites.keyE.x = 315;
   sprites.keyE.y = 600;
   sprites.keyE.visible = false;
   sprites.keyE.click = false;
 
   sprites.keyR = new PIXI.Sprite(keyCapsTexture);
-  sprites.keyR.x = 350;
+  sprites.keyR.x = 445;
   sprites.keyR.y = 600;
   sprites.keyR.visible = false;
   sprites.keyR.click = false;
 
   //Player sprite//Grid top row
   sprites.player = new PIXI.Sprite(gridTexture);
-  sprites.player.x = 250;
+  sprites.player.x = 315;
   sprites.player.y = 400;
 
   // //Grid top row
@@ -117,11 +117,11 @@ function gridSetup() {
     //Left arrow key `press` method
     left.press = () => {
       //Change the cat's velocity when the key is pressed
-      if(sprites.player.x == 50 ){
+      if(sprites.player.x == 55 ){
       }
       else {
       //  for (let i = 0; i< 1000; i++)
-        sprites.player.x -= 100;
+        sprites.player.x -= 130;
       }
     };
 
@@ -146,10 +146,10 @@ function gridSetup() {
     //Right
     right.press = () => {
       //Change the cat's velocity when the key is pressed
-      if(sprites.player.x == 350 ){
+      if(sprites.player.x == 445 ){
       }
       else {
-        sprites.player.x += 100;
+        sprites.player.x += 130;
       }
     };
 
