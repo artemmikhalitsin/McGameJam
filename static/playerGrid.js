@@ -5,6 +5,14 @@ const grid = {};
 function gridSetup() {
   var gridTexture = PIXI.Texture.fromImage('static/images/test1.png')
   var keyCapsTexture = PIXI.Texture.fromImage('static/images/KeyCaps.png')
+  var hendrixTexture = PIXI.Texture.fromImage('static/images/Hendrix.png')
+
+
+  hendrix = new PIXI.Sprite(hendrixTexture);
+  hendrix.x = 600;
+  hendrix.y = 50;
+  hendrix.height = 400;
+  hendrix.width = 300;
 
 
   //KeyCaps row
@@ -99,6 +107,7 @@ function gridSetup() {
   //Add player to the stage
   app.stage.addChild(sprites.player);
 
+  app.stage.addChild(hendrix);
   //Capture the keyboard arrow keys
     let left = keyboard(37),
         up = keyboard(38),
