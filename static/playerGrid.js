@@ -1,117 +1,103 @@
+const sprites = {};
+const grid = {};
+
 //This `setup` function will run when the image has loaded
 function gridSetup() {
   var gridTexture = PIXI.Texture.fromImage('static/images/test1.png')
   var keyCapsTexture = PIXI.Texture.fromImage('static/images/KeyCaps.png')
 
+
   //KeyCaps row
-  let keyQ = new PIXI.Sprite(keyCapsTexture);
-  keyQ.x = 50;
-  keyQ.y = 700;
-  keyQ.visible = false;
+  sprites.keyQ = new PIXI.Sprite(keyCapsTexture);
+  sprites.keyQ.x =50;
+  sprites.keyQ.y = 700;
+  sprites.keyQ.visible = false;
+  sprites.keyQ.click = false;
 
-  let keyW = new PIXI.Sprite(keyCapsTexture);
-  keyW.x = 150;
-  keyW.y = 700;
-  keyW.visible = false;
 
-  let keyE = new PIXI.Sprite(keyCapsTexture);
-  keyE.x = 250;
-  keyE.y = 700;
-  keyE.visible = false;
+  sprites.keyW = new PIXI.Sprite(keyCapsTexture);
+  sprites.keyW.x = 150;
+  sprites.keyW.y = 700;
+  sprites.keyW.visible = false;
+  sprites.keyW.click = false;
 
-  let keyR = new PIXI.Sprite(keyCapsTexture);
-  keyR.x = 350;
-  keyR.y = 700;
-  keyR.visible = false;
+  sprites.keyE = new PIXI.Sprite(keyCapsTexture);
+  sprites.keyE.x = 250;
+  sprites.keyE.y = 700;
+  sprites.keyE.visible = false;
+  sprites.keyE.click = false;
+
+  sprites.keyR = new PIXI.Sprite(keyCapsTexture);
+  sprites.keyR.x = 350;
+  sprites.keyR.y = 700;
+  sprites.keyR.visible = false;
+  sprites.keyR.click = false;
+
+  //Player sprite//Grid top row
+  sprites.player = new PIXI.Sprite(gridTexture);
+  sprites.player.x = 250;
+  sprites.player.y = 500;
 
   //Grid top row
-  let g00 = new PIXI.Sprite(gridTexture);
-  g00.x = 50;
-  g00.y = 400;
+  grid.g00 = new PIXI.Sprite(gridTexture);
+  grid.g00.x = 50;
+  grid.g00.y = 400;
 
-  let g10 = new PIXI.Sprite(gridTexture);
-  g10.x = 150;
-  g10.y = 400;
+  grid.g10 = new PIXI.Sprite(gridTexture);
+  grid.g10.x = 150;
+  grid.g10.y = 400;
 
-  let g20 = new PIXI.Sprite(gridTexture);
-  g20.x = 250;
-  g20.y = 400;
+  grid.g20 = new PIXI.Sprite(gridTexture);
+  grid.g20.x = 250;
+  grid.g20.y = 400;
 
-  let g30 = new PIXI.Sprite(gridTexture);
-  g30.x = 350;
-  g30.y = 400;
+  grid.g30 = new PIXI.Sprite(gridTexture);
+  grid.g30.x = 350;
+  grid.g30.y = 400;
 
   //Grid middle row
-  let g01 = new PIXI.Sprite(gridTexture);
-  g01.x = 50;
-  g01.y = 500;
+  grid.g01 = new PIXI.Sprite(gridTexture);
+  grid.g01.x = 50;
+  grid.g01.y = 500;
 
-  let g11 = new PIXI.Sprite(gridTexture);
-  g11.x = 150;
-  g11.y = 500;
+  grid.g11 = new PIXI.Sprite(gridTexture);
+  grid.g11.x = 150;
+  grid.g11.y = 500;
 
-  let g21 = new PIXI.Sprite(gridTexture);
-  g21.x = 250;
-  g21.y = 500;
+  grid.g21 = new PIXI.Sprite(gridTexture);
+  grid.g21.x = 250;
+  grid.g21.y = 500;
 
-  let g31 = new PIXI.Sprite(gridTexture);
-  g31.x = 350;
-  g31.y = 500;
+  grid.g31 = new PIXI.Sprite(gridTexture);
+  grid.g31.x = 350;
+  grid.g31.y = 500;
 
   //Grid bottom row
-  let g02 = new PIXI.Sprite(gridTexture);
-  g02.x = 50;
-  g02.y = 600;
+  grid.g02 = new PIXI.Sprite(gridTexture);
+  grid.g02.x = 50;
+  grid.g02.y = 600;
 
-  let g12 = new PIXI.Sprite(gridTexture);
-  g12.x = 150;
-  g12.y = 600;
+  grid.g12 = new PIXI.Sprite(gridTexture);
+  grid.g12.x = 150;
+  grid.g12.y = 600;
 
-  let g22 = new PIXI.Sprite(gridTexture);
-  g22.x = 250;
-  g22.y = 600;
+  grid.g22 = new PIXI.Sprite(gridTexture);
+  grid.g22.x = 250;
+  grid.g22.y = 600;
 
-  let g32 = new PIXI.Sprite(gridTexture);
-  g32.x = 350;
-  g32.y = 600;
+  grid.g32 = new PIXI.Sprite(gridTexture);
+  grid.g32.x = 350;
+  grid.g32.y = 600;
 
 
   //Add the KeyCaps to the stage
-  app.stage.addChild(keyQ);
-  app.stage.addChild(keyW);
-  app.stage.addChild(keyE);
-  app.stage.addChild(keyR);
+  app.stage.addChild(sprites.keyQ);
+  app.stage.addChild(sprites.keyW);
+  app.stage.addChild(sprites.keyE);
+  app.stage.addChild(sprites.keyR);
 
-  //Add the grid top row to the stage
-  app.stage.addChild(g00);
-  app.stage.addChild(g10);
-  app.stage.addChild(g20);
-  app.stage.addChild(g30);
-
-  //Add the grid middle row to the stage
-  app.stage.addChild(g01);
-  app.stage.addChild(g11);
-  app.stage.addChild(g21);
-  app.stage.addChild(g31);
-
-  //Add the grid bottom row to the stage
-  app.stage.addChild(g02);
-  app.stage.addChild(g12);
-  app.stage.addChild(g22);
-  app.stage.addChild(g32);
-
-  playerGrid = [[g00, g10, g20, g30], [g01, g11, g21, g31], [g02, g12, g22 , g32]];
-  for (let i = 0; i < 3; i++){
-    for (let j = 0; j < 4; j++){
-      console.log(i + " , " + j);
-      playerGrid[i][j].visible = false;
-    }
-  }
-
-  let posX = 2;
-  let posY = 1;
-  playerGrid[posY][posX].visible = true;
-
+  //Add player to the stage
+  app.stage.addChild(sprites.player);
 
   //Capture the keyboard arrow keys
     let left = keyboard(37),
@@ -122,13 +108,11 @@ function gridSetup() {
     //Left arrow key `press` method
     left.press = () => {
       //Change the cat's velocity when the key is pressed
-      if(posX ==0 ){
+      if(sprites.player.x == 50 ){
         console.log ("x = -1");
       }
       else {
-        playerGrid[posY][posX].visible = false;
-        posX--;
-        playerGrid[posY][posX].visible = true;
+        sprites.player.x -= 100;
       }
     };
 
@@ -140,13 +124,11 @@ function gridSetup() {
 
     //Up
     up.press = () => {
-      if(posY ==0 ){
+      if(sprites.player.y == 400 ){
         console.log ("y = -1");
       }
       else {
-        playerGrid[posY][posX].visible = false;
-        posY--;
-        playerGrid[posY][posX].visible = true;
+        sprites.player.y -=100;
       }
     };
     up.release = () => {
@@ -156,13 +138,11 @@ function gridSetup() {
     //Right
     right.press = () => {
       //Change the cat's velocity when the key is pressed
-      if(posX ==3 ){
+      if(sprites.player.x == 350 ){
         console.log ("x = 4");
       }
       else {
-        playerGrid[posY][posX].visible = false;
-        posX++;
-        playerGrid[posY][posX].visible = true;
+        sprites.player.x += 100;
       }
     };
 
@@ -171,13 +151,11 @@ function gridSetup() {
 
     //Down
     down.press = () => {
-      if(posY ==2 ){
+      if(sprites.player.y ==2 ){
         console.log ("y = 3");
       }
       else {
-        playerGrid[posY][posX].visible = false;
-        posY++;
-        playerGrid[posY][posX].visible = true;
+        sprites.player.y += 100;
       }
     };
     down.release = () => {
@@ -192,45 +170,51 @@ function gridSetup() {
       //Left arrow key `press` method
       q.press = () => {
         //Change the cat's velocity when the key is pressed
-        keyQ.visible = true;
+        sprites.keyQ.visible = true;
+        sprites.keyQ.click = true;
+
       };
 
       //Left arrow key `release` method
       q.release = () => {
-        keyQ.visible = false;
+        sprites.keyQ.visible = false;
+
       };
 
       //Left arrow key `press` method
       w.press = () => {
         //Change the cat's velocity when the key is pressed
-        keyW.visible = true;
+        sprites.keyW.visible = true;
+        sprites.keyW.click = true;
       };
 
       //Left arrow key `release` method
       w.release = () => {
-        keyW.visible = false;
+        sprites.keyW.visible = false;
       };
 
       //Left arrow key `press` method
       e.press = () => {
         //Change the cat's velocity when the key is pressed
-        keyE.visible = true;
+        sprites.keyE.visible = true;
+        sprites.keyE.click = true;
       };
 
       //Left arrow key `release` method
       e.release = () => {
-        keyE.visible = false;
+        sprites.keyE.visible = false;
       };
 
       //Left arrow key `press` method
       r.press = () => {
         //Change the cat's velocity when the key is pressed
-        keyR.visible = true;
+        sprites.keyR.visible = true;
+        sprites.keyR.click = true;
       };
 
       //Left arrow key `release` method
       r.release = () => {
-        keyR.visible = false;
+        sprites.keyR.visible = false;
       };
 
   }

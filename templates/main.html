@@ -10,19 +10,21 @@
     <script src="{{url_for('static', filename='pixi.min.js')}}"></script>
     <script src="{{url_for('static', filename='GameLoop.js')}}"></script>
     <script src="{{url_for('static', filename='playerGrid.js')}}"></script>
-    <script src="{{url_for('static', filename='rhythmLogic.js')}}"></script>
+    <script src="{{url_for('static', filename='makemap.js')}}"> </script>
+    <script src ="{{url_for('static', filename='spawnNote.js')}}"></script>
+    <script src ="{{url_for('static', filename='rhythmLogic.js')}}"></script>
 
     <body>
       <script type="text/javascript">
 
       //Aliases
-  let Application = PIXI.Application,
+  const Application = PIXI.Application,
       loader = PIXI.loader,
       resources = PIXI.loader.resources,
       Sprite = PIXI.Sprite;
 
   //Create a Pixi Application
-  let app = new Application({
+  const app = new Application({
       width: 1000,
       height: 800,
       antialias: true,
@@ -31,19 +33,21 @@
     }
   );
 
+const playerLoc = {}
+var ready = false;
+
   //Add the canvas that Pixi automatically created for you to the HTML document
   document.body.appendChild(app.view);
 
   //load an image and run the `setup` function when it's done
   loader
     .add("{{url_for('static', filename='images/test1.png')}}")
-    .add("{{url_for('static', filename='images/KeyCaps.png')}}")
-    .load(gridSetup)
-      //Set the game state
-      state = play;
-
-      //Start the game loop
-      app.ticker.add(delta => gameLoop(delta));
+    .add('keyCaps',"{{url_for('static', filename='images/KeyCaps.png')}}")
+    .load(gridSetup);
+    //Set the game state
+    state = play;
+    //Start the game loop
+   app.ticker.add(delta => gameLoop(delta));
 
 
     function gameLoop(delta){
@@ -54,20 +58,16 @@
 
     function play(delta) {
 
-      //Use the cat's velocity to make it move
-      //cat.x += cat.vx;
-      //cat.y += cat.vy
+
+      loader.onComplete.add(() => ready = true);
+      if (ready){
+        playRhythm()
+
+      }
     }
-
-      </script>
-
-      <script src="{{url_for('static', filename='makemap.js')}}"> </script>
-      <script>
         var mapTextures = setupMap();
         buildMap(mapTextures);
-      </script>
-      <script src ="{{url_for('static', filename='spawnNote.js')}}"></script>
-      <script>
+
         var noteTexture = setupNote();
         // console.log('hi')
         // var note = new PIXI.Sprite({{url_for('static', filename='images/test1.png')}})
@@ -82,6 +82,62 @@
         app.ticker.add(spawnNote(noteTexture, 150, 25, 1.0));
         app.ticker.add(spawnNote(noteTexture, 250, 25, 1.0));
         app.ticker.add(spawnNote(noteTexture, 350, 25, 1.0));
+        app.ticker.add(console.log("1"));
+
+
+        loader.onComplete.add(() => console.log(sprites.keyQ.visible));
+
+        function playRhythm(){
+          //Q hit logic
+          if(sprites.keyQ.click){
+            console.log("Q bang");
+            if(note1.sprite.y>690 && note1.sprite.y<710){
+              console.log("hit");
+            }
+            else {
+              console.log("miss");
+            }
+            sprites.keyQ.click = false;
+          }
+
+          //W hit logic
+          if(sprites.keyW.click){
+            console.log("W bang");
+            if(note1.sprite.y>690 && note1.sprite.y<710){
+              console.log("hit");
+            }
+            else {
+              console.log("miss");
+            }
+            sprites.keyW.click = false;
+          }
+
+          //E hit logic
+          if(sprites.keyE.click){
+            console.log("E bang");
+            if(note1.sprite.y>690 && note1.sprite.y<710){
+              console.log("hit");
+            }
+            else {
+              console.log("miss");
+            }
+            sprites.keyE.click = false;
+          }
+
+          //R hit logic
+          if(sprites.keyR.click){
+            console.log("R bang");
+            if(note1.sprite.y>690 && note1.sprite.y<710){
+              console.log("hit");
+            }
+            else {
+              console.log("miss");
+            }
+            sprites.keyR.click = false;
+          }
+        }
+
+
       </script>
     </body>
 </html>
