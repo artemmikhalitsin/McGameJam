@@ -25,8 +25,8 @@
 
   //Create a Pixi Application
   const app = new Application({
-      width: 1000,
-      height: 800,
+      width: 900,
+      height: 700,
       antialias: true,
       transparent: false,
       resolution: 1
@@ -72,30 +72,21 @@ var crashCheck = false;
       }
     }
         var mapTextures = setupMap();
-        buildMap(mapTextures);
+        // buildMap(mapTextures);
 
-        var noteTexture = setupNote();
-        // console.log('hi')
-        // var note = new PIXI.Sprite({{url_for('static', filename='images/test1.png')}})
-        // note.speed = speed;
-        // app.stage.addChild(note);
-        // note.x = app.screen.width / 2;
-        // note.y = app.screen.height / 2;
-        // spawnNote(noteTexture, app.screen.width / 2, app.screen.height / 2, 1.0);
-
-        note1 = new Note(noteTexture, 50, 25, 1.0);
-        app.ticker.add(note1.update);
-        app.ticker.add(spawnNote(noteTexture, 150, 25, 1.0));
-        app.ticker.add(spawnNote(noteTexture, 250, 25, 1.0));
-        app.ticker.add(spawnNote(noteTexture, 350, 25, 1.0));
+        var MM = new musicManager();
+        app.ticker.add((delta) => MM.update(delta));
+        MM.pushNoteLane('Q', 3.0);
+        MM.pushNoteLane('W', 3.0);
+        MM.pushNoteLane('E', 3.0);
+        MM.pushNoteLane('R', 3.0);
 
         function playRhythm(){
           //Q hit logic
           if(sprites.keyQ.click){
             console.log("Q bang");
-            if(note1.sprite.y>690 && note1.sprite.y<710){
+            if(MM.handleCollision('Q')){
               console.log("hit");
-              note1.sprite.visible = false;
             }
             else {
               console.log("miss");
@@ -107,9 +98,8 @@ var crashCheck = false;
           //W hit logic
           if(sprites.keyW.click){
             console.log("W bang");
-            if(note1.sprite.y>690 && note1.sprite.y<710){
+            if(MM.handleCollision('W')){
               console.log("hit");
-              note1.sprite.visible = false;
             }
             else {
               console.log("miss");
@@ -121,9 +111,8 @@ var crashCheck = false;
           //E hit logic
           if(sprites.keyE.click){
             console.log("E bang");
-            if(note1.sprite.y>690 && note1.sprite.y<710){
+            if(MM.handleCollision('E')){
               console.log("hit");
-              note1.sprite.visible = false;
             }
             else {
               console.log("miss");
@@ -135,9 +124,8 @@ var crashCheck = false;
           //R hit logic
           if(sprites.keyR.click){
             console.log("R bang");
-            if(note1.sprite.y>690 && note1.sprite.y<710){
+            if(MM.handleCollision('R')){
               console.log("hit");
-              note1.sprite.visible = false;
             }
             else {
               console.log("miss");
@@ -145,33 +133,16 @@ var crashCheck = false;
             }
             sprites.keyR.click = false;
           }
-          if (note1.sprite.y > sprites.keyQ.y+10&& note1.sprite.visible){
-            console.log("miss");
+
+          numberEscapedBoundary = MM.handleBoundary(sprites.keyQ.y+10)
+          for (let index = 0; index < numberEscapedBoundary; index++){
             lifeHit();
-            note1.sprite.visible = false;
-          }
-          if (note1.sprite.y > sprites.keyW.y+10&& note1.sprite.visible){
-            console.log("miss");
-            lifeHit();
-            note1.sprite.visible = false;
-          }
-          if (note1.sprite.y > sprites.keyE.y+10&& note1.sprite.visible){
-            console.log("miss");
-            lifeHit();
-            note1.sprite.visible = false;
-          }
-          if (note1.sprite.y > sprites.keyR.y+10 && note1.sprite.visible){
-            console.log("miss");
-            lifeHit();
-            note1.sprite.visible = false;
           }
 
         }
 
         function dodgeNotes(){
-          if(sprites.player.x == note1.sprite.x && sprites.player.y - 5 < note1.sprite.y &&sprites.player.y+5 > note1.sprite.y&& !crashCheck){
-            note1.sprite.visible = false;
-            crashCheck = true;
+          if (MM.handleCrash(sprites.player.x, sprites.player.y)){
             lifeHit();
             console.log("crash");
           }

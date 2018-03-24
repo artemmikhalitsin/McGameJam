@@ -10,84 +10,84 @@ function gridSetup() {
   //KeyCaps row
   sprites.keyQ = new PIXI.Sprite(keyCapsTexture);
   sprites.keyQ.x =50;
-  sprites.keyQ.y = 700;
+  sprites.keyQ.y = 600;
   sprites.keyQ.visible = false;
   sprites.keyQ.click = false;
 
 
   sprites.keyW = new PIXI.Sprite(keyCapsTexture);
   sprites.keyW.x = 150;
-  sprites.keyW.y = 700;
+  sprites.keyW.y = 600;
   sprites.keyW.visible = false;
   sprites.keyW.click = false;
 
   sprites.keyE = new PIXI.Sprite(keyCapsTexture);
   sprites.keyE.x = 250;
-  sprites.keyE.y = 700;
+  sprites.keyE.y = 600;
   sprites.keyE.visible = false;
   sprites.keyE.click = false;
 
   sprites.keyR = new PIXI.Sprite(keyCapsTexture);
   sprites.keyR.x = 350;
-  sprites.keyR.y = 700;
+  sprites.keyR.y = 600;
   sprites.keyR.visible = false;
   sprites.keyR.click = false;
 
   //Player sprite//Grid top row
   sprites.player = new PIXI.Sprite(gridTexture);
   sprites.player.x = 250;
-  sprites.player.y = 500;
+  sprites.player.y = 400;
 
-  //Grid top row
-  grid.g00 = new PIXI.Sprite(gridTexture);
-  grid.g00.x = 50;
-  grid.g00.y = 400;
-
-  grid.g10 = new PIXI.Sprite(gridTexture);
-  grid.g10.x = 150;
-  grid.g10.y = 400;
-
-  grid.g20 = new PIXI.Sprite(gridTexture);
-  grid.g20.x = 250;
-  grid.g20.y = 400;
-
-  grid.g30 = new PIXI.Sprite(gridTexture);
-  grid.g30.x = 350;
-  grid.g30.y = 400;
-
-  //Grid middle row
-  grid.g01 = new PIXI.Sprite(gridTexture);
-  grid.g01.x = 50;
-  grid.g01.y = 500;
-
-  grid.g11 = new PIXI.Sprite(gridTexture);
-  grid.g11.x = 150;
-  grid.g11.y = 500;
-
-  grid.g21 = new PIXI.Sprite(gridTexture);
-  grid.g21.x = 250;
-  grid.g21.y = 500;
-
-  grid.g31 = new PIXI.Sprite(gridTexture);
-  grid.g31.x = 350;
-  grid.g31.y = 500;
-
-  //Grid bottom row
-  grid.g02 = new PIXI.Sprite(gridTexture);
-  grid.g02.x = 50;
-  grid.g02.y = 600;
-
-  grid.g12 = new PIXI.Sprite(gridTexture);
-  grid.g12.x = 150;
-  grid.g12.y = 600;
-
-  grid.g22 = new PIXI.Sprite(gridTexture);
-  grid.g22.x = 250;
-  grid.g22.y = 600;
-
-  grid.g32 = new PIXI.Sprite(gridTexture);
-  grid.g32.x = 350;
-  grid.g32.y = 600;
+  // //Grid top row
+  // grid.g00 = new PIXI.Sprite(gridTexture);
+  // grid.g00.x = 50;
+  // grid.g00.y = 300;
+  //
+  // grid.g10 = new PIXI.Sprite(gridTexture);
+  // grid.g10.x = 150;
+  // grid.g10.y = 300;
+  //
+  // grid.g20 = new PIXI.Sprite(gridTexture);
+  // grid.g20.x = 250;
+  // grid.g20.y = 300;
+  //
+  // grid.g30 = new PIXI.Sprite(gridTexture);
+  // grid.g30.x = 350;
+  // grid.g30.y = 300;
+  //
+  // //Grid middle row
+  // grid.g01 = new PIXI.Sprite(gridTexture);
+  // grid.g01.x = 50;
+  // grid.g01.y = 500;
+  //
+  // grid.g11 = new PIXI.Sprite(gridTexture);
+  // grid.g11.x = 150;
+  // grid.g11.y = 500;
+  //
+  // grid.g21 = new PIXI.Sprite(gridTexture);
+  // grid.g21.x = 250;
+  // grid.g21.y = 500;
+  //
+  // grid.g31 = new PIXI.Sprite(gridTexture);
+  // grid.g31.x = 350;
+  // grid.g31.y = 500;
+  //
+  // //Grid bottom row
+  // grid.g02 = new PIXI.Sprite(gridTexture);
+  // grid.g02.x = 50;
+  // grid.g02.y = 600;
+  //
+  // grid.g12 = new PIXI.Sprite(gridTexture);
+  // grid.g12.x = 150;
+  // grid.g12.y = 600;
+  //
+  // grid.g22 = new PIXI.Sprite(gridTexture);
+  // grid.g22.x = 250;
+  // grid.g22.y = 600;
+  //
+  // grid.g32 = new PIXI.Sprite(gridTexture);
+  // grid.g32.x = 350;
+  // grid.g32.y = 600;
 
 
   //Add the KeyCaps to the stage
@@ -124,10 +124,10 @@ function gridSetup() {
 
     //Up
     up.press = () => {
-      if(sprites.player.y == 400 ){
+      if(sprites.player.y == 300 ){
       }
       else {
-        sprites.player.y -=100;
+        sprites.player.y -= 100;
       }
     };
     up.release = () => {
@@ -149,7 +149,7 @@ function gridSetup() {
 
     //Down
     down.press = () => {
-      if(sprites.player.y ==600 ){
+      if(sprites.player.y == 500){
       }
       else {
         sprites.player.y += 100;
