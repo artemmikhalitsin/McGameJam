@@ -8,6 +8,9 @@
   </head>
 
     <script src="{{url_for('static', filename='pixi.min.js')}}"></script>
+    <script src="{{url_for('static', filename='GameLoop.js')}}"></script>
+    <script src="{{url_for('static', filename='playerGrid.js')}}"></script>
+    <script src="{{url_for('static', filename='rhythmLogic.js')}}"></script>
 
     <body>
       <script type="text/javascript">
@@ -35,103 +38,50 @@
   loader
     .add("{{url_for('static', filename='images/test1.png')}}")
     .add("{{url_for('static', filename='images/KeyCaps.png')}}")
-    .load(setup);
+    .load(gridSetup)
+      //Set the game state
+      state = play;
+
+      //Start the game loop
+      app.ticker.add(delta => gameLoop(delta));
 
 
+    function gameLoop(delta){
 
-  //This `setup` function will run when the image has loaded
-  function setup() {
+      //Update the current game state:
+      state(delta);
+    }
 
-    //KeyCaps row
-    let keyQ = new Sprite(resources["{{url_for('static', filename='images/KeyCaps.png')}}"].texture);
-    keyQ.x = 50;
-    keyQ.y = 700;
+    function play(delta) {
 
-    let keyW = new Sprite(resources["{{url_for('static', filename='images/KeyCaps.png')}}"].texture);
-    keyW.x = 150;
-    keyW.y = 700;
+      //Use the cat's velocity to make it move
+      //cat.x += cat.vx;
+      //cat.y += cat.vy
+    }
 
-    let keyE = new Sprite(resources["{{url_for('static', filename='images/KeyCaps.png')}}"].texture);
-    keyE.x = 250;
-    keyE.y = 700;
+      </script>
 
-    let keyR = new Sprite(resources["{{url_for('static', filename='images/KeyCaps.png')}}"].texture);
-    keyR.x = 350;
-    keyR.y = 700;
+      <script src="{{url_for('static', filename='makemap.js')}}"> </script>
+      <script>
+        var mapTextures = setupMap();
+        buildMap(mapTextures);
+      </script>
+      <script src ="{{url_for('static', filename='spawnNote.js')}}"></script>
+      <script>
+        var noteTexture = setupNote();
+        // console.log('hi')
+        // var note = new PIXI.Sprite({{url_for('static', filename='images/test1.png')}})
+        // note.speed = speed;
+        // app.stage.addChild(note);
+        // note.x = app.screen.width / 2;
+        // note.y = app.screen.height / 2;
+        // spawnNote(noteTexture, app.screen.width / 2, app.screen.height / 2, 1.0);
 
-    //Grid top row
-    let g00 = new Sprite(resources["{{url_for('static', filename='images/test1.png')}}"].texture);
-    g00.x = 50;
-    g00.y = 400;
-
-    let g10 = new Sprite(resources["{{url_for('static', filename='images/test1.png')}}"].texture);
-    g10.x = 150;
-    g10.y = 400;
-
-    let g20 = new Sprite(resources["{{url_for('static', filename='images/test1.png')}}"].texture);
-    g20.x = 250;
-    g20.y = 400;
-
-    let g30 = new Sprite(resources["{{url_for('static', filename='images/test1.png')}}"].texture);
-    g30.x = 350;
-    g30.y = 400;
-
-    //Grid middle row
-    let g01 = new Sprite(resources["{{url_for('static', filename='images/test1.png')}}"].texture);
-    g01.x = 50;
-    g01.y = 500;
-
-    let g11 = new Sprite(resources["{{url_for('static', filename='images/test1.png')}}"].texture);
-    g11.x = 150;
-    g11.y = 500;
-
-    let g21 = new Sprite(resources["{{url_for('static', filename='images/test1.png')}}"].texture);
-    g21.x = 250;
-    g21.y = 500;
-
-    let g31 = new Sprite(resources["{{url_for('static', filename='images/test1.png')}}"].texture);
-    g31.x = 350;
-    g31.y = 500;
-
-    //Grid bottom row
-    let g02 = new Sprite(resources["{{url_for('static', filename='images/test1.png')}}"].texture);
-    g02.x = 50;
-    g02.y = 600;
-
-    let g12 = new Sprite(resources["{{url_for('static', filename='images/test1.png')}}"].texture);
-    g12.x = 150;
-    g12.y = 600;
-
-    let g22 = new Sprite(resources["{{url_for('static', filename='images/test1.png')}}"].texture);
-    g22.x = 250;
-    g22.y = 600;
-
-    let g32 = new Sprite(resources["{{url_for('static', filename='images/test1.png')}}"].texture);
-    g32.x = 350;
-    g32.y = 600;
-
-    //Add the grid top row to the stage
-    app.stage.addChild(g00);
-    app.stage.addChild(g10);
-    app.stage.addChild(g20);
-    app.stage.addChild(g30);
-
-    //Add the grid middle row to the stage
-    app.stage.addChild(g01);
-    app.stage.addChild(g11);
-    app.stage.addChild(g21);
-    app.stage.addChild(g31);
-
-    //Add the grid bottom row to the stage
-    app.stage.addChild(g02);
-    app.stage.addChild(g12);
-    app.stage.addChild(g22);
-    app.stage.addChild(g32);
-  }
-
-
-
-
+        note1 = new Note(noteTexture, 50, 25, 1.0);
+        app.ticker.add(note1.update);
+        app.ticker.add(spawnNote(noteTexture, 150, 25, 1.0));
+        app.ticker.add(spawnNote(noteTexture, 250, 25, 1.0));
+        app.ticker.add(spawnNote(noteTexture, 350, 25, 1.0));
       </script>
     </body>
 </html>
