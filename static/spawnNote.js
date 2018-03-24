@@ -29,7 +29,7 @@ class Note {
 //
 // }
 
-class musicManager{
+class musicM  anager{
   constructor(trackPath, sequenceQWER, bpm, noteSpeed) {
     this.noteTexture = PIXI.Texture.fromImage('static/images/placeholder_note.png')
     this.bpm = bpm;
