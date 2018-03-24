@@ -5,7 +5,7 @@ def generate_map(y_size, x_size, max_rooms):
 
     grid = [[0 for _ in range(x_size+2)] for _ in range(y_size+2)]
 
-    first_room = (floor(len(grid)/2), floor(len(grid[0])/2))
+    first_room = (floor(random.random()*(len(grid)-2)+1), floor(random.random()*(len(grid[0])-2)+1))
     grid[first_room[0]][first_room[1]] = 1
     rooms = []
     rooms.append(first_room)
@@ -13,9 +13,9 @@ def generate_map(y_size, x_size, max_rooms):
     while len(rooms) < max_rooms:
         for room in rooms:
             if adjacent_empty(grid, room[0], room[1]):
-                tiles = adjacent_empty(grid, room[0], room[1])
-                num_free = len(tiles)
-                chosen = tiles[floor(random.random()*num_free)]
+                empty_rooms = adjacent_empty(grid, room[0], room[1])
+                num_free = len(empty_rooms)
+                chosen = empty_rooms[floor(random.random()*num_free)]
                 if chosen[0] >= 0 and chosen[0] < len(grid) and chosen[1] >= 0 and chosen[1] < len(grid[chosen[0]]):
                     if len(adjacent_empty(grid, chosen[0], chosen[1])) > 2:
                         grid[chosen[0]][chosen[1]] = 1
@@ -27,6 +27,7 @@ def generate_map(y_size, x_size, max_rooms):
     possible_ends = []
     for room in rooms:
         if len(adjacent_empty(grid, room[0], room[1])) == 3:
+            grid[room[0]][room[1]] = 4
             possible_ends.append((room[0], room[1]))
 
     num_free = len(possible_ends)
@@ -39,7 +40,7 @@ def generate_map(y_size, x_size, max_rooms):
     grid[end[0]][end[1]] = 3
 
     grid = grid[1:-1]
-    for i in range(len(grid)):
+    for i, _ in enumerate(grid):
         grid[i] = grid[i][1:-1]
 
     return grid
