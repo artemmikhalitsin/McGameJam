@@ -114,8 +114,8 @@ class musicManager{
       console.log(this.allNotes[i].sprite.x)
       if(x_l < this.allNotes[i].sprite.x &&
         this.allNotes[i].sprite.x < x_r &&
-        690 < this.allNotes[i].sprite.y &&
-        this.allNotes[i].sprite.y < 710){
+        590 < this.allNotes[i].sprite.y &&
+        this.allNotes[i].sprite.y < 610){
           // Found hit!
           successHit = true;
           this.allNotes[i].sprite.visible = false;
