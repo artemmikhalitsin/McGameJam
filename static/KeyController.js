@@ -4,7 +4,32 @@ let q = keyboard(81),
   e = keyboard(69),
   r = keyboard(82);
 
-handle = (letter) => {
+keys = {}
+
+bindKeys = () => {
+  keys = {
+    'Q':{
+      'key':sprites.keyQ,
+      'keyPress':sprites.keyQPress
+    },
+    'W':{
+      'key':sprites.keyW,
+      'keyPress':sprites.keyWPress
+    },
+    'E':{
+      'key':sprites.keyE,
+      'keyPress':sprites.keyEPress
+    },
+    'R':{
+      'key':sprites.keyR,
+      'keyPress':sprites.keyRPress
+    },
+  }
+}
+
+handlePress = (letter) => {
+  keys[letter].key.visible = false;
+  keys[letter].keyPress.visible = true;
   if(MM.handleCollision(letter)){
     console.log("hit");
   }
@@ -14,48 +39,39 @@ handle = (letter) => {
   }
 }
 
+handleRelease = (letter) => {
+  keys[letter].key.visible = true;
+  keys[letter].keyPress.visible = false;
+}
+
 q.press = () => {
-  sprites.keyQ.visible = false;
-  sprites.keyQPress.visible = true;
-  handle('Q');
+  handlePress('Q');
 };
 
 q.release = () => {
-  sprites.keyQPress.visible = false;
-  sprites.keyQ.visible = true;
+  handleRelease('Q');
 };
 
 w.press = () => {
-  sprites.keyW.visible = false;
-  sprites.keyWPress.visible = true;
-  handle('W');
+  handlePress('W');
 };
 
 w.release = () => {
-  sprites.keyWPress.visible = false;
-  sprites.keyW.visible = true;
-
+  handleRelease('W');
 };
 
 e.press = () => {
-  sprites.keyE.visible = false;
-  sprites.keyEPress.visible = true;
-  handle('E');
+  handlePress('E');
 };
 
 e.release = () => {
-  sprites.keyEPress.visible = false;
-  sprites.keyE.visible = true;
+  handleRelease('E');
 };
 
 r.press = () => {
-  sprites.keyR.visible = false;
-  sprites.keyRPress.visible = true;
-
-  handle('R');
+  handlePress('R');
 };
 
 r.release = () => {
-  sprites.keyRPress.visible = false;
-  sprites.keyR.visible = true;
+  handleRelease('R');
 };
