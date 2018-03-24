@@ -5,10 +5,10 @@ def generate_map(y_size, x_size, max_rooms):
 
     grid = [[0 for _ in range(x_size+2)] for _ in range(y_size+2)]
 
-    starting_room = (floor(len(grid)/2), floor(len(grid[0])/2))
-    grid[starting_room[0]][starting_room[1]] = 1
+    first_room = (floor(len(grid)/2), floor(len(grid[0])/2))
+    grid[first_room[0]][first_room[1]] = 1
     rooms = []
-    rooms.append(starting_room)
+    rooms.append(first_room)
 
     while len(rooms) < max_rooms:
         for room in rooms:
