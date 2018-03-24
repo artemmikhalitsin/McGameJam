@@ -10,26 +10,33 @@
     <script src="{{url_for('static', filename='pixi.min.js')}}"></script>
     <script src="{{url_for('static', filename='GameLoop.js')}}"></script>
     <script src="{{url_for('static', filename='playerGrid.js')}}"></script>
-    <script src="{{url_for('static', filename='rhythmLogic.js')}}"></script>
+    <script src="{{url_for('static', filename='makemap.js')}}"> </script>
+    <script src ="{{url_for('static', filename='spawnNote.js')}}"></script>
+    <script src ="{{url_for('static', filename='rhythmLogic.js')}}"></script>
 
     <body>
       <script type="text/javascript">
 
       //Aliases
-  let Application = PIXI.Application,
+  const Application = PIXI.Application,
       loader = PIXI.loader,
       resources = PIXI.loader.resources,
       Sprite = PIXI.Sprite;
 
   //Create a Pixi Application
-  let app = new Application({
-      width: 1000,
-      height: 800,
+  const app = new Application({
+      width: 900,
+      height: 700,
       antialias: true,
       transparent: false,
       resolution: 1
     }
   );
+
+const playerLoc = {}
+var ready = false;
+var life = 3;
+var crashCheck = false;
 
   //Add the canvas that Pixi automatically created for you to the HTML document
   document.body.appendChild(app.view);
@@ -37,13 +44,16 @@
   //load an image and run the `setup` function when it's done
   loader
     .add("{{url_for('static', filename='images/test1.png')}}")
-    .add("{{url_for('static', filename='images/KeyCaps.png')}}")
-    .load(gridSetup)
-      //Set the game state
-      state = play;
+    .add('keyCaps',"{{url_for('static', filename='images/KeyCaps.png')}}")
+    .add("{{url_for('static', filename='images/Hendrix.png')}}")
+    .load(gridSetup);
 
-      //Start the game loop
-      app.ticker.add(delta => gameLoop(delta));
+
+
+    //Set the game state
+    state = play;
+    //Start the game loop
+   app.ticker.add(delta => gameLoop(delta));
 
 
     function gameLoop(delta){
@@ -54,34 +64,100 @@
 
     function play(delta) {
 
-      //Use the cat's velocity to make it move
-      //cat.x += cat.vx;
-      //cat.y += cat.vy
+      loader.onComplete.add(() => ready = true);
+      if (ready){
+
+        //play the rhythm componenet
+        playRhythm();
+
+        //play dodge component
+        dodgeNotes();
+
+      }
     }
-
-      </script>
-
-      <script src="{{url_for('static', filename='makemap.js')}}"> </script>
-      <script>
         var mapTextures = setupMap();
-        buildMap(mapTextures);
-      </script>
-      <script src ="{{url_for('static', filename='spawnNote.js')}}"></script>
-      <script>
-        var noteTexture = setupNote();
-        // console.log('hi')
-        // var note = new PIXI.Sprite({{url_for('static', filename='images/test1.png')}})
-        // note.speed = speed;
-        // app.stage.addChild(note);
-        // note.x = app.screen.width / 2;
-        // note.y = app.screen.height / 2;
-        // spawnNote(noteTexture, app.screen.width / 2, app.screen.height / 2, 1.0);
+        // buildMap(mapTextures);
 
-        note1 = new Note(noteTexture, 50, 25, 1.0);
-        app.ticker.add(note1.update);
-        app.ticker.add(spawnNote(noteTexture, 150, 25, 1.0));
-        app.ticker.add(spawnNote(noteTexture, 250, 25, 1.0));
-        app.ticker.add(spawnNote(noteTexture, 350, 25, 1.0));
+        var MM = new musicManager();
+        app.ticker.add((delta) => MM.update(delta));
+        MM.pushNoteLane('Q', 3.0);
+        MM.pushNoteLane('W', 3.0);
+        MM.pushNoteLane('E', 3.0);
+        MM.pushNoteLane('R', 3.0);
+
+        function playRhythm(){
+          //Q hit logic
+          if(sprites.keyQ.click){
+            console.log("Q bang");
+            if(MM.handleCollision('Q')){
+              console.log("hit");
+            }
+            else {
+              console.log("miss");
+              lifeHit();
+            }
+            sprites.keyQ.click = false;
+          }
+
+          //W hit logic
+          if(sprites.keyW.click){
+            console.log("W bang");
+            if(MM.handleCollision('W')){
+              console.log("hit");
+            }
+            else {
+              console.log("miss");
+              lifeHit();
+            }
+            sprites.keyW.click = false;
+          }
+
+          //E hit logic
+          if(sprites.keyE.click){
+            console.log("E bang");
+            if(MM.handleCollision('E')){
+              console.log("hit");
+            }
+            else {
+              console.log("miss");
+              lifeHit();
+            }
+            sprites.keyE.click = false;
+          }
+
+          //R hit logic
+          if(sprites.keyR.click){
+            console.log("R bang");
+            if(MM.handleCollision('R')){
+              console.log("hit");
+            }
+            else {
+              console.log("miss");
+              lifeHit();
+            }
+            sprites.keyR.click = false;
+          }
+
+          numberEscapedBoundary = MM.handleBoundary(sprites.keyQ.y+50)
+          for (let index = 0; index < numberEscapedBoundary; index++){
+            lifeHit();
+          }
+
+        }
+
+        function dodgeNotes(){
+          if (MM.handleCrash(sprites.player.x, sprites.player.y)){
+            lifeHit();
+            console.log("crash");
+          }
+        }
+
+        function lifeHit(){
+          life--;
+          console.log(life);
+        }
+
+
       </script>
     </body>
 </html>
