@@ -8,6 +8,7 @@
   </head>
 
     <script src="{{url_for('static', filename='pixi.min.js')}}"></script>
+    <script src="{{url_for('static', filename='pixi-sound.js')}}"></script>
     <script src="{{url_for('static', filename='GameLoop.js')}}"></script>
     <script src="{{url_for('static', filename='playerGrid.js')}}"></script>
     <script src="{{url_for('static', filename='makemap.js')}}"> </script>
@@ -79,12 +80,16 @@ var crashCheck = false;
         var mapTextures = setupMap();
         // buildMap(mapTextures);
 
-        var MM = new musicManager();
+        var MM = new musicManager("static/audio/Tartini.mp3",
+        [ '00000000000000110000000000001100000000000000001100000000000011000000110000000000000011000000000000000000000000000000110000001100',
+          '00000000110000000000000011000000000000001100000000000000110000000000000000001100000000000000110000000000000011001100000011000000',
+          '00001100000000000000110000000000000011000000000000001100000000001100000000000000110000000000000000001100110000000000000000000000',
+          '11000000000000001100000000000000110000000000000011000000000000000000000001100000000000001100000011000000000000000000000000000000'],
+        4*151,
+        6.0);
         app.ticker.add((delta) => MM.update(delta));
-        MM.startTrack(144, ['0000001100000011',
-          '0000110000001100',
-          '0011000000110000',
-          '1100000011000000']);
+        MM.startTrack();
+
         // MM.pushNoteLane('Q', 3.0);
         // MM.pushNoteLane('W', 3.0);
         // MM.pushNoteLane('E', 3.0);
