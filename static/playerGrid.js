@@ -109,9 +109,9 @@ function gridSetup() {
     left.press = () => {
       //Change the cat's velocity when the key is pressed
       if(sprites.player.x == 50 ){
-        console.log ("x = -1");
       }
       else {
+      //  for (let i = 0; i< 1000; i++)
         sprites.player.x -= 100;
       }
     };
@@ -125,7 +125,6 @@ function gridSetup() {
     //Up
     up.press = () => {
       if(sprites.player.y == 400 ){
-        console.log ("y = -1");
       }
       else {
         sprites.player.y -=100;
@@ -139,7 +138,6 @@ function gridSetup() {
     right.press = () => {
       //Change the cat's velocity when the key is pressed
       if(sprites.player.x == 350 ){
-        console.log ("x = 4");
       }
       else {
         sprites.player.x += 100;
@@ -151,8 +149,7 @@ function gridSetup() {
 
     //Down
     down.press = () => {
-      if(sprites.player.y ==2 ){
-        console.log ("y = 3");
+      if(sprites.player.y ==600 ){
       }
       else {
         sprites.player.y += 100;

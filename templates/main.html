@@ -35,6 +35,8 @@
 
 const playerLoc = {}
 var ready = false;
+var life = 3;
+var crashCheck = false;
 
   //Add the canvas that Pixi automatically created for you to the HTML document
   document.body.appendChild(app.view);
@@ -58,10 +60,14 @@ var ready = false;
 
     function play(delta) {
 
-
       loader.onComplete.add(() => ready = true);
       if (ready){
-        playRhythm()
+
+        //play the rhythm componenet
+        playRhythm();
+
+        //play dodge component
+        dodgeNotes();
 
       }
     }
@@ -82,10 +88,6 @@ var ready = false;
         app.ticker.add(spawnNote(noteTexture, 150, 25, 1.0));
         app.ticker.add(spawnNote(noteTexture, 250, 25, 1.0));
         app.ticker.add(spawnNote(noteTexture, 350, 25, 1.0));
-        app.ticker.add(console.log("1"));
-
-
-        loader.onComplete.add(() => console.log(sprites.keyQ.visible));
 
         function playRhythm(){
           //Q hit logic
@@ -93,9 +95,11 @@ var ready = false;
             console.log("Q bang");
             if(note1.sprite.y>690 && note1.sprite.y<710){
               console.log("hit");
+              note1.sprite.visible = false;
             }
             else {
               console.log("miss");
+              lifeHit();
             }
             sprites.keyQ.click = false;
           }
@@ -105,9 +109,11 @@ var ready = false;
             console.log("W bang");
             if(note1.sprite.y>690 && note1.sprite.y<710){
               console.log("hit");
+              note1.sprite.visible = false;
             }
             else {
               console.log("miss");
+              lifeHit();
             }
             sprites.keyW.click = false;
           }
@@ -117,9 +123,11 @@ var ready = false;
             console.log("E bang");
             if(note1.sprite.y>690 && note1.sprite.y<710){
               console.log("hit");
+              note1.sprite.visible = false;
             }
             else {
               console.log("miss");
+              lifeHit();
             }
             sprites.keyE.click = false;
           }
@@ -129,12 +137,49 @@ var ready = false;
             console.log("R bang");
             if(note1.sprite.y>690 && note1.sprite.y<710){
               console.log("hit");
+              note1.sprite.visible = false;
             }
             else {
               console.log("miss");
+              lifeHit();
             }
             sprites.keyR.click = false;
           }
+          if (note1.sprite.y > sprites.keyQ.y+10&& note1.sprite.visible){
+            console.log("miss");
+            lifeHit();
+            note1.sprite.visible = false;
+          }
+          if (note1.sprite.y > sprites.keyW.y+10&& note1.sprite.visible){
+            console.log("miss");
+            lifeHit();
+            note1.sprite.visible = false;
+          }
+          if (note1.sprite.y > sprites.keyE.y+10&& note1.sprite.visible){
+            console.log("miss");
+            lifeHit();
+            note1.sprite.visible = false;
+          }
+          if (note1.sprite.y > sprites.keyR.y+10 && note1.sprite.visible){
+            console.log("miss");
+            lifeHit();
+            note1.sprite.visible = false;
+          }
+
+        }
+
+        function dodgeNotes(){
+          if(sprites.player.x == note1.sprite.x && sprites.player.y - 5 < note1.sprite.y &&sprites.player.y+5 > note1.sprite.y&& !crashCheck){
+            note1.sprite.visible = false;
+            crashCheck = true;
+            lifeHit();
+            console.log("crash");
+          }
+        }
+
+        function lifeHit(){
+          life--;
+          console.log(life);
         }
 
 
