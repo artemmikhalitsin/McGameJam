@@ -33,6 +33,7 @@ class musicManager{
   constructor() {
     this.allNotes = [];
     this.active = [];
+    this.sequences = [];
     this.noteTexture = PIXI.Texture.fromImage('static/images/placeholder_note.png')
   }
 
@@ -79,9 +80,30 @@ class musicManager{
     this.active.push(true);
   }
 
-  startTrack(){
+  startTrack(bpm, sequenceQWER){
+    this.bpm = bpm;
+    this.noteSpeed = 3.0;
+
+    // Parse sequence
+    this.sequences = this.parseSequences(sequenceQWER);
+
+    // this.sequenceW = sequenceW;
+    // this.sequenceE = sequenceE;
+    // this.sequenceR = sequenceR;
     this.clockTime = 0.0;
     this.spawnProgress = 0.0;
+    this.sequenceIndex = 0;
+  }
+
+  parseSequences(sequenceQWER){
+    let sequences = []
+    for (let i = 0; i < sequenceQWER.length; i++){
+      sequences[i] = [];
+      for (let j in sequenceQWER[i].split('')){
+        sequences[i].push(parseInt(sequenceQWER[i][j]))
+      }
+    }
+    return sequences;
   }
 
   update(delta){
@@ -93,15 +115,36 @@ class musicManager{
     this.clockTime += delta/60;
     // console.log(this.clockTime/60);
     this.spawnProgress += delta/60;
-    const randomSpawnTimer = 1.0;
-    while (this.spawnProgress >= randomSpawnTimer){
-      // Pick random lane and generate note
-      const laneMapping = ['Q', 'W', 'E', 'R'];
-      this.pushNoteLane(laneMapping[Math.floor(4*Math.random())], 3.0);
-      this.spawnProgress -= randomSpawnTimer;
+
+    const spawnTimer = 60.0/this.bpm;
+
+    // Spawn cycle
+    while (this.spawnProgress >= spawnTimer){
+      for (let track = 0; track < this.sequences.length; track++){
+        if (this.sequences[track][this.sequenceIndex]){
+          // Spawn
+          const laneMapping = ['Q', 'W', 'E', 'R'];
+          this.pushNoteLane(laneMapping[track], this.noteSpeed);
+        }
+      }
+      this.spawnProgress -= spawnTimer;
+      this.sequenceIndex++;
+      // Make periodic
+      this.sequenceIndex = this.sequenceIndex % this.sequences[0].length;
     }
-    // Spawn random note every second
-    console.log(this.allNotes.length);
+
+    // Test random spawn timer
+    if (false){
+      const randomSpawnTimer = 1.0;
+      while (this.spawnProgress >= randomSpawnTimer){
+        // Pick random lane and generate note
+        const laneMapping = ['Q', 'W', 'E', 'R'];
+        this.pushNoteLane(laneMapping[Math.floor(4*Math.random())], 3.0);
+        this.spawnProgress -= randomSpawnTimer;
+      }
+      // Spawn random note every second
+      console.log(this.allNotes.length);
+    }
   }
 
   // gameLoop(delta) {
