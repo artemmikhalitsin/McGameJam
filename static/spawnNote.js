@@ -68,20 +68,36 @@ class musicManager{
     this.active.push(true);
   }
 
-
-  startTrack(bpm, sequenceQWER){
+  startTrack(bpm, sequenceQWER, trackPath){
     this.bpm = bpm;
-    this.noteSpeed = 3.0;
+
+    // Fixed note speed?
+    this.noteSpeed = 6.0;
+
+    // Initial drop distance
+    this.dropDistance = +this.noteTexture.height - (app.stage.height - 50)
 
     // Parse sequence
     this.sequences = this.parseSequences(sequenceQWER);
 
-    // this.sequenceW = sequenceW;
-    // this.sequenceE = sequenceE;
-    // this.sequenceR = sequenceR;
+    // Timing
     this.clockTime = 0.0;
     this.spawnProgress = 0.0;
     this.sequenceIndex = 0;
+    this.trackDelayTime = this.dropDistance / this.noteSpeed / 5.0;
+    this.trackPlaying = false;
+
+    // Load a track
+    this.track = PIXI.sound.Sound.from({
+      url: trackPath, // 'static/music/Tartini1.midi',
+      autoPlay: false,
+      complete: function() {
+          console.log('Track over');
+      }
+    })
+
+    // Is it really loaded????
+
   }
 
   parseSequences(sequenceQWER){
@@ -96,17 +112,27 @@ class musicManager{
   }
 
   update(delta){
+    console.log(delta - app.ticker.deltaTime)
     // Update note position
     for (let i = 0; i < this.allNotes.length; i++){
       this.allNotes[i].sprite.y += this.allNotes[i].speed*delta;
     }
 
-    // Update internal clock for timely dispensing
+    // Update internal clock for timely dispensing [s]
     this.clockTime += delta/60;
     // console.log(this.clockTime/60);
     this.spawnProgress += delta/60;
 
     const spawnTimer = 60.0/this.bpm;
+
+    // Start playing after the initial drop delay
+    if(!this.trackPlaying){
+      if (this.clockTime > this.trackDelayTime){
+        // Play a track
+        this.track.play();
+        this.trackPlaying = true;
+      }
+    }
 
     // Spawn cycle
     while (this.spawnProgress >= spawnTimer){
