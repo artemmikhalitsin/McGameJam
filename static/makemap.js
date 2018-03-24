@@ -1,6 +1,6 @@
 // Load tile textures
-var passageTexture = PIXI.Texture.fromImage('{{url_for('static', filename='images/placeholder_passage.png')}}')
-var wallTexture = PIXI.Texture.fromImage('{{url_for('static', filename='images/placeholder_wall.png')}}')
+var passageTexture = PIXI.Texture.fromImage('static/images/placeholder_passage.png')
+var wallTexture = PIXI.Texture.fromImage('static/images/placeholder_wall.png') //("{{url_for('static', filename='images/placeholder_wall.png')}}")
 // Create map container that contains tiles
 var overworldMapContainer = new PIXI.Container();
 // Add container to stage
