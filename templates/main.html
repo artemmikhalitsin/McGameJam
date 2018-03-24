@@ -38,8 +38,7 @@
   loader
     .add("{{url_for('static', filename='images/test1.png')}}")
     .add("{{url_for('static', filename='images/KeyCaps.png')}}")
-    .load(gridSetup);
-
+    .load(gridSetup)
       //Set the game state
       state = play;
 
@@ -60,6 +59,29 @@
       //cat.y += cat.vy
     }
 
+      </script>
+
+      <script src="{{url_for('static', filename='makemap.js')}}"> </script>
+      <script>
+        var mapTextures = setupMap();
+        buildMap(mapTextures);
+      </script>
+      <script src ="{{url_for('static', filename='spawnNote.js')}}"></script>
+      <script>
+        var noteTexture = setupNote();
+        // console.log('hi')
+        // var note = new PIXI.Sprite({{url_for('static', filename='images/test1.png')}})
+        // note.speed = speed;
+        // app.stage.addChild(note);
+        // note.x = app.screen.width / 2;
+        // note.y = app.screen.height / 2;
+        // spawnNote(noteTexture, app.screen.width / 2, app.screen.height / 2, 1.0);
+
+        note1 = new Note(noteTexture, 50, 25, 1.0);
+        app.ticker.add(note1.update);
+        app.ticker.add(spawnNote(noteTexture, 150, 25, 1.0));
+        app.ticker.add(spawnNote(noteTexture, 250, 25, 1.0));
+        app.ticker.add(spawnNote(noteTexture, 350, 25, 1.0));
       </script>
     </body>
 </html>
