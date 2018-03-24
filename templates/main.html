@@ -1,168 +1,238 @@
 <!doctype html>
 
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Hello World</title>
-    <style>* {padding: 0; margin: 0}</style>
-  </head>
 
-    <script src="{{url_for('static', filename='pixi.min.js')}}"></script>
-    <script src="{{url_for('static', filename='GameLoop.js')}}"></script>
-    <script src="{{url_for('static', filename='playerGrid.js')}}"></script>
-    <script src="{{url_for('static', filename='makemap.js')}}"> </script>
-    <script src ="{{url_for('static', filename='spawnNote.js')}}"></script>
-    <script src ="{{url_for('static', filename='rhythmLogic.js')}}"></script>
+<head>
+  <meta charset="utf-8">
+  <title>Hello World</title>
+  <style>* {padding: 0; margin: 0}</style>
+</head>
 
-    <body>
-      <script type="text/javascript">
+<script src="{{url_for('static', filename='pixi.min.js')}}"></script>
+<script src="{{url_for('static', filename='GameLoop.js')}}"></script>
+<script src="{{url_for('static', filename='sparkExplosion.js')}}"></script>
+<script src="{{url_for('static', filename='hendrixGrid.js')}}"></script>
+<script src="{{url_for('static', filename='zappaGrid.js')}}"></script>
+<script src="{{url_for('static', filename='tartiniGrid.js')}}"></script>
+<script src="{{url_for('static', filename='princeGrid.js')}}"></script>
+<script src="{{url_for('static', filename='makemap.js')}}"> </script>
+<script src ="{{url_for('static', filename='spawnNote.js')}}"></script>
+<script src ="{{url_for('static', filename='rhythmLogic.js')}}"></script>
+<script src ="{{url_for('static', filename='pixi-sound.js')}}"></script>
+<script src ="{{url_for('static', filename='PlayerController.js')}}"></script>
+<script src ="{{url_for('static', filename='KeyController.js')}}"></script>
 
-      //Aliases
+<body>
+  <script type="text/javascript">
+  const sprites = {};
+
+  //Aliases
   const Application = PIXI.Application,
-      loader = PIXI.loader,
-      resources = PIXI.loader.resources,
-      Sprite = PIXI.Sprite;
+  loader = PIXI.loader,
+  resources = PIXI.loader.resources,
+  Sprite = PIXI.Sprite;
 
   //Create a Pixi Application
   const app = new Application({
-      width: 1000,
-      height: 700,
-      antialias: true,
-      transparent: false,
-      resolution: 1
-    }
-  );
+    width: 1000,
+    height: 700,
+    antialias: true,
+    transparent: false,
+    resolution: 1
+  });
 
-const playerLoc = {}
-var ready = false;
-var life = 3;
-var crashCheck = false;
+  var ready = false;
+  var life = 3;
+  var crashCheck = false;
+  var charswitch = 0;
+  var mainswitch = 0;
+  var viewLoader = 3;
+
 
   //Add the canvas that Pixi automatically created for you to the HTML document
   document.body.appendChild(app.view);
 
   //load an image and run the `setup` function when it's done
-  loader
+  if (viewLoader == 0){
+    loader
     .add("{{url_for('static', filename='images/test1.png')}}")
-    .add('keyCaps',"{{url_for('static', filename='images/KeyCaps.png')}}")
+    .add("{{url_for('static', filename='images/note1.png')}}")
+    .add("{{url_for('static', filename='images/note1Light.png')}}")
+    .add("{{url_for('static', filename='images/note2.png')}}")
+    .add("{{url_for('static', filename='images/note2Light.png')}}")
+    .add("{{url_for('static', filename='images/note3.png')}}")
+    .add("{{url_for('static', filename='images/note3Light.png')}}")
+    .add("{{url_for('static', filename='images/note4.png')}}")
+    .add("{{url_for('static', filename='images/note4Light.png')}}")
     .add("{{url_for('static', filename='images/Hendrix.png')}}")
+    .add("{{url_for('static', filename='images/Hendrix1.png')}}")
+    .add("{{url_for('static', filename='images/Hendrix2.png')}}")
+    .add("{{url_for('static', filename='images/Hendrix3.png')}}")
+    .add("{{url_for('static', filename='images/mc0.png')}}")
+    .add("{{url_for('static', filename='images/mc02.png')}}")
+    .add("{{url_for('static', filename='images/mc03.png')}}")
     .add("{{url_for('static', filename='images/background1.png')}}")
-    .load(gridSetup);
+    .load(hendrixSetup);
+  }
 
+  if(viewLoader == 1){
+    loader
+    .add("{{url_for('static', filename='images/test1.png')}}")
+    .add("{{url_for('static', filename='images/note1.png')}}")
+    .add("{{url_for('static', filename='images/note1Light.png')}}")
+    .add("{{url_for('static', filename='images/note2.png')}}")
+    .add("{{url_for('static', filename='images/note2Light.png')}}")
+    .add("{{url_for('static', filename='images/note3.png')}}")
+    .add("{{url_for('static', filename='images/note3Light.png')}}")
+    .add("{{url_for('static', filename='images/note4.png')}}")
+    .add("{{url_for('static', filename='images/note4Light.png')}}")
+    .add("{{url_for('static', filename='images/Zappa.png')}}")
+    .add("{{url_for('static', filename='images/Zappa1.png')}}")
+    .add("{{url_for('static', filename='images/Zappa2.png')}}")
+    .add("{{url_for('static', filename='images/Zappa3.png')}}")
+    .add("{{url_for('static', filename='images/mc0.png')}}")
+    .add("{{url_for('static', filename='images/mc02.png')}}")
+    .add("{{url_for('static', filename='images/mc03.png')}}")
+    .add("{{url_for('static', filename='images/background1.png')}}")
+    .load(zappaSetup);
+  }
 
+  if(viewLoader == 2){
+    loader
+    .add("{{url_for('static', filename='images/test1.png')}}")
+    .add("{{url_for('static', filename='images/note1.png')}}")
+    .add("{{url_for('static', filename='images/note1Light.png')}}")
+    .add("{{url_for('static', filename='images/note2.png')}}")
+    .add("{{url_for('static', filename='images/note2Light.png')}}")
+    .add("{{url_for('static', filename='images/note3.png')}}")
+    .add("{{url_for('static', filename='images/note3Light.png')}}")
+    .add("{{url_for('static', filename='images/note4.png')}}")
+    .add("{{url_for('static', filename='images/note4Light.png')}}")
+    .add("{{url_for('static', filename='images/Prince.png')}}")
+    .add("{{url_for('static', filename='images/Prince1.png')}}")
+    .add("{{url_for('static', filename='images/Prince2.png')}}")
+    .add("{{url_for('static', filename='images/Prince3.png')}}")
+    .add("{{url_for('static', filename='images/mc0.png')}}")
+    .add("{{url_for('static', filename='images/mc02.png')}}")
+    .add("{{url_for('static', filename='images/mc03.png')}}")
+    .add("{{url_for('static', filename='images/background1.png')}}")
+    .load(princeSetup);
+  }
+  if(viewLoader == 3){
+    loader
+    .add("{{url_for('static', filename='images/test1.png')}}")
+    .add("{{url_for('static', filename='images/note1.png')}}")
+    .add("{{url_for('static', filename='images/note1Light.png')}}")
+    .add("{{url_for('static', filename='images/note2.png')}}")
+    .add("{{url_for('static', filename='images/note2Light.png')}}")
+    .add("{{url_for('static', filename='images/note3.png')}}")
+    .add("{{url_for('static', filename='images/note3Light.png')}}")
+    .add("{{url_for('static', filename='images/note4.png')}}")
+    .add("{{url_for('static', filename='images/note4Light.png')}}")
+    .add("{{url_for('static', filename='images/Tartini.png')}}")
+    .add("{{url_for('static', filename='images/Tartini1.png')}}")
+    .add("{{url_for('static', filename='images/Tartini2.png')}}")
+    .add("{{url_for('static', filename='images/Tartini3.png')}}")
+    .add("{{url_for('static', filename='images/TartiniDeadH.png')}}")
+    .add("{{url_for('static', filename='images/TartiniDeadV.png')}}")
+    .add("{{url_for('static', filename='images/mc0.png')}}")
+    .add("{{url_for('static', filename='images/mc02.png')}}")
+    .add("{{url_for('static', filename='images/mc03.png')}}")
+    .add("{{url_for('static', filename='images/background1.png')}}")
+    .load(tartiniSetup);
+  }
 
-    //Set the game state
-    state = play;
-    //Start the game loop
-   app.ticker.add(delta => gameLoop(delta));
+  var mapTextures = setupMap();
+  // buildMap(mapTextures);
 
+  var MM = new musicManager("static/audio/Tartini.mp3",
+  [ '00000000000000110000000000001100000000000000001100000000000011000000110000000000000011000000000000000000000000000000110000001100',
+  '00000000110000000000000011000000000000001100000000000000110000000000000000001100000000000000110000000000000011001100000011000000',
+  '00001100000000000000110000000000000011000000000000001100000000001100000000000000110000000000000000001100110000000000000000000000',
+  '11000000000000001100000000000000110000000000000011000000000000000000000001100000000000001100000011000000000000000000000000000000'],
+  4*151,
+  6.0);
 
-    function gameLoop(delta){
+  //Set the game state
+  state = play;
+  //Start the game loop
+  app.ticker.add(delta => gameLoop(delta));
+  app.ticker.add(delta => MM.update(delta));
+  MM.startTrack();
 
-      //Update the current game state:
-      state(delta);
+  function gameLoop(delta){
+    //Update the current game state:
+    state(delta);
+  }
+
+  function play(delta) {
+    loader.onComplete.add(() => ready = true);
+    if (ready){
+      //play dodge component
+      dodgeNotes();
+      //animations
+      characterChanger();
+      //animations
+      mainChanger();
+      //binds the keys
+      bindKeys();
     }
+  }
 
-    function play(delta) {
+  function dodgeNotes(){
+    if (MM.handleCrash(sprites.player.x, sprites.player.y)){
+      lifeHit();
+      console.log("crash");
+    }
+  }
 
-      loader.onComplete.add(() => ready = true);
-      if (ready){
-
-        //play the rhythm componenet
-        playRhythm();
-
-        //play dodge component
-        dodgeNotes();
-
+  //dont open this @Artem PlZ
+  function characterChanger(){
+    if (charswitch < 30){
+      charswitch++;}
+      else if (charswitch < 60){
+        charswitch++;
+        character1.visible = false;
+        character2.visible = true;
+      }else if (charswitch < 90){
+        charswitch++;
+        character2.visible = false;
+        character3.visible = true;
+      }else if (charswitch < 120){
+        charswitch++;
+        character3.visible = false;
+        character4.visible = true;
+      }else{
+        charswitch = 0;
+        character4.visible = false;
+        character1.visible = true;
       }
     }
-        var mapTextures = setupMap();
-        // buildMap(mapTextures);
 
-        var MM = new musicManager();
-        app.ticker.add((delta) => MM.update(delta));
-        MM.startTrack(144, ['0000001100000011',
-          '0000110000001100',
-          '0011000000110000',
-          '1100000011000000']);
-        // MM.pushNoteLane('Q', 3.0);
-        // MM.pushNoteLane('W', 3.0);
-        // MM.pushNoteLane('E', 3.0);
-        // MM.pushNoteLane('R', 3.0);
-
-        function playRhythm(){
-          //Q hit logic
-          if(sprites.keyQ.click){
-            console.log("Q bang");
-            if(MM.handleCollision('Q')){
-              console.log("hit");
-            }
-            else {
-              console.log("miss");
-              lifeHit();
-            }
-            sprites.keyQ.click = false;
-          }
-
-          //W hit logic
-          if(sprites.keyW.click){
-            console.log("W bang");
-            if(MM.handleCollision('W')){
-              console.log("hit");
-            }
-            else {
-              console.log("miss");
-              lifeHit();
-            }
-            sprites.keyW.click = false;
-          }
-
-          //E hit logic
-          if(sprites.keyE.click){
-            console.log("E bang");
-            if(MM.handleCollision('E')){
-              console.log("hit");
-            }
-            else {
-              console.log("miss");
-              lifeHit();
-            }
-            sprites.keyE.click = false;
-          }
-
-          //R hit logic
-          if(sprites.keyR.click){
-            console.log("R bang");
-            if(MM.handleCollision('R')){
-              console.log("hit");
-            }
-            else {
-              console.log("miss");
-              lifeHit();
-            }
-            sprites.keyR.click = false;
-          }
-
-          numberEscapedBoundary = MM.handleBoundary(sprites.keyQ.y+50)
-          for (let index = 0; index < numberEscapedBoundary; index++){
-            lifeHit();
-          }
-
+    function mainChanger(){
+      if (mainswitch < 30){
+        mainswitch++;}
+        else if (mainswitch < 60){
+          mainswitch++;
+          m01.visible = false;
+          m02.visible = true;
+        }else if (mainswitch < 90){
+          mainswitch++;
+          m02.visible = false;
+          m03.visible = true;
+        }else{
+          mainswitch = 0;
+          m03.visible = false;
+          m01.visible = true;
         }
+      }
 
-        function dodgeNotes(){
-          if (MM.handleCrash(sprites.player.x, sprites.player.y)){
-            lifeHit();
-            console.log("crash");
-          }
-        }
-
-        function lifeHit(){
-          life--;
-          console.log(life);
-        }
+      function lifeHit(){
+        life--;
+        //console.log(life);
+      }
 
 
       </script>
     </body>
-</html>
+    </html>
