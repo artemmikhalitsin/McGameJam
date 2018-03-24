@@ -20,6 +20,7 @@
 <script src ="{{url_for('static', filename='pixi-sound.js')}}"></script>
 <script src ="{{url_for('static', filename='PlayerController.js')}}"></script>
 <script src ="{{url_for('static', filename='KeyController.js')}}"></script>
+<script src ="{{url_for('static', filename='viewLoader.js')}}"></script>
 
 <body>
   <script type="text/javascript">
@@ -45,101 +46,13 @@
   var crashCheck = false;
   var charswitch = 0;
   var mainswitch = 0;
-  var viewLoader = 3;
+  var texturePackName = "tartini";
 
 
   //Add the canvas that Pixi automatically created for you to the HTML document
   document.body.appendChild(app.view);
 
-  //load an image and run the `setup` function when it's done
-  if (viewLoader == 0){
-    loader
-    .add("{{url_for('static', filename='images/test1.png')}}")
-    .add("{{url_for('static', filename='images/note1.png')}}")
-    .add("{{url_for('static', filename='images/note1Light.png')}}")
-    .add("{{url_for('static', filename='images/note2.png')}}")
-    .add("{{url_for('static', filename='images/note2Light.png')}}")
-    .add("{{url_for('static', filename='images/note3.png')}}")
-    .add("{{url_for('static', filename='images/note3Light.png')}}")
-    .add("{{url_for('static', filename='images/note4.png')}}")
-    .add("{{url_for('static', filename='images/note4Light.png')}}")
-    .add("{{url_for('static', filename='images/Hendrix.png')}}")
-    .add("{{url_for('static', filename='images/Hendrix1.png')}}")
-    .add("{{url_for('static', filename='images/Hendrix2.png')}}")
-    .add("{{url_for('static', filename='images/Hendrix3.png')}}")
-    .add("{{url_for('static', filename='images/mc0.png')}}")
-    .add("{{url_for('static', filename='images/mc02.png')}}")
-    .add("{{url_for('static', filename='images/mc03.png')}}")
-    .add("{{url_for('static', filename='images/background1.png')}}")
-    .load(hendrixSetup);
-  }
-
-  if(viewLoader == 1){
-    loader
-    .add("{{url_for('static', filename='images/test1.png')}}")
-    .add("{{url_for('static', filename='images/note1.png')}}")
-    .add("{{url_for('static', filename='images/note1Light.png')}}")
-    .add("{{url_for('static', filename='images/note2.png')}}")
-    .add("{{url_for('static', filename='images/note2Light.png')}}")
-    .add("{{url_for('static', filename='images/note3.png')}}")
-    .add("{{url_for('static', filename='images/note3Light.png')}}")
-    .add("{{url_for('static', filename='images/note4.png')}}")
-    .add("{{url_for('static', filename='images/note4Light.png')}}")
-    .add("{{url_for('static', filename='images/Zappa.png')}}")
-    .add("{{url_for('static', filename='images/Zappa1.png')}}")
-    .add("{{url_for('static', filename='images/Zappa2.png')}}")
-    .add("{{url_for('static', filename='images/Zappa3.png')}}")
-    .add("{{url_for('static', filename='images/mc0.png')}}")
-    .add("{{url_for('static', filename='images/mc02.png')}}")
-    .add("{{url_for('static', filename='images/mc03.png')}}")
-    .add("{{url_for('static', filename='images/background1.png')}}")
-    .load(zappaSetup);
-  }
-
-  if(viewLoader == 2){
-    loader
-    .add("{{url_for('static', filename='images/test1.png')}}")
-    .add("{{url_for('static', filename='images/note1.png')}}")
-    .add("{{url_for('static', filename='images/note1Light.png')}}")
-    .add("{{url_for('static', filename='images/note2.png')}}")
-    .add("{{url_for('static', filename='images/note2Light.png')}}")
-    .add("{{url_for('static', filename='images/note3.png')}}")
-    .add("{{url_for('static', filename='images/note3Light.png')}}")
-    .add("{{url_for('static', filename='images/note4.png')}}")
-    .add("{{url_for('static', filename='images/note4Light.png')}}")
-    .add("{{url_for('static', filename='images/Prince.png')}}")
-    .add("{{url_for('static', filename='images/Prince1.png')}}")
-    .add("{{url_for('static', filename='images/Prince2.png')}}")
-    .add("{{url_for('static', filename='images/Prince3.png')}}")
-    .add("{{url_for('static', filename='images/mc0.png')}}")
-    .add("{{url_for('static', filename='images/mc02.png')}}")
-    .add("{{url_for('static', filename='images/mc03.png')}}")
-    .add("{{url_for('static', filename='images/background1.png')}}")
-    .load(princeSetup);
-  }
-  if(viewLoader == 3){
-    loader
-    .add("{{url_for('static', filename='images/test1.png')}}")
-    .add("{{url_for('static', filename='images/note1.png')}}")
-    .add("{{url_for('static', filename='images/note1Light.png')}}")
-    .add("{{url_for('static', filename='images/note2.png')}}")
-    .add("{{url_for('static', filename='images/note2Light.png')}}")
-    .add("{{url_for('static', filename='images/note3.png')}}")
-    .add("{{url_for('static', filename='images/note3Light.png')}}")
-    .add("{{url_for('static', filename='images/note4.png')}}")
-    .add("{{url_for('static', filename='images/note4Light.png')}}")
-    .add("{{url_for('static', filename='images/Tartini.png')}}")
-    .add("{{url_for('static', filename='images/Tartini1.png')}}")
-    .add("{{url_for('static', filename='images/Tartini2.png')}}")
-    .add("{{url_for('static', filename='images/Tartini3.png')}}")
-    .add("{{url_for('static', filename='images/TartiniDeadH.png')}}")
-    .add("{{url_for('static', filename='images/TartiniDeadV.png')}}")
-    .add("{{url_for('static', filename='images/mc0.png')}}")
-    .add("{{url_for('static', filename='images/mc02.png')}}")
-    .add("{{url_for('static', filename='images/mc03.png')}}")
-    .add("{{url_for('static', filename='images/background1.png')}}")
-    .load(tartiniSetup);
-  }
+  loadView(texturePackName);
 
   var mapTextures = setupMap();
   // buildMap(mapTextures);
@@ -165,7 +78,10 @@
   }
 
   function play(delta) {
-    loader.onComplete.add(() => ready = true);
+    loader.onComplete.add(() => {
+      ready = true;
+      bindKeys();
+    });
     if (ready){
       //play dodge component
       dodgeNotes();
@@ -174,7 +90,6 @@
       //animations
       mainChanger();
       //binds the keys
-      bindKeys();
     }
   }
 
