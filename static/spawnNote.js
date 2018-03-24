@@ -37,7 +37,7 @@ class musicManager{
     // Fixed note speed?
     this.noteSpeed = 6.0;
     // Initial drop distance
-    this.dropDistance = +this.noteTexture.height - (app.stage.height - 50)
+    this.dropDistance = +this.noteTexture.height - (app.stage.height - 50);
     // Is it really loaded????
     // Load a track
     this.track = PIXI.sound.Sound.from({
@@ -191,10 +191,10 @@ class musicManager{
     var successHit = false;
     // Bbox
 
-    console.log(x_l)
+    //console.log(x_l)
     // Find first note to collide
     for (let i = 0; i < this.allNotes.length; i++){
-      console.log(this.allNotes[i].sprite.x)
+      //console.log(this.allNotes[i].sprite.x)
       if(x_l < this.allNotes[i].sprite.x &&
         this.allNotes[i].sprite.x < x_r &&
         590 < this.allNotes[i].sprite.y &&
