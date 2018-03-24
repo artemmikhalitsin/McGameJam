@@ -2,7 +2,7 @@ class Note {
   constructor(noteTexture, x, y, speed){
     this.sprite = new PIXI.Sprite(noteTexture);
     this.speed = speed;
-    this.sprite.anchor.set(0.5);
+    this.sprite.anchor.set(0);
     app.stage.addChild(this.sprite);
     this.sprite.x = x;
     this.sprite.y = y;
@@ -42,16 +42,16 @@ class musicManager{
     var x;
     switch (lane) {
       case 'Q':
-        x = 50;
+        x = 130;
         break;
       case 'W':
-        x = 50+130;
+        x = 250;
         break;
       case 'E':
-        x = 50+260;
+        x = 370;
         break;
       case 'R':
-        x = 50+390;
+        x = 490;
         break;
       default:
         console.error('Yo your lane does not exist. Relinquish your property!');
@@ -100,7 +100,7 @@ class musicManager{
     for (let i = 0; i < this.allNotes.length; i++){
       this.allNotes[i].sprite.y += this.allNotes[i].speed*delta;
     }
-    
+
     // Update internal clock for timely dispensing
     this.clockTime += delta/60;
     // console.log(this.clockTime/60);
@@ -149,20 +149,20 @@ class musicManager{
     // Find lane coordinates
     switch (lane) {
       case 'Q':
-        x_l = 55 - epsilon;
-        x_r = 155 + epsilon;
+        x_l = 130 - epsilon;
+        x_r = 215 + epsilon;
         break;
       case 'W':
-        x_l = 55+130 - epsilon;
-        x_r = 155+130 + epsilon;
+        x_l = 250 - epsilon;
+        x_r = 335 + epsilon;
         break;
       case 'E':
-        x_l = 55+260 - epsilon;
-        x_r = 155+260 + epsilon;
+        x_l = 370 - epsilon;
+        x_r = 455 + epsilon;
         break;
       case 'R':
-        x_l = 55+390 - epsilon;
-        x_r = 155+390 + epsilon;
+        x_l = 490 - epsilon;
+        x_r = 575 + epsilon;
         break;
       default:
         console.error('Invalid lane in MusicManager! Identify yourself!');
