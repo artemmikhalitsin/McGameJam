@@ -24,13 +24,10 @@ function Player(base_damage, health){
     return damage; 
   }
   
-  this.gain_health = function(health){ //
-    temp = this.health+health;
-    if(temp > max_health)
-      this.health = max_health;
-    else
-      this.health = temp; 
-    
+  this.gain_health = function(health){ //over heal allowed
+    this.health = this.health+health;
+    if(this.health > this.max_health)
+      this.max_health = this.health; 
     console.log(this.health);
   }
   
