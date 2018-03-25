@@ -1,6 +1,6 @@
 function setupMap() {
   var passageTexture = PIXI.Texture.fromImage('static/images/placeholder_passage.png')
-  var wallTexture = PIXI.Texture.fromImage('static/images/placeholder_wall.png') //("{{url_for('static', filename='images/placeholder_wall.png')}}")
+  var wallTexture = PIXI.Texture.fromImage('static/images/placeholder_wall.png')
   return {passageTexture:passageTexture, wallTexture:wallTexture}
 }
 

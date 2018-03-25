@@ -5,6 +5,8 @@ let q = keyboard(81),
   r = keyboard(82);
 
 keys = {}
+handlePress = ()=>{}
+handleRelease = ()=>{}
 
 bindKeys = () => {
   keys = {
@@ -25,9 +27,11 @@ bindKeys = () => {
       'keyPress':sprites.keyRPress
     },
   }
+  handlePress = handleRhythmPress;
+  handleRelease = handleRhythmRelease;
 }
 
-handlePress = (letter) => {
+handleRhythmPress = (letter) => {
   keys[letter].key.visible = false;
   keys[letter].keyPress.visible = true;
   if(MM.handleCollision(letter)){
@@ -39,7 +43,7 @@ handlePress = (letter) => {
   }
 }
 
-handleRelease = (letter) => {
+handleRhythmRelease = (letter) => {
   keys[letter].key.visible = true;
   keys[letter].keyPress.visible = false;
 }
