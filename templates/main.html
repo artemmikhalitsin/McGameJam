@@ -157,7 +157,9 @@
   state = play;
   //Start the game loop
   app.ticker.add(delta => gameLoop(delta));
-  app.ticker.add(delta => MM.update(delta));
+  f = (delta) => MM.update(delta);
+  MM.f = f;
+  app.ticker.add(f);
   MM.startTrack();
 
   function gameLoop(delta){

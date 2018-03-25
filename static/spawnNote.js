@@ -6,12 +6,14 @@ class Note {
     app.stage.addChild(this.sprite);
     this.sprite.x = x;
     this.sprite.y = y;
+    this.f = () => {};
     // this.update = (delta) => this.sprite.y += speed*delta;
   }
 }
 
 class musicManager{
   constructor(trackPath, sequenceQWER, bpm, noteSpeed) {
+    // WARNING: Note texture needs to be loaded again after a terminate()
     this.noteTexture = PIXI.Texture.fromImage('static/images/placeholder_note.png')
     this.bpm = bpm;
     this.fixedDelay = 1.0;
@@ -28,7 +30,6 @@ class musicManager{
           console.log('Track over');
       }
     })
-
     // Parse sequence
     this.sequences = this.parseSequences(sequenceQWER);
     this.allNotes = [];
@@ -44,6 +45,15 @@ class musicManager{
       }
     }
     return sequences;
+  }
+
+  terminate(){
+    // Get rid of the notes
+    for (let i = 0; i < this.allNotes.length; i++){
+      this.allNotes[i].sprite.destroy(true)
+    }
+    this.allNotes = [];
+    app.ticker.remove(this.f);
   }
 
   // Push note by lane
