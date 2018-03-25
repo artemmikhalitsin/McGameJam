@@ -39,6 +39,7 @@ loadView = () => {
   .add("static/images/instructions1.png")
   .add("static/images/game_over.png")
   .add("static/images/welcome_page.png")
+  .add("static/images/win.png")
 }
 
 /*
