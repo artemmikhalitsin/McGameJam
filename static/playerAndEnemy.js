@@ -1,5 +1,4 @@
 
-
 function Player(base_damage, health){
   this.max_health = health;
   this.health = health;
