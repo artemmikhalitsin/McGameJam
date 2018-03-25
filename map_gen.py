@@ -10,7 +10,6 @@ def generate_map(y_size, x_size, max_rooms):
     rooms = []
     rooms.append(first_room)
 
-
     while len(rooms) < max_rooms:
         for room in rooms:
             if adjacent_empty(grid, room[0], room[1]):

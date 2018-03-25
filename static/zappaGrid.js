@@ -1,5 +1,8 @@
 
 
+//This `setup` function will run when the image has loaded
+function zappaSetup() {
+
   var gridTexture = PIXI.Texture.fromImage('static/images/test1.png')
   var note1 = PIXI.Texture.fromImage('static/images/note1.png')
   var note1Light = PIXI.Texture.fromImage('static/images/note1Light.png')
@@ -40,9 +43,6 @@
  sprites.player = new PIXI.Sprite(gridTexture);
 
  background1 = new PIXI.Sprite(background1Texture);
-
-//This `setup` function will run when the image has loaded
-function zappaSetup() {
 
    // background1 = new PIXI.Sprite(background1Texture);
     background1.x = 0;
