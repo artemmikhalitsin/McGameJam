@@ -35,7 +35,7 @@ class musicManager{
     this.bpm = bpm;
     this.fixedDelay = 1.0;
     // Fixed note speed?
-    this.noteSpeed = 6.0;
+    this.noteSpeed = noteSpeed;
     // Initial drop distance
     this.dropDistance = +this.noteTexture.height - (app.stage.height - 50);
     // Is it really loaded????
