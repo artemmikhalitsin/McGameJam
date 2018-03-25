@@ -1,47 +1,49 @@
 
-  var gridTexture = PIXI.Texture.fromImage('static/images/test1.png')
-  var note1 = PIXI.Texture.fromImage('static/images/note1.png')
-  var note1Light = PIXI.Texture.fromImage('static/images/note1Light.png')
-  var note2 = PIXI.Texture.fromImage('static/images/note2.png')
-  var note2Light = PIXI.Texture.fromImage('static/images/note2Light.png')
-  var note3 = PIXI.Texture.fromImage('static/images/note3.png')
-  var note3Light = PIXI.Texture.fromImage('static/images/note3Light.png')
-  var note4 = PIXI.Texture.fromImage('static/images/note4.png')
-  var note4Light = PIXI.Texture.fromImage('static/images/note4Light.png')
-  var charTexture = PIXI.Texture.fromImage('static/images/Hendrix.png')
-  var charTexture1 = PIXI.Texture.fromImage('static/images/Hendrix1.png')
-  var charTexture2 = PIXI.Texture.fromImage('static/images/Hendrix2.png')
-  var charTexture3 = PIXI.Texture.fromImage('static/images/Hendrix3.png')
-  var charTextureH = PIXI.Texture.fromImage('static/images/HendrixH.png')
-  var charTextureV = PIXI.Texture.fromImage('static/images/HendrixV.png')
-  var mc1 = PIXI.Texture.fromImage('static/images/mc0.png')
-  var mc2 = PIXI.Texture.fromImage('static/images/mc02.png')
-  var mc3 = PIXI.Texture.fromImage('static/images/mc03.png')
-  var background1Texture = PIXI.Texture.fromImage('static/images/background1.png')
-
-  background1 = new PIXI.Sprite(background1Texture);
-
-  m01 = new PIXI.Sprite(mc1);
-  m02 = new PIXI.Sprite(mc2);
-  m03 = new PIXI.Sprite(mc3);
-
-  character2 = new PIXI.Sprite(charTexture1);
-  character3 = new PIXI.Sprite(charTexture2);
-  character4 = new PIXI.Sprite(charTexture3);
-  character1 = new PIXI.Sprite(charTexture);
-
-  sprites.keyQ = new PIXI.Sprite(note1);
-  sprites.keyQPress = new PIXI.Sprite(note1Light);
-  sprites.keyW = new PIXI.Sprite(note2);
-  sprites.keyWPress = new PIXI.Sprite(note2Light);
-  sprites.keyE = new PIXI.Sprite(note3);
-  sprites.keyEPress = new PIXI.Sprite(note3Light);
-  sprites.keyR = new PIXI.Sprite(note4);
-  sprites.keyRPress = new PIXI.Sprite(note4Light);
-
-  sprites.player = new PIXI.Sprite(gridTexture);
 //This `setup` function will run when the image has loaded
 function hendrixSetup() {
+
+
+    var gridTexture = PIXI.Texture.fromImage('static/images/test1.png')
+    var note1 = PIXI.Texture.fromImage('static/images/note1.png')
+    var note1Light = PIXI.Texture.fromImage('static/images/note1Light.png')
+    var note2 = PIXI.Texture.fromImage('static/images/note2.png')
+    var note2Light = PIXI.Texture.fromImage('static/images/note2Light.png')
+    var note3 = PIXI.Texture.fromImage('static/images/note3.png')
+    var note3Light = PIXI.Texture.fromImage('static/images/note3Light.png')
+    var note4 = PIXI.Texture.fromImage('static/images/note4.png')
+    var note4Light = PIXI.Texture.fromImage('static/images/note4Light.png')
+    var charTexture = PIXI.Texture.fromImage('static/images/Hendrix.png')
+    var charTexture1 = PIXI.Texture.fromImage('static/images/Hendrix1.png')
+    var charTexture2 = PIXI.Texture.fromImage('static/images/Hendrix2.png')
+    var charTexture3 = PIXI.Texture.fromImage('static/images/Hendrix3.png')
+    var charTextureH = PIXI.Texture.fromImage('static/images/HendrixH.png')
+    var charTextureV = PIXI.Texture.fromImage('static/images/HendrixV.png')
+    var mc1 = PIXI.Texture.fromImage('static/images/mc0.png')
+    var mc2 = PIXI.Texture.fromImage('static/images/mc02.png')
+    var mc3 = PIXI.Texture.fromImage('static/images/mc03.png')
+    var background1Texture = PIXI.Texture.fromImage('static/images/background1.png')
+
+    background1 = new PIXI.Sprite(background1Texture);
+
+    m01 = new PIXI.Sprite(mc1);
+    m02 = new PIXI.Sprite(mc2);
+    m03 = new PIXI.Sprite(mc3);
+
+    character2 = new PIXI.Sprite(charTexture1);
+    character3 = new PIXI.Sprite(charTexture2);
+    character4 = new PIXI.Sprite(charTexture3);
+    character1 = new PIXI.Sprite(charTexture);
+
+    sprites.keyQ = new PIXI.Sprite(note1);
+    sprites.keyQPress = new PIXI.Sprite(note1Light);
+    sprites.keyW = new PIXI.Sprite(note2);
+    sprites.keyWPress = new PIXI.Sprite(note2Light);
+    sprites.keyE = new PIXI.Sprite(note3);
+    sprites.keyEPress = new PIXI.Sprite(note3Light);
+    sprites.keyR = new PIXI.Sprite(note4);
+    sprites.keyRPress = new PIXI.Sprite(note4Light);
+
+    sprites.player = new PIXI.Sprite(gridTexture);
 
  // background1 = new PIXI.Sprite(background1Texture);
   background1.x = 0;

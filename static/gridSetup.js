@@ -1,6 +1,6 @@
 
-function tartiniSetup() {
-
+//This `setup` function will run when the image has loaded
+function gridSetup(number) {
 
 
     var gridTexture = PIXI.Texture.fromImage('static/images/test1.png')
@@ -12,12 +12,12 @@ function tartiniSetup() {
     var note3Light = PIXI.Texture.fromImage('static/images/note3Light.png')
     var note4 = PIXI.Texture.fromImage('static/images/note4.png')
     var note4Light = PIXI.Texture.fromImage('static/images/note4Light.png')
-    var charTexture = PIXI.Texture.fromImage('static/images/Tartini.png')
-    var charTexture1 = PIXI.Texture.fromImage('static/images/Tartini1.png')
-    var charTexture2 = PIXI.Texture.fromImage('static/images/Tartini2.png')
-    var charTexture3 = PIXI.Texture.fromImage('static/images/Tartini3.png')
-    var charTextureH = PIXI.Texture.fromImage('static/images/TartiniDeadH.png')
-    var charTextureV = PIXI.Texture.fromImage('static/images/TartiniDeadV.png')
+    var charTexture = PIXI.Texture.fromImage('static/images/Hendrix.png')
+    var charTexture1 = PIXI.Texture.fromImage('static/images/Hendrix1.png')
+    var charTexture2 = PIXI.Texture.fromImage('static/images/Hendrix2.png')
+    var charTexture3 = PIXI.Texture.fromImage('static/images/Hendrix3.png')
+    var charTextureH = PIXI.Texture.fromImage('static/images/HendrixH.png')
+    var charTextureV = PIXI.Texture.fromImage('static/images/HendrixV.png')
     var mc1 = PIXI.Texture.fromImage('static/images/mc0.png')
     var mc2 = PIXI.Texture.fromImage('static/images/mc02.png')
     var mc3 = PIXI.Texture.fromImage('static/images/mc03.png')
@@ -34,9 +34,6 @@ function tartiniSetup() {
     character4 = new PIXI.Sprite(charTexture3);
     character1 = new PIXI.Sprite(charTexture);
 
-    characterH = new PIXI.Sprite(charTextureH);
-    characterV = new PIXI.Sprite(charTextureV);
-
     sprites.keyQ = new PIXI.Sprite(note1);
     sprites.keyQPress = new PIXI.Sprite(note1Light);
     sprites.keyW = new PIXI.Sprite(note2);
@@ -47,12 +44,12 @@ function tartiniSetup() {
     sprites.keyRPress = new PIXI.Sprite(note4Light);
 
     sprites.player = new PIXI.Sprite(gridTexture);
-  //This `setup` function will run when the image has loaded
-//  background1 = new PIXI.Sprite(background1Texture);
+
+ // background1 = new PIXI.Sprite(background1Texture);
   background1.x = 0;
   background1.y = 0;
 
-  //m01 = new PIXI.Sprite(mc1);
+//  m01 = new PIXI.Sprite(mc1);
   m01.x = 800;
   m01.y = 475;
   m01.height = 200;
@@ -73,21 +70,21 @@ function tartiniSetup() {
   m03.width = 100;
   m03.visible = false;
 
-  //character2 = new PIXI.Sprite(charTexture1);
+ // character2 = new PIXI.Sprite(charTexture1);
   character2.x = 750;
   character2.y = 25;
   character2.height = 300;
   character2.width = 200;
   character2.visible = false;
 
-  //character3 = new PIXI.Sprite(charTexture2);
+ // character3 = new PIXI.Sprite(charTexture2);
   character3.x = 750;
   character3.y = 25;
   character3.height = 300;
   character3.width = 200;
   character3.visible = false;
 
-  //character4 = new PIXI.Sprite(charTexture3);
+ // character4 = new PIXI.Sprite(charTexture3);
   character4.x = 750;
   character4.y = 25;
   character4.height = 300;
@@ -101,19 +98,19 @@ function tartiniSetup() {
   character1.width = 200;
   character1.visible = true;
 
-  //characterH = new PIXI.Sprite(charTextureH);
-  characterH.x = 750;
-  characterH.y = 25;
-  characterH.height = 200;
-  characterH.width = 300;
-  characterH.visible = false;
-
- // characterV = new PIXI.Sprite(charTextureV);
+  characterV = new PIXI.Sprite(charTextureV);
   characterV.x = 750;
   characterV.y = 25;
   characterV.height = 300;
   characterV.width = 200;
   characterV.visible = false;
+
+  characterH = new PIXI.Sprite(charTextureH);
+  characterH.x = 750;
+  characterH.y = 25;
+  characterH.height = 200;
+  characterH.width = 300;
+  characterH.visible = false;
 
 
 
@@ -129,8 +126,6 @@ function tartiniSetup() {
   sprites.keyQPress.y = 600;
   sprites.keyQPress.visible = false;
 
-
-
  // sprites.keyW = new PIXI.Sprite(note2);
   sprites.keyW.x = 250;
   sprites.keyW.y = 600;
@@ -141,7 +136,6 @@ function tartiniSetup() {
   sprites.keyWPress.x = 250;
   sprites.keyWPress.y = 600;
   sprites.keyWPress.visible = false;
-
 
 //  sprites.keyE = new PIXI.Sprite(note3);
   sprites.keyE.x = 370;
@@ -161,10 +155,10 @@ function tartiniSetup() {
   sprites.keyR.visible = true;
 
 
- // sprites.keyRPress = new PIXI.Sprite(note4Light);
+//  sprites.keyRPress = new PIXI.Sprite(note4Light);
   sprites.keyRPress.x = 490;
   sprites.keyRPress.y = 600;
-  sprites.keyRPress.visible = false;
+  sprites.keyRPress.visible = true;
 
 
   //Player sprite//Grid top row
@@ -186,6 +180,7 @@ function tartiniSetup() {
   app.stage.addChild(sprites.keyWPress);
   app.stage.addChild(sprites.keyEPress);
   app.stage.addChild(sprites.keyRPress);
+
   //Add player to the stage
   app.stage.addChild(sprites.player);
 
@@ -193,16 +188,17 @@ function tartiniSetup() {
   app.stage.addChild(character2);
   app.stage.addChild(character3);
   app.stage.addChild(character4);
-  app.stage.addChild(characterH);
   app.stage.addChild(characterV);
+  app.stage.addChild(character3H);
+
+
 
   app.stage.addChild(m01);
   app.stage.addChild(m02);
   app.stage.addChild(m03);
-
   }
 
-function tartiniDestructor(){
+function hendrixDestructor(){
   app.stage.removeChild(background1);
 
   //Add the KeyCaps to the stage
@@ -216,6 +212,7 @@ function tartiniDestructor(){
   app.stage.removeChild(sprites.keyWPress);
   app.stage.removeChild(sprites.keyEPress);
   app.stage.removeChild(sprites.keyRPress);
+
   //Add player to the stage
   app.stage.removeChild(sprites.player);
 
@@ -229,4 +226,5 @@ function tartiniDestructor(){
   app.stage.removeChild(m01);
   app.stage.removeChild(m02);
   app.stage.removeChild(m03);
+
   }
