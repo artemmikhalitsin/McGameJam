@@ -139,8 +139,8 @@ function gridSetup(number) {
   characterV.visible = false;
 
   characterH = new PIXI.Sprite(charTextureH);
-  characterH.x = 750;
-  characterH.y = 25;
+  characterH.x = 650;
+  characterH.y = 125;
   characterH.height = 200;
   characterH.width = 300;
   characterH.visible = false;

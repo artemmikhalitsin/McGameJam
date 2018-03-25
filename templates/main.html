@@ -190,17 +190,14 @@
       if (true){
         //play dodge component
         dodgeNotes();
-
         if(life > 0){
-        //animations
-        characterChanger();
-        //animations
-        mainChanger();
-        //binds the keys
+          //animations
+          characterChanger();
+          //animations
+          mainChanger();
         }
       }
       if (life <= 0){
-
         killChar();
       }
     }
@@ -211,6 +208,8 @@
         console.log("crash");
       }
     }
+
+    function killPlayer(){}
 
     function killChar(){
       if (killswitch < 45){
@@ -227,7 +226,6 @@
         killswitch++;
       }
       else {
-
         state = overworldScreen;
         MM.terminate();
         removeChildren();
