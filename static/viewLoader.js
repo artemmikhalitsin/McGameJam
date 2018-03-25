@@ -35,6 +35,10 @@ loadView = () => {
   .add("static/images/Tartini3.png")
   .add("static/images/TartiniDeadH.png")
   .add("static/images/TartiniDeadV.png")
+  .add("static/images/win_phase1.png")
+  .add("static/images/instructions1.png")
+  .add("static/images/game_over.png")
+  .add("static/images/welcome_page.png")
 }
 
 /*
