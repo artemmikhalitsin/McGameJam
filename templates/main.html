@@ -44,7 +44,7 @@
   });
 
   var ready = false;
-  var life = 3;
+  var playerlife = 20;
   var crashCheck = false;
   var charswitch = 0;
   var mainswitch = 0;
@@ -131,7 +131,8 @@
         '11000000000000001100000000000000110000000000000011000000000000000000000001100000000000001100000011000000000000000000000000000000'],
         4*151,
         3.0);
-      bindRhythmKeys();
+
+      life = playerlife;
 
       // Load music manager
 
@@ -143,12 +144,9 @@
 
       // if(!loader.loading){
       //   state = play;
-
-      while (!ready){
-        console.log("waiting");
-      }
       //wait for loader
-
+      zappaSetup();
+      bindRhythmKeys();
       state = play
 
       // ready = true;
@@ -157,7 +155,7 @@
     function play(delta) {
       // WARNING: Can't get async to work: the loader is already done too fast
 
-      if (ready){
+      if (true){
         //play dodge component
         dodgeNotes();
         //animations
@@ -167,7 +165,8 @@
         //binds the keys
       }
       if (life <= 0){
-        state = overworld;
+        state = overworldScreen;
+        MM.terminate();
       }
     }
 
