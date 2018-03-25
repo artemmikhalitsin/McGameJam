@@ -21,6 +21,8 @@ loadView = (enemyNumber) => {
     .add("static/images/Hendrix1.png")
     .add("static/images/Hendrix2.png")
     .add("static/images/Hendrix3.png")
+    .add("static/images/HendrixH.png")
+    .add("static/images/HendrixV.png")
     .load(hendrixSetup);
   }
   if(enemyNumber == 5){
@@ -29,6 +31,8 @@ loadView = (enemyNumber) => {
     .add("static/images/Zappa1.png")
     .add("static/images/Zappa2.png")
     .add("static/images/Zappa3.png")
+    .add("static/images/ZappaH.png")
+    .add("static/images/Zappa3V.png")
     .load(zappaSetup);
   }
 
@@ -38,9 +42,11 @@ loadView = (enemyNumber) => {
     .add("static/images/Prince1.png")
     .add("static/images/Prince2.png")
     .add("static/images/Prince3.png")
+    .add("static/images/PrinceH.png")
+    .add("static/images/PrinceV.png")
     .load(princeSetup);
   }
-  if(enemyNumber == 4){
+  if(enemyNumber == 3){
     loader
     .add("static/images/Tartini.png")
     .add("static/images/Tartini1.png")
@@ -49,5 +55,15 @@ loadView = (enemyNumber) => {
     .add("static/images/TartiniDeadH.png")
     .add("static/images/TartiniDeadV.png")
     .load(tartiniSetup);
+  }
+  if(enemyNumber == 4){
+    loader
+    .add("static/images/devil.png")
+    .add("static/images/devil1.png")
+    .add("static/images/devil2.png")
+    .add("static/images/devil3.png")
+    .add("static/images/devilH.png")
+    .add("static/images/devilV.png")
+    .load(devilSetup);
   }
 }
