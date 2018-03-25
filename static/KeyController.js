@@ -74,12 +74,12 @@ handleRhythmPress = (letter) => {
     keys[letter].key.visible = false;
     keys[letter].keyPress.visible = true;
     if(MM.handleCollision(letter)){
-      console.log("hit");
-      monsterLife--;
+      // console.log("hit");
+      monsterLifeHit();
       currentCombo++;
     }
     else {
-      console.log("miss");
+      // console.log("miss");
       currentCombo = 0;
       lifeHit();
     }

@@ -26,6 +26,7 @@ class musicManager{
     this.track = PIXI.sound.Sound.from({
       url: trackPath, // 'static/music/Tartini1.midi',
       autoPlay: false,
+      loop: true,
       complete: function() {
           console.log('Track over');
       }
@@ -194,7 +195,8 @@ class musicManager{
     // Find first note to collide
     for (let i = 0; i < this.allNotes.length; i++){
       //console.log(this.allNotes[i].sprite.x)
-      if(x_l < this.allNotes[i].sprite.x &&
+      if(this.active[i] &&
+        x_l < this.allNotes[i].sprite.x &&
         this.allNotes[i].sprite.x < x_r &&
         500 < this.allNotes[i].sprite.y &&
         this.allNotes[i].sprite.y < 610){
@@ -206,6 +208,7 @@ class musicManager{
             1.0, colour, 1.0);
           this.allNotes[i].sprite.visible = false;
           this.active[i] = false;
+          break;
       }
     }
 

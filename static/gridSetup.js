@@ -9,6 +9,10 @@ function gridSetup(number) {
     var charTexture3 = PIXI.Texture.fromImage('static/images/Hendrix3.png')
     var charTextureH = PIXI.Texture.fromImage('static/images/HendrixH.png')
     var charTextureV = PIXI.Texture.fromImage('static/images/HendrixV.png')
+    var aspectRatioV = 1.5;
+    var aspectRatioVD = 1.6;
+    var aspectRatioH = 0.71;
+    var scaleH = 1.0;
   }
   if (number == enemyEnum['zappa']){
     var charTexture = PIXI.Texture.fromImage('static/images/Zappa.png')
@@ -17,6 +21,10 @@ function gridSetup(number) {
     var charTexture3 = PIXI.Texture.fromImage('static/images/Zappa3.png')
     var charTextureV = PIXI.Texture.fromImage('static/images/ZappaV.png')
     var charTextureH = PIXI.Texture.fromImage('static/images/ZappaH.png')
+    var aspectRatioV = 1.5;
+    var aspectRatioVD = 1.76;
+    var aspectRatioH = 0.57;
+    var scaleH = 1.0;
   }
   if (number == enemyEnum['prince']){
     var charTexture = PIXI.Texture.fromImage('static/images/Prince.png')
@@ -25,6 +33,10 @@ function gridSetup(number) {
     var charTexture3 = PIXI.Texture.fromImage('static/images/Prince3.png')
     var charTextureV = PIXI.Texture.fromImage('static/images/PrinceV.png')
     var charTextureH = PIXI.Texture.fromImage('static/images/PrinceH.png')
+    var aspectRatioV = 1.2;
+    var aspectRatioVD = 1.59;
+    var aspectRatioH = 0.62;
+    var scaleH = 1.0;
   }
   if (number == enemyEnum['tartini']){
     var charTexture = PIXI.Texture.fromImage('static/images/Tartini.png')
@@ -33,6 +45,10 @@ function gridSetup(number) {
     var charTexture3 = PIXI.Texture.fromImage('static/images/Tartini3.png')
     var charTextureH = PIXI.Texture.fromImage('static/images/TartiniDeadH.png')
     var charTextureV = PIXI.Texture.fromImage('static/images/TartiniDeadV.png')
+    var aspectRatioV = 1.36;
+    var aspectRatioVD = 1.5;
+    var aspectRatioH = 0.61;
+    var scaleH = 1.0;
   }
   if (number == enemyEnum['tartinidevil']){
     var charTexture = PIXI.Texture.fromImage('static/images/devil.png')
@@ -41,6 +57,10 @@ function gridSetup(number) {
     var charTexture3 = PIXI.Texture.fromImage('static/images/devil3.png')
     var charTextureH = PIXI.Texture.fromImage('static/images/devilH.png')
     var charTextureV = PIXI.Texture.fromImage('static/images/devilV.png')
+    var aspectRatioV = 1.22;
+    var aspectRatioVD = 1.21;
+    var aspectRatioH = 1.33;
+    var scaleH = 0.5;
   }
 
   var tv = PIXI.Texture.fromImage('static/images/MCTV.png')
@@ -91,80 +111,91 @@ function gridSetup(number) {
   background1.y = 0;
 
   //  m01 = new PIXI.Sprite(mc1);
-  m01.x = 800;
+  m01.x = 850;
+  m01.anchor.set(0.5,0.0);
   m01.y = 475;
   m01.height = 200;
   m01.width = 100;
   m01.visible = true;
 
   // m02 = new PIXI.Sprite(mc2);
-  m02.x = 800;
+  m02.x = 850;
+  m02.anchor.set(0.5,0.0);
   m02.y = 475;
   m02.height = 200;
   m02.width = 100;
   m02.visible = false;
 
   // m03 = new PIXI.Sprite(mc3);
-  m03.x = 800;
+  m03.x = 850;
+  m03.anchor.set(0.5,0.0);
   m03.y = 475;
   m03.height = 200;
   m03.width = 100;
   m03.visible = false;
 
   // m0D = new PIXI.Sprite(mcD);
-  m0D.x = 800;
-  m0D.y = 475;
-  m0D.height = 200;
+  m0D.x = 850;
+  m0D.anchor.set(0.5,0.0);
+  m0D.y = 540;
+  m0D.height = 121.1;
   m0D.width = 100;
   m0D.visible = false;
 
   // m0H = new PIXI.Sprite(mcH);
-  m0H.x = 700;
+  m0H.x = 850;
+  m0H.anchor.set(0.5,0.0);
   m0H.y = 475;
   m0H.height = 200;
-  m0H.width = 200;
+  m0H.width = 200/1.685;
   m0H.visible = false;
 
+  // character1 = new PIXI.Sprite(charTexture);
+  character1.x = 850;
+  character1.anchor.set(0.5,0.0);
+  character1.y = 25;
+  character1.height = 300;
+  character1.width = character1.height/aspectRatioV;
+  character1.visible = false;
+
   // character2 = new PIXI.Sprite(charTexture1);
-  character2.x = 750;
+  character2.x = 850;
+  character2.anchor.set(0.5,0.0);
   character2.y = 25;
   character2.height = 300;
-  character2.width = 200;
+  character2.width = character2.height/aspectRatioV;
   character2.visible = false;
 
   // character3 = new PIXI.Sprite(charTexture2);
-  character3.x = 750;
+  character3.x = 850;
+  character3.anchor.set(0.5,0.0);
   character3.y = 25;
   character3.height = 300;
-  character3.width = 200;
+  character3.width = character3.height/aspectRatioV;
   character3.visible = false;
 
   // character4 = new PIXI.Sprite(charTexture3);
-  character4.x = 750;
+  character4.x = 850;
+  character4.anchor.set(0.5,0.0);
   character4.y = 25;
   character4.height = 300;
-  character4.width = 200;
+  character4.width = character4.height/aspectRatioV;
   character4.visible = false;
 
-  // character1 = new PIXI.Sprite(charTexture);
-  character1.x = 750;
-  character1.y = 25;
-  character1.height = 300;
-  character1.width = 200;
-  character1.visible = true;
-
   characterV = new PIXI.Sprite(charTextureV);
-  characterV.x = 750;
+  characterV.x = 850;
+  characterV.anchor.set(0.5,0.0);
   characterV.y = 25;
   characterV.height = 300;
-  characterV.width = 200;
+  characterV.width = characterV.height/aspectRatioVD;
   characterV.visible = false;
 
   characterH = new PIXI.Sprite(charTextureH);
-  characterH.x = 650;
-  characterH.y = 125;
-  characterH.height = 200;
-  characterH.width = 300;
+  characterH.x = 850;
+  characterH.anchor.set(0.5,0.0);
+  characterH.y = 150 - scaleH*60;
+  characterH.width = scaleH*300;
+  characterH.height = characterH.width*aspectRatioH;
   characterH.visible = false;
 
   //KeyCaps row

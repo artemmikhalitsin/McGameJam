@@ -4,7 +4,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Hello World</title>
+  <title>BattleBard aka MavenMaestro from Nazi who played Yahtzee in Gamejam 2018</title>
   <style>{padding: 0; margin: 0}</style>
 </head>
 <script src="{{url_for('static', filename='jquery-latest.js')}}"></script>
@@ -40,14 +40,14 @@
   });
 
   var ready = false;
-  var playerlife = 20; // NOTE MAX life
+  var playerlife = 10; // NOTE MAX life
   var crashCheck = false;
   var charswitch = 0;
   var mainswitch = 0;
   var killswitch = 0;
   var angry = 0;
 
-  var monsterMaxLife = 10;
+  var monsterMaxLife = 50;
   var monsterLife = monsterMaxLife; // NOTE Current monster life
   var currentCombo = 0;
   var enemyNumber = enemyEnum['hendrix'];
@@ -99,7 +99,6 @@
 
     // Title screen logic
     function titleScreen (delta) {
-      console.log('title');
       // Bind keys to title page
       bindTitleKeys();
       // NOTE No loader yet
@@ -113,7 +112,6 @@
 
     function overworldScreen (delta) {
       if (setup){
-        console.log('overworld');
         setupMap();
         bindOverworldKeys();
         setup = false
@@ -192,10 +190,21 @@
       // playerBarMask.x -= 50;
 
       // Combo panel
-      let comboPanel = new PIXI.Text(
-        currentCombo,
-        {fontFamily : 'Comic Sans MS', fontSize: 16,
-          fill : 0xff1010, align : 'center'});
+      // Combo panel
+      var comboPanel = new PIXI.Text(
+        'x' + currentCombo,
+        {fontFamily : 'Trebuchet MS', fontSize: 20,
+          fill : [0xE25822, 0x000000],
+          fillGradientStops: [0.2],
+          align : 'center',
+          dropShadow: true});
+      comboPanel.x = 720;
+      comboPanel.y = 550;
+      comboPanel.anchor.set(0.5);
+      app.stage.addChild(comboPanel);
+      app.ticker.add((delta) => {comboPanel.text = 'x' + currentCombo;
+        comboPanel.style.fontSize = 20+1*currentCombo;
+        comboPanel.style.fillGradientStops = [Math.min(1.0, 0.2+0.02*currentCombo)]});
 
       // ready = true;
     }
@@ -251,7 +260,7 @@
 
     function escapeNotes(){
       if (MM.handleBoundary(app.screen.height)){
-        lifeHit();
+        // lifeHit();
         console.log("escape");
       }
     }
@@ -271,7 +280,7 @@
         killswitch++;
       }
       else {
-        state = overworldScreen;
+        // state = overworldScreen;
         removeChildren();
         killswitch = 0;
         state = titleScreen;
@@ -298,9 +307,10 @@
         killswitch++;
       }
        else {
-        state = overworldScreen;
+        // state = overworldScreen;
         removeChildren();
         killswitch = 0;
+        state = titleScreen;
       }
     }
 
@@ -343,6 +353,10 @@
           m03.visible = false;
           m01.visible = true;
         }
+      }
+
+      function monsterLifeHit(){
+        monsterLife -= Math.pow(1+currentCombo, 0.3);
       }
 
       function lifeHit(){
