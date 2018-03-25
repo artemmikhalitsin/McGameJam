@@ -47,7 +47,6 @@
   var charswitch = 0;
   var mainswitch = 0;
   var killswitch = 0;
-
   var angry = 0;
 
   var monsterMaxLife = 10;
@@ -212,32 +211,24 @@
 
         //play dodge component
         dodgeNotes();
-<<<<<<< HEAD
-        if(life > 0){
+
+        if(monsterLife > 0){
           //animations
           characterChanger();
           //animations
           mainChanger();
         }
 
-=======
-        //animations
-        characterChanger();
-        //animations
-        mainChanger();
         //checks for runaway notes
         escapeNotes();
 
       // Player lose!
->>>>>>> 718d0ff8fbbd1ec37aec172ff09d56424ae4f82d
       if (life <= 0){
         killChar();
       }
       // Player win!
       else if (monsterLife <= 0){
-        // WARNING: Placeholder text
-        state = overworldScreen;
-        MM.terminate();
+        killMon();
       }
 
     }
@@ -261,19 +252,20 @@
       }
     }
 
-<<<<<<< HEAD
+
     function killPlayer(){}
-=======
+
     function escapeNotes(){
       if (MM.handleBoundary(app.screen.height)){
         lifeHit();
         console.log("escape");
       }
     }
->>>>>>> 718d0ff8fbbd1ec37aec172ff09d56424ae4f82d
+
 
     function killChar(){
       if (killswitch < 45){
+        MM.terminate();
         m01.visible = false;
         m02.visible = false;
         m03.visible = false;
@@ -286,12 +278,36 @@
       }
       else {
         state = overworldScreen;
-        MM.terminate();
         removeChildren();
         killswitch = 0;
       }
     }
 
+    function killMon(){
+      if (killswitch < 45){
+        MM.terminate();
+        character1.visible= false;
+        character2.visible = false;
+        character3.visible = false;
+        character4.visible = false;
+        characterV.visible = true;
+        m01.visible = false;
+        m02.visible = false;
+        m03.visible = false;
+        m0H.visible = true;
+        killswitch++;
+     }
+      else if (killswitch < 90){
+        characterV.visible = false;
+        characterH.visible = true;
+        killswitch++;
+      }
+       else {
+        state = overworldScreen;
+        removeChildren();
+        killswitch = 0;
+      }
+    }
 
     //dont open this @Artem PlZ
     function characterChanger(){

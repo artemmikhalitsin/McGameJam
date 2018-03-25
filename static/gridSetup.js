@@ -56,6 +56,7 @@ function gridSetup(number) {
   var mc2 = PIXI.Texture.fromImage('static/images/mc02.png')
   var mc3 = PIXI.Texture.fromImage('static/images/mc03.png')
   var mcD = PIXI.Texture.fromImage('static/images/mc0D.png')
+  var mcH = PIXI.Texture.fromImage('static/images/mc0H.png')
   var background1Texture = PIXI.Texture.fromImage('static/images/background1.png')
 
   background1 = new PIXI.Sprite(background1Texture);
@@ -64,8 +65,7 @@ function gridSetup(number) {
   m02 = new PIXI.Sprite(mc2);
   m03 = new PIXI.Sprite(mc3);
   m0D = new PIXI.Sprite(mcD);
-
-
+  m0H = new PIXI.Sprite(mcH);
 
   character2 = new PIXI.Sprite(charTexture1);
   character3 = new PIXI.Sprite(charTexture2);
@@ -115,9 +115,15 @@ function gridSetup(number) {
   m0D.x = 800;
   m0D.y = 475;
   m0D.height = 200;
-  m0D.width = 300;
+  m0D.width = 100;
   m0D.visible = false;
 
+  // m0H = new PIXI.Sprite(mcH);
+  m0H.x = 700;
+  m0H.y = 475;
+  m0H.height = 200;
+  m0H.width = 200;
+  m0H.visible = false;
 
   // character2 = new PIXI.Sprite(charTexture1);
   character2.x = 750;
@@ -246,6 +252,7 @@ function gridSetup(number) {
   app.stage.addChild(m02);
   app.stage.addChild(m03);
   app.stage.addChild(m0D);
+  app.stage.addChild(m0H);
 }
 
 function removeChildren(){
