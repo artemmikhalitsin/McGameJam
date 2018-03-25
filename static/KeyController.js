@@ -76,7 +76,7 @@ handleRhythmPress = (letter) => {
     if(MM.handleCollision(letter)){
       // console.log("hit");
       monsterLifeHit();
-      currentCombo++;
+      comboUp();
     }
     else {
       // console.log("miss");

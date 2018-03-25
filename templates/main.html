@@ -194,8 +194,8 @@
       var comboPanel = new PIXI.Text(
         'x' + currentCombo,
         {fontFamily : 'Trebuchet MS', fontSize: 20,
-          fill : [0xE25822, 0x000000],
-          fillGradientStops: [0.2],
+          fill : [0xFF0000, 0xE25822, 0xFFFFFF],
+          fillGradientStops: [0.0, 0.2, 1.0],
           align : 'center',
           dropShadow: true});
       comboPanel.x = 720;
@@ -203,8 +203,8 @@
       comboPanel.anchor.set(0.5);
       app.stage.addChild(comboPanel);
       app.ticker.add((delta) => {comboPanel.text = 'x' + currentCombo;
-        comboPanel.style.fontSize = 20+1*currentCombo;
-        comboPanel.style.fillGradientStops = [Math.min(1.0, 0.2+0.02*currentCombo)]});
+        comboPanel.style.fontSize = Math.min(60,20+1*currentCombo);
+        comboPanel.style.fillGradientStops = [0.0, Math.min(1.0, 0.2+0.02*currentCombo), 1.0]});
 
       // ready = true;
     }
@@ -251,7 +251,7 @@
         angry = 10;
 
         lifeHit();
-        console.log("crash");
+        // console.log("crash");
       }
     }
 
@@ -261,7 +261,7 @@
     function escapeNotes(){
       if (MM.handleBoundary(app.screen.height)){
         // lifeHit();
-        console.log("escape");
+        // console.log("escape");
       }
     }
 
@@ -362,6 +362,20 @@
       function lifeHit(){
         life--;
         //console.log(life);
+      }
+
+      function comboUp(){
+        currentCombo++;
+        // Celebrate milestones!
+        if (currentCombo == 10 || currentCombo == 20){
+          new beamExplosion(720, 550, 0.5);
+        }
+        else if (currentCombo == 30 || currentCombo == 40){
+          new beamExplosion(720, 550, 2);
+        }
+        else if (currentCombo % 10 == 0 && currentCombo > 0){
+          new beamExplosion(720, 550, 2*Math.floor(currentCombo/10))
+        }
       }
 
 
