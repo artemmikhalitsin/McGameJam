@@ -15,6 +15,8 @@ function princeSetup() {
   var charTexture1 = PIXI.Texture.fromImage('static/images/Prince1.png')
   var charTexture2 = PIXI.Texture.fromImage('static/images/Prince2.png')
   var charTexture3 = PIXI.Texture.fromImage('static/images/Prince3.png')
+  var charTextureV = PIXI.Texture.fromImage('static/images/PrinceV.png')
+  var charTextureH = PIXI.Texture.fromImage('static/images/PrinceH.png')
   var mc1 = PIXI.Texture.fromImage('static/images/mc0.png')
   var mc2 = PIXI.Texture.fromImage('static/images/mc02.png')
   var mc3 = PIXI.Texture.fromImage('static/images/mc03.png')
@@ -73,7 +75,19 @@ function princeSetup() {
     character1.width = 200;
     character1.visible = true;
 
+    characterV  = new PIXI.Sprite(charTextureV);
+    characterV.x = 750;
+    characterV.y = 25;
+    characterV.height = 300;
+    characterV.width = 200;
+    characterV.visible = false;
 
+    characterH = new PIXI.Sprite(charTextureH);
+    characterH.x = 750;
+    characterH.y = 25;
+    characterH.height = 200;
+    characterH.width = 300;
+    characterH.visible = false;
 
     //KeyCaps row
     sprites.keyQ = new PIXI.Sprite(note1);
@@ -151,6 +165,8 @@ function princeSetup() {
     app.stage.addChild(character2);
     app.stage.addChild(character3);
     app.stage.addChild(character4);
+    app.stage.addChild(characterH);
+    app.stage.addChild(characterV);
 
     app.stage.addChild(m01);
     app.stage.addChild(m02);

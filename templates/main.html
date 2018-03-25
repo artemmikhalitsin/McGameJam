@@ -14,6 +14,7 @@
 <script src="{{url_for('static', filename='hendrixGrid.js')}}"></script>
 <script src="{{url_for('static', filename='zappaGrid.js')}}"></script>
 <script src="{{url_for('static', filename='tartiniGrid.js')}}"></script>
+<script src="{{url_for('static', filename='devilGrid.js')}}"></script>
 <script src="{{url_for('static', filename='princeGrid.js')}}"></script>
 <script src="{{url_for('static', filename='makemap.js')}}"> </script>
 <script src ="{{url_for('static', filename='spawnNote.js')}}"></script>
@@ -48,6 +49,7 @@
   var crashCheck = false;
   var charswitch = 0;
   var mainswitch = 0;
+  var killswitch = 0;
   var enemyNumber = enemyEnum['zappa'];
 
   //Add the canvas that Pixi automatically created for you to the HTML document
@@ -125,6 +127,26 @@
       }
     }
 
+    function killChar(){
+      if (killswitch < 30){
+        character1.visible= false;
+        character2.visible = false;
+        character3.visible = false;
+        character4.visible = false;
+        characterV.visible = true;
+        killswitch++;
+      }
+      else if (killswitch < 60){
+        characterV.visible = false;
+        characterH.visible = true;
+        killswitch++;
+      }
+      else {
+        //destroyScene();
+      }
+    }
+
+
     //dont open this @Artem PlZ
     function characterChanger(){
       if (charswitch < 30){
@@ -147,6 +169,7 @@
           character1.visible = true;
         }
       }
+
 
       function mainChanger(){
         if (mainswitch < 30){
