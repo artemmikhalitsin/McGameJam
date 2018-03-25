@@ -44,6 +44,7 @@
   var charswitch = 0;
   var mainswitch = 0;
   var killswitch = 0;
+  var angry = 0;
   var enemyNumber = enemyEnum['hendrix'];
 
   //Add the canvas that Pixi automatically created for you to the HTML document
@@ -183,13 +184,11 @@
 
         //play dodge component
         dodgeNotes();
-
         if(life > 0){
-        //animations
-        characterChanger();
-        //animations
-        mainChanger();
-        //binds the keys
+          //animations
+          characterChanger();
+          //animations
+          mainChanger();
         }
 
       if (life <= 0){
@@ -198,24 +197,36 @@
     }
 
     function dodgeNotes(){
+      if (angry == 0){
+        sprites.player.visible = true;
+        sprites.playerH.visible = false;
+      }
+      else
+        angry--;
       if (MM.handleCrash(sprites.player.x, sprites.player.y)){
+        sprites.player.visible = false;
+        sprites.playerH.x = sprites.player.x;
+        sprites.playerH.y = sprites.player.y;
+        sprites.playerH.visible = true;
+        angry = 10;
+
         lifeHit();
         console.log("crash");
       }
     }
 
+    function killPlayer(){}
+
     function killChar(){
       if (killswitch < 45){
-        character1.visible= false;
-        character2.visible = false;
-        character3.visible = false;
-        character4.visible = false;
-        characterV.visible = true;
-        killswitch++;
-      }
-      else if (killswitch < 90){
-        characterV.visible = false;
-        characterH.visible = true;
+        m01.visible = false;
+        m02.visible = false;
+        m03.visible = false;
+        m0D.visible = true;
+        sprites.playerH.x = sprites.player.x;
+        sprites.playerH.y = sprites.player.y;
+        sprites.player.visible = false;
+        sprites.playerH.visible = true;
         killswitch++;
       }
       else {
