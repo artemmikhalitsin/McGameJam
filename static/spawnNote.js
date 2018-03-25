@@ -200,7 +200,8 @@ class musicManager{
         this.allNotes[i].sprite.y < 610){
           // Found hit!
           successHit = true;
-          var successSpark = new sparkExplosion(this.allNotes[i].sprite.x,
+          var successSpark = new sparkExplosion(
+            this.allNotes[i].sprite.x + 0.5*this.allNotes[i].sprite.width,
             this.allNotes[i].sprite.y,
             1.0, colour, 1.0);
           this.allNotes[i].sprite.visible = false;
@@ -218,6 +219,8 @@ class musicManager{
       if (this.allNotes[i].sprite.y > yBoundary &&
         this.active[i]){
           numberEscapedBoundary++;
+          // new beamExplosion(this.allNotes[i].sprite.x +
+          //   0.5* this.allNotes[i].sprite.width, app.screen.height, 10);
           this.allNotes[i].sprite.visible = false;
           this.active[i] = false;
       }
