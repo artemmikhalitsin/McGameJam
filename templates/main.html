@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <title>Hello World</title>
-  <style>* {padding: 0; margin: 0}</style>
+  <style>{padding: 0; margin: 0}</style>
 </head>
 
 <script src="{{url_for('static', filename='pixi.min.js')}}"></script>
@@ -187,7 +187,6 @@
     function play(delta) {
       // WARNING: Can't get async to work: the loader is already done too fast
 
-      if (true){
         //play dodge component
         dodgeNotes();
         if(life > 0){
@@ -196,7 +195,7 @@
           //animations
           mainChanger();
         }
-      }
+
       if (life <= 0){
         killChar();
       }
