@@ -11,6 +11,7 @@
 <script src="{{url_for('static', filename='pixi.min.js')}}"></script>
 <script src="{{url_for('static', filename='GameLoop.js')}}"></script>
 <script src="{{url_for('static', filename='sparkExplosion.js')}}"></script>
+<script src="{{url_for('static', filename='beamExplosion.js')}}"></script>
 <script src="{{url_for('static', filename='gridSetup.js')}}"></script>
 <script src="{{url_for('static', filename='makemap.js')}}"> </script>
 <script src ="{{url_for('static', filename='spawnNote.js')}}"></script>
@@ -41,12 +42,17 @@
   });
 
   var ready = false;
-  var playerlife = 20;
+  var playerlife = 20; // NOTE MAX life
   var crashCheck = false;
   var charswitch = 0;
   var mainswitch = 0;
   var killswitch = 0;
+
   var angry = 0;
+
+  var monsterMaxLife = 10;
+  var monsterLife = monsterMaxLife; // NOTE Current monster life
+  var currentCombo = 0;
   var enemyNumber = enemyEnum['hendrix'];
 
   //Add the canvas that Pixi automatically created for you to the HTML document
@@ -132,6 +138,7 @@
         3.0);
 
       life = playerlife;
+      monsterLife = monsterMaxLife;
 
       // Load music manager
 
@@ -153,14 +160,23 @@
 
       var enemyBarBase = new PIXI.Graphics();
       var enemyBarTop = new PIXI.Graphics();
+      var enemyBarMask = new PIXI.Graphics();
       enemyBarBase.lineStyle(1);
       enemyBarBase.beginFill(0x000000, 1.0)
       enemyBarBase.drawRoundedRect(725, 350, 200, 20, 10);
       enemyBarTop.lineStyle(0);
       enemyBarTop.beginFill(0xFF0000, 1.0)
       enemyBarTop.drawRoundedRect(725+2.5, 350+2.5, 200-5, 20-5, 10-2.5);
+      enemyBarMask.lineStyle(0);
+      enemyBarMask.beginFill(0xFF0000, 1.0)
+      enemyBarMask.drawRoundedRect(725+2.5, 350+2.5, 200-5, 20-5, 10-2.5);
+      enemyBarTop.mask = enemyBarMask;
+      enemyBarTop.addChild(enemyBarMask);
       app.stage.addChild(enemyBarBase);
       app.stage.addChild(enemyBarTop);
+
+      app.ticker.add((delta) => {enemyBarMask.x =
+        -200 + 200*monsterLife/monsterMaxLife});
 
       var playerBarBase = new PIXI.Graphics();
       var playerBarTop = new PIXI.Graphics();
@@ -182,6 +198,12 @@
       app.ticker.add((delta) => {playerBarMask.x = -150 + 150*life/playerlife});
       // playerBarMask.x -= 50;
 
+      // Combo panel
+      let comboPanel = new PIXI.Text(
+        currentCombo,
+        {fontFamily : 'Comic Sans MS', fontSize: 16,
+          fill : 0xff1010, align : 'center'});
+
       // ready = true;
     }
 
@@ -190,6 +212,7 @@
 
         //play dodge component
         dodgeNotes();
+<<<<<<< HEAD
         if(life > 0){
           //animations
           characterChanger();
@@ -197,9 +220,26 @@
           mainChanger();
         }
 
+=======
+        //animations
+        characterChanger();
+        //animations
+        mainChanger();
+        //checks for runaway notes
+        escapeNotes();
+
+      // Player lose!
+>>>>>>> 718d0ff8fbbd1ec37aec172ff09d56424ae4f82d
       if (life <= 0){
         killChar();
       }
+      // Player win!
+      else if (monsterLife <= 0){
+        // WARNING: Placeholder text
+        state = overworldScreen;
+        MM.terminate();
+      }
+
     }
 
     function dodgeNotes(){
@@ -221,7 +261,16 @@
       }
     }
 
+<<<<<<< HEAD
     function killPlayer(){}
+=======
+    function escapeNotes(){
+      if (MM.handleBoundary(app.screen.height)){
+        lifeHit();
+        console.log("escape");
+      }
+    }
+>>>>>>> 718d0ff8fbbd1ec37aec172ff09d56424ae4f82d
 
     function killChar(){
       if (killswitch < 45){
