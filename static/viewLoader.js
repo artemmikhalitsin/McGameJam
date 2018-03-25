@@ -38,8 +38,18 @@ loadView = () => {
   .add("static/images/win_phase1.png")
   .add("static/images/instructions1.png")
   .add("static/images/game_over.png")
-  .add("static/images/welcome_page.png")
   .add("static/images/win.png")
+}
+
+loadTitle = () => {
+    loader
+    .add('title', "static/images/welcome_page.png")
+    .load((loader, resources) => {
+        var titleSprite = PIX.Sprite(resources.title.texture);
+    })
+    .onComplete(() => {
+        state = titleScreen;
+    });
 }
 
 /*
