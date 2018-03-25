@@ -1,6 +1,6 @@
 
 //This `setup` function will run when the image has loaded
-function hendrixSetup() {
+function devilSetup() {
   var gridTexture = PIXI.Texture.fromImage('static/images/test1.png')
   var note1 = PIXI.Texture.fromImage('static/images/note1.png')
   var note1Light = PIXI.Texture.fromImage('static/images/note1Light.png')
@@ -10,12 +10,12 @@ function hendrixSetup() {
   var note3Light = PIXI.Texture.fromImage('static/images/note3Light.png')
   var note4 = PIXI.Texture.fromImage('static/images/note4.png')
   var note4Light = PIXI.Texture.fromImage('static/images/note4Light.png')
-  var charTexture = PIXI.Texture.fromImage('static/images/Hendrix.png')
-  var charTexture1 = PIXI.Texture.fromImage('static/images/Hendrix1.png')
-  var charTexture2 = PIXI.Texture.fromImage('static/images/Hendrix2.png')
-  var charTexture3 = PIXI.Texture.fromImage('static/images/Hendrix3.png')
-  var charTextureH = PIXI.Texture.fromImage('static/images/HendrixH.png')
-  var charTextureV = PIXI.Texture.fromImage('static/images/HendrixV.png')
+  var charTexture = PIXI.Texture.fromImage('static/images/devil.png')
+  var charTexture1 = PIXI.Texture.fromImage('static/images/devil1.png')
+  var charTexture2 = PIXI.Texture.fromImage('static/images/devil2.png')
+  var charTexture3 = PIXI.Texture.fromImage('static/images/devil3.png')
+  var charTextureH = PIXI.Texture.fromImage('static/images/devilH.png')
+  var charTextureV = PIXI.Texture.fromImage('static/images/devilV.png')
   var mc1 = PIXI.Texture.fromImage('static/images/mc0.png')
   var mc2 = PIXI.Texture.fromImage('static/images/mc02.png')
   var mc3 = PIXI.Texture.fromImage('static/images/mc03.png')
@@ -74,19 +74,19 @@ function hendrixSetup() {
   character1.width = 200;
   character1.visible = true;
 
+  characterH = new PIXI.Sprite(charTextureH);
+  characterH.x = 750;
+  characterH.y = 25;
+  characterH.height = 300;
+  characterH.width = 200;
+  characterH.visible = false;
+
   characterV = new PIXI.Sprite(charTextureV);
   characterV.x = 750;
   characterV.y = 25;
   characterV.height = 300;
   characterV.width = 200;
   characterV.visible = false;
-
-  characterH = new PIXI.Sprite(charTextureH);
-  characterH.x = 750;
-  characterH.y = 25;
-  characterH.height = 200;
-  characterH.width = 300;
-  characterH.visible = false;
 
 
 
@@ -115,6 +115,7 @@ function hendrixSetup() {
   sprites.keyWPress.y = 600;
   sprites.keyWPress.visible = false;
 
+
   sprites.keyE = new PIXI.Sprite(note3);
   sprites.keyE.x = 370;
   sprites.keyE.y = 600;
@@ -136,7 +137,7 @@ function hendrixSetup() {
   sprites.keyRPress = new PIXI.Sprite(note4Light);
   sprites.keyRPress.x = 490;
   sprites.keyRPress.y = 600;
-  sprites.keyRPress.visible = true;
+  sprites.keyRPress.visible = false;
 
 
   //Player sprite//Grid top row
@@ -158,7 +159,6 @@ function hendrixSetup() {
   app.stage.addChild(sprites.keyWPress);
   app.stage.addChild(sprites.keyEPress);
   app.stage.addChild(sprites.keyRPress);
-
   //Add player to the stage
   app.stage.addChild(sprites.player);
 
@@ -166,14 +166,13 @@ function hendrixSetup() {
   app.stage.addChild(character2);
   app.stage.addChild(character3);
   app.stage.addChild(character4);
+  app.stage.addChild(characterH);
   app.stage.addChild(characterV);
-  app.stage.addChild(character3H);
-
-
 
   app.stage.addChild(m01);
   app.stage.addChild(m02);
   app.stage.addChild(m03);
+
 
 
 

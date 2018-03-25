@@ -62,15 +62,19 @@ class musicManager{
     switch (lane) {
       case 'Q':
         x = 130;
+        this.noteTexture = PIXI.Texture.fromImage('static/images/note1.png');
         break;
       case 'W':
         x = 250;
+        this.noteTexture = PIXI.Texture.fromImage('static/images/note2.png');
         break;
       case 'E':
         x = 370;
+        this.noteTexture = PIXI.Texture.fromImage('static/images/note3.png');
         break;
       case 'R':
         x = 490;
+        this.noteTexture = PIXI.Texture.fromImage('static/images/note4.png');
         break;
       default:
         console.error('Yo your lane does not exist. Relinquish your property!');
@@ -192,7 +196,7 @@ class musicManager{
       //console.log(this.allNotes[i].sprite.x)
       if(x_l < this.allNotes[i].sprite.x &&
         this.allNotes[i].sprite.x < x_r &&
-        590 < this.allNotes[i].sprite.y &&
+        500 < this.allNotes[i].sprite.y &&
         this.allNotes[i].sprite.y < 610){
           // Found hit!
           successHit = true;
@@ -226,8 +230,8 @@ class musicManager{
     for (let i = 0; i < this.allNotes.length; i++){
       if (this.active[i] &&
         playerX == this.allNotes[i].sprite.x &&
-        playerY - 5 < this.allNotes[i].sprite.y &&
-        playerY + 5 > this.allNotes[i].sprite.y){
+        playerY - 50 < this.allNotes[i].sprite.y &&
+        playerY + 50 > this.allNotes[i].sprite.y){
           collision = true;
           this.allNotes[i].sprite.visible = false;
           this.active[i] = false;

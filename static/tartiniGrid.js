@@ -77,8 +77,8 @@ function tartiniSetup() {
   characterH = new PIXI.Sprite(charTextureH);
   characterH.x = 750;
   characterH.y = 25;
-  characterH.height = 300;
-  characterH.width = 200;
+  characterH.height = 200;
+  characterH.width = 300;
   characterH.visible = false;
 
   characterV = new PIXI.Sprite(charTextureV);
