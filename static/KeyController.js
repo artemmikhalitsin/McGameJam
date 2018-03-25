@@ -2,13 +2,14 @@
 let q = keyboard(81),
   w = keyboard(87),
   e = keyboard(69),
-  r = keyboard(82);
+  r = keyboard(82),
+  enter = keyboard(13);
 
 keys = {}
 handlePress = ()=>{}
 handleRelease = ()=>{}
 
-bindKeys = () => {
+bindRhythmKeys = () => {
   keys = {
     'Q':{
       'key':sprites.keyQ,
@@ -29,21 +30,59 @@ bindKeys = () => {
   }
   handlePress = handleRhythmPress;
   handleRelease = handleRhythmRelease;
+  bindPlayerControls();
+}
+
+bindTitleKeys = () => {
+  handlePress = handleTitlePress;
+  handleRelease = handleTitleRelease;
+  unbindPlayerControls();
+}
+
+handleTitlePress = (letter) => {
+  if (!['ENTER'].includes(letter)){
+    return;
+  }
+  state = overworldScreen;
+}
+
+handleTitleRelease = () => {
+}
+
+bindOverworldKeys = () => {
+  handlePress = handleOverworldPress;
+  handleRelease = handleOverworldRelease;
+  unbindPlayerControls();
+}
+
+handleOverworldPress = (letter) => {
+  if (!['ENTER'].includes(letter)){
+    return;
+  }
+  state = preGame;
+}
+
+handleOverworldRelease = () => {
 }
 
 handleRhythmPress = (letter) => {
-  keys[letter].key.visible = false;
-  keys[letter].keyPress.visible = true;
-  if(MM.handleCollision(letter)){
-    console.log("hit");
+  if (!['Q','W','E','R'].includes(letter)){
+    return;
   }
-  else {
-    console.log("miss");
-    lifeHit();
-  }
+    keys[letter].key.visible = false;
+    keys[letter].keyPress.visible = true;
+    if(MM.handleCollision(letter)){
+      console.log("hit");
+    }
+    else {
+      console.log("miss");
+      lifeHit();
+    }
 }
-
 handleRhythmRelease = (letter) => {
+  if (!['Q','W','E','R'].includes(letter)){
+    return;
+  }
   keys[letter].key.visible = true;
   keys[letter].keyPress.visible = false;
 }
@@ -78,4 +117,12 @@ r.press = () => {
 
 r.release = () => {
   handleRelease('R');
+};
+
+enter.press = () => {
+  handlePress('ENTER');
+};
+
+enter.release = () => {
+
 };

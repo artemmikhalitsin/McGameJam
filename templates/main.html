@@ -45,7 +45,7 @@
   });
 
   var ready = false;
-  var life = 3;
+  var playerlife = 20;
   var crashCheck = false;
   var charswitch = 0;
   var mainswitch = 0;
@@ -54,7 +54,11 @@
 
   //Add the canvas that Pixi automatically created for you to the HTML document
   document.body.appendChild(app.view);
-  loadView(enemyNumber);
+  loadView();
+  loader.onComplete.add(() => {
+     ready = true;
+  //   bindKeys();
+  });
 
   var mapTextures = setupMap();
   // buildMap(mapTextures);
@@ -83,36 +87,77 @@
     break;
   }
 
-
-  var MM = new musicManager(track,
-    [ '00000000000000110000000000001100000000000000001100000000000011000000110000000000000011000000000000000000000000000000110000001100',
-    '00000000110000000000000011000000000000001100000000000000110000000000000000001100000000000000110000000000000011001100000011000000',
-    '00001100000000000000110000000000000011000000000000001100000000001100000000000000110000000000000000001100110000000000000000000000',
-    '11000000000000001100000000000000110000000000000011000000000000000000000001100000000000001100000011000000000000000000000000000000'],
-    4*151,
-    6.0);
-
     //Set the game state
-    state = play;
+    state = titleScreen;
+
+    var MM;
+
     //Start the game loop
     app.ticker.add(delta => gameLoop(delta));
-    f = (delta) => MM.update(delta);
-    MM.f = f;
-    app.ticker.add(f);
-    MM.startTrack();
-
 
     function gameLoop(delta){
       //Update the current game state:
       state(delta);
     }
 
+    // Title screen logic
+    function titleScreen (delta) {
+      console.log('title');
+      // Bind keys to title page
+      bindTitleKeys();
+      // NOTE No loader yet
+      // loader.onComplete.add(() => {
+      //   bindTitleKeys()});
+
+      // Show title things
+
+      // NOTE: State changes in KeyController
+    }
+
+    function overworldScreen (delta) {
+      console.log('overworld');
+      bindOverworldKeys();
+      // Bind keyPress: NOTE no loader yet
+      // loader.onComplete.add(() => {
+      //   bindOverworldKeys()});
+      // Selection of opponent
+
+      // Logic to lead to next state is in KeyController. NOTE!
+    }
+
+    function preGame(delta){
+      MM = new musicManager(track,
+        [ '00000000000000110000000000001100000000000000001100000000000011000000110000000000000011000000000000000000000000000000110000001100',
+        '00000000110000000000000011000000000000001100000000000000110000000000000000001100000000000000110000000000000011001100000011000000',
+        '00001100000000000000110000000000000011000000000000001100000000001100000000000000110000000000000000001100110000000000000000000000',
+        '11000000000000001100000000000000110000000000000011000000000000000000000001100000000000001100000011000000000000000000000000000000'],
+        4*151,
+        3.0);
+
+      life = playerlife;
+
+      // Load music manager
+
+      // Start music manager
+      f = (delta) => MM.update(delta);
+      MM.f = f;
+      app.ticker.add(f);
+      MM.startTrack();
+
+      // if(!loader.loading){
+      //   state = play;
+      //wait for loader
+      zappaSetup();
+      bindRhythmKeys();
+      state = play
+
+      // ready = true;
+    }
+
     function play(delta) {
-      loader.onComplete.add(() => {
-        ready = true;
-        bindKeys();
-      });
-      if (ready){
+      // WARNING: Can't get async to work: the loader is already done too fast
+
+      if (true){
         //play dodge component
         dodgeNotes();
         //animations
@@ -120,6 +165,10 @@
         //animations
         mainChanger();
         //binds the keys
+      }
+      if (life <= 0){
+        state = overworldScreen;
+        MM.terminate();
       }
     }
 

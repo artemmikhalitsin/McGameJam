@@ -3,6 +3,7 @@ up = keyboard(38),
 right = keyboard(39),
 down = keyboard(40);
 
+function bindPlayerControls(){
 //Left arrow key `press` method
 left.press = () => {
   //Change the cat's velocity when the key is pressed
@@ -55,3 +56,18 @@ down.press = () => {
 down.release = () => {
 
 };
+
+}
+
+function unbindPlayerControls(){
+  left.press = () => {
+  };
+  up.press = () => {
+  };
+  //Right
+  right.press = () => {
+  };
+  //Down
+  down.press = () => {
+  };
+}
