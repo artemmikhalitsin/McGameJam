@@ -7,7 +7,7 @@
   <title>Hello World</title>
   <style>{padding: 0; margin: 0}</style>
 </head>
-
+<script src="{{url_for('static', filename='jquery-latest.js')}}"></script>
 <script src="{{url_for('static', filename='pixi.min.js')}}"></script>
 <script src="{{url_for('static', filename='GameLoop.js')}}"></script>
 <script src="{{url_for('static', filename='sparkExplosion.js')}}"></script>
@@ -15,9 +15,7 @@
 <script src="{{url_for('static', filename='gridSetup.js')}}"></script>
 <script src="{{url_for('static', filename='makemap.js')}}"> </script>
 <script src ="{{url_for('static', filename='spawnNote.js')}}"></script>
-<script src ="{{url_for('static', filename='rhythmLogic.js')}}"></script>
 <script src ="{{url_for('static', filename='pixi-sound.js')}}"></script>
-<script src ="{{url_for('static', filename='PlayerController.js')}}"></script>
 <script src ="{{url_for('static', filename='KeyController.js')}}"></script>
 <script src ="{{url_for('static', filename='viewLoader.js')}}"></script>
 <script src ="{{url_for('static', filename='enemyEnum.js')}}"></script>
@@ -61,9 +59,6 @@
      ready = true;
   //   bindKeys();
   });
-
-  var mapTextures = setupMap();
-  // buildMap(mapTextures);
 
   // buildMap(mapTextures);
 
@@ -117,13 +112,12 @@
     }
 
     function overworldScreen (delta) {
-      console.log('overworld');
-      bindOverworldKeys();
-      // Bind keyPress: NOTE no loader yet
-      // loader.onComplete.add(() => {
-      //   bindOverworldKeys()});
-      // Selection of opponent
-
+      if (setup){
+        console.log('overworld');
+        setupMap();
+        bindOverworldKeys();
+        setup = false
+      }
       // Logic to lead to next state is in KeyController. NOTE!
     }
 
@@ -280,6 +274,7 @@
         state = overworldScreen;
         removeChildren();
         killswitch = 0;
+        state = titleScreen;
       }
     }
 
@@ -331,7 +326,6 @@
           character1.visible = true;
         }
       }
-
 
       function mainChanger(){
         if (mainswitch < 30){
