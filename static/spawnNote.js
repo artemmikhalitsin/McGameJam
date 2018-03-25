@@ -81,6 +81,17 @@ class musicManager{
         console.error('Yo your lane does not exist. Relinquish your property!');
         return
     }
+    // Recycle a note of the same lane
+    for (let i = 0; i < this.active.length; i++){
+      if (!this.active[i] && Math.abs(this.allNotes[i].sprite.x - x) < 1e-1){
+        this.allNotes[i].sprite.x = x;
+        this.allNotes[i].sprite.y = -this.noteTexture.height+ extraY;
+        this.allNotes[i].speed = speed;
+        this.active[i] = true;
+        this.allNotes[i].sprite.visible = true;
+        return;
+      }
+    }
     this.allNotes.push(
       new Note (this.noteTexture, x, -this.noteTexture.height + extraY, speed))
     this.active.push(true);
