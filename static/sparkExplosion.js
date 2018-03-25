@@ -18,8 +18,8 @@ class sparkExplosion{
 
       // create a new Sprite
       shape.lineStyle(0);
-      // shape.beginFill(colour, 1.0);
-      shape.beginFill(colour, 0.3+0.5*Math.random());
+      shape.beginFill(colour, 1.0);
+      // shape.beginFill(colour, 0.3+0.5*Math.random());
       shape.drawCircle(0, 0, 10);
       shape.endFill();
 
@@ -51,7 +51,7 @@ class sparkExplosion{
     for (let i = 0; i < this.sparks.length; i++) {
       this.sparks[i].x += this.sparks[i].speed * Math.cos(this.sparks[i].direction) * delta;
       this.sparks[i].y += this.sparks[i].speed * Math.sin(this.sparks[i].direction) * delta;
-      this.sparks[i].alpha -= 0.1*0.03*delta/this.decayTime;
+      this.sparks[i].alpha -= 0.03*delta/this.decayTime;
       if (this.sparks[i].alpha > 0){
         extinct = false;
       }
