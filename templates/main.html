@@ -190,11 +190,14 @@
       if (true){
         //play dodge component
         dodgeNotes();
+
+        if(life > 0){
         //animations
         characterChanger();
         //animations
         mainChanger();
         //binds the keys
+        }
       }
       if (life <= 0){
 
@@ -224,10 +227,11 @@
         killswitch++;
       }
       else {
-        killswitch = 0;
+
         state = overworldScreen;
         MM.terminate();
         removeChildren();
+        killswitch = 0;
       }
     }
 
