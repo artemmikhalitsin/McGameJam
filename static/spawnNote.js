@@ -10,32 +10,13 @@ class Note {
   }
 }
 
-// function setupNote(){
-//   var noteTexture = PIXI.Texture.fromImage('static/images/placeholder_note.png')
-//   return {noteTexture:noteTexture}
-// }
-
-// function spawnNote(noteTexture, x, y, speed) {
-//   var note = new PIXI.Sprite(noteTexture.noteTexture)
-//   note.speed = speed;
-//   note.anchor.set(0.5);
-//   app.stage.addChild(note);
-//   note.x = x; // app.screen.width / 2;
-//   note.y = y; // app.screen.height / 2;
-//   return delta => {note.y++}
-// }
-
-// function deleteNote(){
-//
-// }
-
 class musicManager{
   constructor(trackPath, sequenceQWER, bpm, noteSpeed) {
     this.noteTexture = PIXI.Texture.fromImage('static/images/placeholder_note.png')
     this.bpm = bpm;
     this.fixedDelay = 1.0;
     // Fixed note speed?
-    this.noteSpeed = 6.0;
+    this.noteSpeed = noteSpeed;
     // Initial drop distance
     this.dropDistance = +this.noteTexture.height - (app.stage.height - 50);
     // Is it really loaded????
@@ -163,7 +144,7 @@ class musicManager{
   // }
 
   handleCollision(lane) {
-    var x_l, x_r;
+    var x_l, x_r, colour;
     // Fudge factor "close enough" for position detection
     const epsilon = 10;
     // Find lane coordinates
@@ -171,18 +152,22 @@ class musicManager{
       case 'Q':
         x_l = 130 - epsilon;
         x_r = 215 + epsilon;
+        colour = 0xF7E685;
         break;
       case 'W':
         x_l = 250 - epsilon;
         x_r = 335 + epsilon;
+        colour = 0xAF2AFA;
         break;
       case 'E':
         x_l = 370 - epsilon;
         x_r = 455 + epsilon;
+        colour = 0x6AAE67;
         break;
       case 'R':
         x_l = 490 - epsilon;
         x_r = 575 + epsilon;
+        colour = 0x9595DB;
         break;
       default:
         console.error('Invalid lane in MusicManager! Identify yourself!');
@@ -201,6 +186,9 @@ class musicManager{
         this.allNotes[i].sprite.y < 610){
           // Found hit!
           successHit = true;
+          var successSpark = new sparkExplosion(this.allNotes[i].sprite.x,
+            this.allNotes[i].sprite.y,
+            1.0, colour, 1.0);
           this.allNotes[i].sprite.visible = false;
           this.active[i] = false;
       }

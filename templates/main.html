@@ -10,6 +10,7 @@
 
 <script src="{{url_for('static', filename='pixi.min.js')}}"></script>
 <script src="{{url_for('static', filename='GameLoop.js')}}"></script>
+<script src="{{url_for('static', filename='sparkExplosion.js')}}"></script>
 <script src="{{url_for('static', filename='hendrixGrid.js')}}"></script>
 <script src="{{url_for('static', filename='zappaGrid.js')}}"></script>
 <script src="{{url_for('static', filename='tartiniGrid.js')}}"></script>
@@ -17,15 +18,14 @@
 <script src="{{url_for('static', filename='makemap.js')}}"> </script>
 <script src ="{{url_for('static', filename='spawnNote.js')}}"></script>
 <script src ="{{url_for('static', filename='rhythmLogic.js')}}"></script>
+<script src ="{{url_for('static', filename='pixi-sound.js')}}"></script>
 <script src ="{{url_for('static', filename='PlayerController.js')}}"></script>
 <script src ="{{url_for('static', filename='KeyController.js')}}"></script>
-<script src ="{{url_for('static', filename='pixi-sound.js')}}"></script>
+<script src ="{{url_for('static', filename='viewLoader.js')}}"></script>
 
 <body>
   <script type="text/javascript">
   const sprites = {};
-
-
 
   //Aliases
   const Application = PIXI.Application,
@@ -40,7 +40,42 @@
     antialias: true,
     transparent: false,
     resolution: 1
+  });
+
+  var ready = false;
+  var life = 3;
+  var crashCheck = false;
+  var charswitch = 0;
+  var mainswitch = 0;
+  var texturePackName = "hendrix";
+
+  //Add the canvas that Pixi automatically created for you to the HTML document
+  document.body.appendChild(app.view);
+  loadView(texturePackName);
+
+  var mapTextures = setupMap();
+  // buildMap(mapTextures);
+
+  var MM = new musicManager("static/audio/Tartini.mp3",
+  [ '00000000000000100000000000001000000000000000001000000000000010000000100000000000000010000000000000000000000000000000100000001000',
+  '00000000100000000000000010000000000000001000000000000000100000000000000000001000000000000000100000000000000010001000000010000000',
+  '00001000000000000000100000000000000010000000000000001000000000001000000000000000100000000000000000001000100000000000000000000000',
+  '10000000000000001000000000000000100000000000000010000000000000000000000001000000000000001000000010000000000000000000000000000000'],
+  4*151,
+  3.0);
+
+  //Set the game state
+  state = play;
+  //Start the game loop
+  app.ticker.add(delta => gameLoop(delta));
+  app.ticker.add(delta => MM.update(delta));
+  MM.startTrack();
+
+  function gameLoop(delta){
+    //Update the current game state:
+    state(delta);
   }
+
 );
 
 var ready = false;
@@ -203,43 +238,56 @@ function play(delta) {
     //animations
     mainChanger();
 
-  }
-}
-
-function dodgeNotes(){
-  if (MM.handleCrash(sprites.player.x, sprites.player.y)){
-    lifeHit();
-    console.log("crash");
-  }
-}
-
-//dont open this @Artem PlZ
-function characterChanger(){
-  if (charswitch < 30){
-    charswitch++;}
-    else if (charswitch < 60){
-      charswitch++;
-      character1.visible = false;
-      character2.visible = true;
-    }else if (charswitch < 90){
-      charswitch++;
-      character2.visible = false;
-      character3.visible = true;
-    }else if (charswitch < 120){
-      charswitch++;
-      character3.visible = false;
-      character4.visible = true;
-    }else{
-      charswitch = 0;
-      character4.visible = false;
-      character1.visible = true;
+  function play(delta) {
+    loader.onComplete.add(() => {
+      ready = true;
+      bindKeys();
+    });
+    if (ready){
+      //play dodge component
+      dodgeNotes();
+      //animations
+      characterChanger();
+      //animations
+      mainChanger();
+      //binds the keys
     }
   }
 
-  function mainChanger(){
-    if (mainswitch < 30){
-      mainswitch++;}
-      else if (mainswitch < 60){
+  function dodgeNotes(){
+    if (MM.handleCrash(sprites.player.x, sprites.player.y)){
+      lifeHit();
+      console.log("crash");
+    }
+  }
+
+  //dont open this @Artem PlZ
+  function characterChanger(){
+    if (charswitch < 30){
+      charswitch++;}
+      else if (charswitch < 60){
+        charswitch++;
+        character1.visible = false;
+        character2.visible = true;
+      }else if (charswitch < 90){
+        charswitch++;
+        character2.visible = false;
+        character3.visible = true;
+      }else if (charswitch < 120){
+        charswitch++;
+        character3.visible = false;
+        character4.visible = true;
+      }else{
+        charswitch = 0;
+        character4.visible = false;
+        character1.visible = true;
+      }
+    }
+
+    function mainChanger(){
+      if (mainswitch < 30){
+        mainswitch++;
+      }else if (mainswitch < 60){
         mainswitch++;
         m01.visible = false;
         m02.visible = true;
@@ -254,14 +302,12 @@ function characterChanger(){
       }
     }
 
-
-
     function lifeHit(){
       life--;
       //console.log(life);
     }
 
 
-  </script>
-</body>
-</html>
+    </script>
+  </body>
+  </html>
