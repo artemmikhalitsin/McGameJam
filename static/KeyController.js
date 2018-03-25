@@ -151,9 +151,9 @@ function bindPlayerControls(){
     }
   };
   up.press = () => {
-    if(sprites.player.y == 300 ){
+    if(sprites.player.y == 700 ){
     } else {
-      sprites.player.y -= 100;
+      sprites.player.y -= 150;
     }
   };
   right.press = () => {
@@ -164,9 +164,9 @@ function bindPlayerControls(){
     }
   };
   down.press = () => {
-    if(sprites.player.y == 500){
+    if(sprites.player.y == 400){
     } else {
-      sprites.player.y += 100;
+      sprites.player.y += 150;
     }
   };
 }
