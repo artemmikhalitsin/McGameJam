@@ -18,7 +18,8 @@ class sparkExplosion{
 
       // create a new Sprite
       shape.lineStyle(0);
-      shape.beginFill(colour, 0.3+0.5*Math.random());
+      shape.beginFill(colour, 1.0);
+      // shape.beginFill(colour, 0.3+0.5*Math.random());
       shape.drawCircle(0, 0, 10);
       shape.endFill();
 
@@ -29,7 +30,7 @@ class sparkExplosion{
 
       // spark.tint = Math.random() * 0xFFFFFF;
       spark.anchor.set(0.5);
-      spark.scale.set(0.1 + 0.7*Math.random());
+      spark.scale.set(0.1 + 1.2*Math.random());
 
       // Position
       spark.x = hostX;
