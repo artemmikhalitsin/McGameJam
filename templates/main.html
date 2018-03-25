@@ -166,9 +166,8 @@
         //binds the keys
       }
       if (life <= 0){
-        state = overworldScreen;
-        MM.terminate();
-        removeChildren();
+
+        killChar();
       }
     }
 
@@ -180,7 +179,7 @@
     }
 
     function killChar(){
-      if (killswitch < 30){
+      if (killswitch < 45){
         character1.visible= false;
         character2.visible = false;
         character3.visible = false;
@@ -188,14 +187,16 @@
         characterV.visible = true;
         killswitch++;
       }
-      else if (killswitch < 60){
+      else if (killswitch < 90){
         characterV.visible = false;
         characterH.visible = true;
         killswitch++;
       }
       else {
         killswitch = 0;
-        //destroyScene();
+        state = overworldScreen;
+        MM.terminate();
+        removeChildren();
       }
     }
 
