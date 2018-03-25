@@ -147,7 +147,31 @@ if(viewLoader == 3){
 var mapTextures = setupMap();
 // buildMap(mapTextures);
 
-var MM = new musicManager("static/audio/Tartini.mp3",
+var track="";
+switch (viewLoader){
+	case 0: //Hendrix
+		track="static/audio/Tartini.mp3"
+		break;
+	case 1: //Zappa
+		track="static/audio/Tartini.mp3"
+		break;
+	case 2://Prince
+		track= "static/audio/Quick.mp3" 
+		break;
+	case 3: //Tartini
+		track = "static/audio/Tartini.mp3"
+		break;
+	case 4: //Tartini Devil
+		track = "static/audio/TartiniDevil.mp3"
+		break;
+	case 5: //Intro, any monster
+		track = "static/audio/Intro.mp3"
+		break;
+
+)
+	
+
+var MM = new musicManager(track,
 [ '00000000000000110000000000001100000000000000001100000000000011000000110000000000000011000000000000000000000000000000110000001100',
 '00000000110000000000000011000000000000001100000000000000110000000000000000001100000000000000110000000000000011001100000011000000',
 '00001100000000000000110000000000000011000000000000001100000000001100000000000000110000000000000000001100110000000000000000000000',
