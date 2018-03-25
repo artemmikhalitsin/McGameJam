@@ -222,8 +222,6 @@ function gridSetup(number) {
   app.stage.addChild(characterV);
   app.stage.addChild(characterH);
 
-
-
   app.stage.addChild(m01);
   app.stage.addChild(m02);
   app.stage.addChild(m03);

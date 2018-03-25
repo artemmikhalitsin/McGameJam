@@ -3,7 +3,11 @@ let q = keyboard(81),
   w = keyboard(87),
   e = keyboard(69),
   r = keyboard(82),
-  enter = keyboard(13);
+  enter = keyboard(13),
+  left = keyboard(37),
+  up = keyboard(38),
+  right = keyboard(39),
+  down = keyboard(40);
 
 keys = {}
 handlePress = ()=>{}
@@ -36,13 +40,13 @@ bindRhythmKeys = () => {
 bindTitleKeys = () => {
   handlePress = handleTitlePress;
   handleRelease = handleTitleRelease;
-  unbindPlayerControls();
 }
 
 handleTitlePress = (letter) => {
   if (!['ENTER'].includes(letter)){
     return;
   }
+  setup = true;
   state = overworldScreen;
 }
 
@@ -51,12 +55,10 @@ handleTitleRelease = () => {
 
 bindOverworldKeys = () => {
   handlePress = handleOverworldPress;
-  handleRelease = handleOverworldRelease;
-  unbindPlayerControls();
 }
 
 handleOverworldPress = (letter) => {
-  if (!['ENTER'].includes(letter)){
+  if (!['ENTER', 'UP', 'DOWN', 'LEFT', 'RIGHT'].includes(letter)){
     return;
   }
   state = preGame;
@@ -123,6 +125,45 @@ enter.press = () => {
   handlePress('ENTER');
 };
 
-enter.release = () => {
+enter.release = () => {};
 
+up.press = () => {
+  handlePress('UP');
 };
+down.press = () => {
+  handlePress('DOWN');
+};
+left.press = () => {
+  handlePress('LEFT');
+};
+right.press = () => {
+  handlePress('RIGHT');
+};
+
+function bindPlayerControls(){
+  left.press = () => {
+    if(sprites.player.x == 130 ){
+    } else {
+      sprites.player.x -= 120;
+    }
+  };
+  up.press = () => {
+    if(sprites.player.y == 300 ){
+    } else {
+      sprites.player.y -= 100;
+    }
+  };
+  right.press = () => {
+    //Change the cat's velocity when the key is pressed
+    if(sprites.player.x == 490 ){
+    } else {
+      sprites.player.x += 120;
+    }
+  };
+  down.press = () => {
+    if(sprites.player.y == 500){
+    } else {
+      sprites.player.y += 100;
+    }
+  };
+}
