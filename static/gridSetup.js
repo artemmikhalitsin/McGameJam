@@ -242,7 +242,7 @@ function gridSetup(number) {
   //  sprites.keyRPress = new PIXI.Sprite(note4Light);
   sprites.keyRPress.x = 490;
   sprites.keyRPress.y = 600;
-  sprites.keyRPress.visible = true;
+  sprites.keyRPress.visible = false;
 
 
   //Player sprite//Grid top row

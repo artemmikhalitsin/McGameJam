@@ -54,7 +54,10 @@ class musicManager{
       this.allNotes[i].sprite.destroy(true)
     }
     this.allNotes = [];
+    this.trackPlaying = false;
+    MM.track.pause();
     app.ticker.remove(this.f);
+
   }
 
   // Push note by lane
