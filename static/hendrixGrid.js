@@ -14,6 +14,8 @@ function hendrixSetup() {
   var charTexture1 = PIXI.Texture.fromImage('static/images/Hendrix1.png')
   var charTexture2 = PIXI.Texture.fromImage('static/images/Hendrix2.png')
   var charTexture3 = PIXI.Texture.fromImage('static/images/Hendrix3.png')
+  var charTextureH = PIXI.Texture.fromImage('static/images/HendrixH.png')
+  var charTextureV = PIXI.Texture.fromImage('static/images/HendrixV.png')
   var mc1 = PIXI.Texture.fromImage('static/images/mc0.png')
   var mc2 = PIXI.Texture.fromImage('static/images/mc02.png')
   var mc3 = PIXI.Texture.fromImage('static/images/mc03.png')
@@ -71,6 +73,20 @@ function hendrixSetup() {
   character1.height = 300;
   character1.width = 200;
   character1.visible = true;
+
+  characterV = new PIXI.Sprite(charTextureV);
+  characterV.x = 750;
+  characterV.y = 25;
+  characterV.height = 300;
+  characterV.width = 200;
+  characterV.visible = false;
+
+  characterH = new PIXI.Sprite(charTextureH);
+  characterH.x = 750;
+  characterH.y = 25;
+  characterH.height = 200;
+  characterH.width = 300;
+  characterH.visible = false;
 
 
 
@@ -150,6 +166,10 @@ function hendrixSetup() {
   app.stage.addChild(character2);
   app.stage.addChild(character3);
   app.stage.addChild(character4);
+  app.stage.addChild(characterV);
+  app.stage.addChild(character3H);
+
+
 
   app.stage.addChild(m01);
   app.stage.addChild(m02);
