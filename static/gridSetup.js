@@ -1,7 +1,47 @@
 
 //This `setup` function will run when the image has loaded
 function gridSetup(number) {
-
+  if (number == enemyEnum['hendrix']){
+    var note4Light = PIXI.Texture.fromImage('static/images/note4Light.png')
+    var charTexture = PIXI.Texture.fromImage('static/images/Hendrix.png')
+    var charTexture1 = PIXI.Texture.fromImage('static/images/Hendrix1.png')
+    var charTexture2 = PIXI.Texture.fromImage('static/images/Hendrix2.png')
+    var charTexture3 = PIXI.Texture.fromImage('static/images/Hendrix3.png')
+    var charTextureH = PIXI.Texture.fromImage('static/images/HendrixH.png')
+    var charTextureV = PIXI.Texture.fromImage('static/images/HendrixV.png')
+  }
+  if (number == enemyEnum['zappa']){
+    var charTexture = PIXI.Texture.fromImage('static/images/Zappa.png')
+    var charTexture1 = PIXI.Texture.fromImage('static/images/Zappa1.png')
+    var charTexture2 = PIXI.Texture.fromImage('static/images/Zappa2.png')
+    var charTexture3 = PIXI.Texture.fromImage('static/images/Zappa3.png')
+    var charTextureV = PIXI.Texture.fromImage('static/images/ZappaV.png')
+    var charTextureH = PIXI.Texture.fromImage('static/images/ZappaH.png')
+  }
+  if (number == enemyEnum['prince']){
+    var charTexture = PIXI.Texture.fromImage('static/images/Prince.png')
+    var charTexture1 = PIXI.Texture.fromImage('static/images/Prince1.png')
+    var charTexture2 = PIXI.Texture.fromImage('static/images/Prince2.png')
+    var charTexture3 = PIXI.Texture.fromImage('static/images/Prince3.png')
+    var charTextureV = PIXI.Texture.fromImage('static/images/PrinceV.png')
+    var charTextureH = PIXI.Texture.fromImage('static/images/PrinceH.png')
+  }
+  if (number == enemyEnum['tartini']){
+    var charTexture = PIXI.Texture.fromImage('static/images/Tartini.png')
+    var charTexture1 = PIXI.Texture.fromImage('static/images/Tartini1.png')
+    var charTexture2 = PIXI.Texture.fromImage('static/images/Tartini2.png')
+    var charTexture3 = PIXI.Texture.fromImage('static/images/Tartini3.png')
+    var charTextureH = PIXI.Texture.fromImage('static/images/TartiniDeadH.png')
+    var charTextureV = PIXI.Texture.fromImage('static/images/TartiniDeadV.png')
+  }
+  if (number == enemyEnum['tartinidevil']){
+    var charTexture = PIXI.Texture.fromImage('static/images/devil.png')
+    var charTexture1 = PIXI.Texture.fromImage('static/images/devil1.png')
+    var charTexture2 = PIXI.Texture.fromImage('static/images/devil2.png')
+    var charTexture3 = PIXI.Texture.fromImage('static/images/devil3.png')
+    var charTextureH = PIXI.Texture.fromImage('static/images/devilH.png')
+    var charTextureV = PIXI.Texture.fromImage('static/images/devilV.png')
+  }
 
     var gridTexture = PIXI.Texture.fromImage('static/images/test1.png')
     var note1 = PIXI.Texture.fromImage('static/images/note1.png')
@@ -11,13 +51,6 @@ function gridSetup(number) {
     var note3 = PIXI.Texture.fromImage('static/images/note3.png')
     var note3Light = PIXI.Texture.fromImage('static/images/note3Light.png')
     var note4 = PIXI.Texture.fromImage('static/images/note4.png')
-    var note4Light = PIXI.Texture.fromImage('static/images/note4Light.png')
-    var charTexture = PIXI.Texture.fromImage('static/images/Hendrix.png')
-    var charTexture1 = PIXI.Texture.fromImage('static/images/Hendrix1.png')
-    var charTexture2 = PIXI.Texture.fromImage('static/images/Hendrix2.png')
-    var charTexture3 = PIXI.Texture.fromImage('static/images/Hendrix3.png')
-    var charTextureH = PIXI.Texture.fromImage('static/images/HendrixH.png')
-    var charTextureV = PIXI.Texture.fromImage('static/images/HendrixV.png')
     var mc1 = PIXI.Texture.fromImage('static/images/mc0.png')
     var mc2 = PIXI.Texture.fromImage('static/images/mc02.png')
     var mc3 = PIXI.Texture.fromImage('static/images/mc03.png')
@@ -112,8 +145,6 @@ function gridSetup(number) {
   characterH.width = 300;
   characterH.visible = false;
 
-
-
   //KeyCaps row
  // sprites.keyQ = new PIXI.Sprite(note1);
   sprites.keyQ.x =130;
@@ -189,7 +220,7 @@ function gridSetup(number) {
   app.stage.addChild(character3);
   app.stage.addChild(character4);
   app.stage.addChild(characterV);
-  app.stage.addChild(character3H);
+  app.stage.addChild(characterH);
 
 
 
@@ -198,7 +229,7 @@ function gridSetup(number) {
   app.stage.addChild(m03);
   }
 
-function hendrixDestructor(){
+function removeChildren(){
   app.stage.removeChild(background1);
 
   //Add the KeyCaps to the stage
