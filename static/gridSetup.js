@@ -43,7 +43,8 @@ function gridSetup(number) {
     var charTextureV = PIXI.Texture.fromImage('static/images/devilV.png')
   }
 
-  var gridTexture = PIXI.Texture.fromImage('static/images/test1.png')
+  var tv = PIXI.Texture.fromImage('static/images/MCTV.png')
+  var tv1 = PIXI.Texture.fromImage('static/images/MCTV1.png')
   var note1 = PIXI.Texture.fromImage('static/images/note1.png')
   var note1Light = PIXI.Texture.fromImage('static/images/note1Light.png')
   var note2 = PIXI.Texture.fromImage('static/images/note2.png')
@@ -54,6 +55,7 @@ function gridSetup(number) {
   var mc1 = PIXI.Texture.fromImage('static/images/mc0.png')
   var mc2 = PIXI.Texture.fromImage('static/images/mc02.png')
   var mc3 = PIXI.Texture.fromImage('static/images/mc03.png')
+  var mcD = PIXI.Texture.fromImage('static/images/mc0D.png')
   var background1Texture = PIXI.Texture.fromImage('static/images/background1.png')
 
   background1 = new PIXI.Sprite(background1Texture);
@@ -61,6 +63,9 @@ function gridSetup(number) {
   m01 = new PIXI.Sprite(mc1);
   m02 = new PIXI.Sprite(mc2);
   m03 = new PIXI.Sprite(mc3);
+  m0D = new PIXI.Sprite(mcD);
+
+
 
   character2 = new PIXI.Sprite(charTexture1);
   character3 = new PIXI.Sprite(charTexture2);
@@ -76,7 +81,10 @@ function gridSetup(number) {
   sprites.keyR = new PIXI.Sprite(note4);
   sprites.keyRPress = new PIXI.Sprite(note4Light);
 
-  sprites.player = new PIXI.Sprite(gridTexture);
+  sprites.player = new PIXI.Sprite(tv);
+  sprites.playerH = new PIXI.Sprite(tv1);
+  sprites.playerH.visible = false;
+
 
   // background1 = new PIXI.Sprite(background1Texture);
   background1.x = 0;
@@ -102,6 +110,14 @@ function gridSetup(number) {
   m03.height = 200;
   m03.width = 100;
   m03.visible = false;
+
+  // m0D = new PIXI.Sprite(mcD);
+  m0D.x = 800;
+  m0D.y = 475;
+  m0D.height = 200;
+  m0D.width = 300;
+  m0D.visible = false;
+
 
   // character2 = new PIXI.Sprite(charTexture1);
   character2.x = 750;
@@ -214,6 +230,8 @@ function gridSetup(number) {
 
   //Add player to the stage
   app.stage.addChild(sprites.player);
+  app.stage.addChild(sprites.playerH);
+
 
   app.stage.addChild(character1);
   app.stage.addChild(character2);
@@ -227,6 +245,7 @@ function gridSetup(number) {
   app.stage.addChild(m01);
   app.stage.addChild(m02);
   app.stage.addChild(m03);
+  app.stage.addChild(m0D);
 }
 
 function removeChildren(){
