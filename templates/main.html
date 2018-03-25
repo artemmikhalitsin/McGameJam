@@ -11,11 +11,7 @@
 <script src="{{url_for('static', filename='pixi.min.js')}}"></script>
 <script src="{{url_for('static', filename='GameLoop.js')}}"></script>
 <script src="{{url_for('static', filename='sparkExplosion.js')}}"></script>
-<script src="{{url_for('static', filename='hendrixGrid.js')}}"></script>
-<script src="{{url_for('static', filename='zappaGrid.js')}}"></script>
-<script src="{{url_for('static', filename='tartiniGrid.js')}}"></script>
-<script src="{{url_for('static', filename='devilGrid.js')}}"></script>
-<script src="{{url_for('static', filename='princeGrid.js')}}"></script>
+<script src="{{url_for('static', filename='gridSetup.js')}}"></script>
 <script src="{{url_for('static', filename='makemap.js')}}"> </script>
 <script src ="{{url_for('static', filename='spawnNote.js')}}"></script>
 <script src ="{{url_for('static', filename='rhythmLogic.js')}}"></script>
@@ -147,7 +143,7 @@
       // if(!loader.loading){
       //   state = play;
       //wait for loader
-      zappaSetup();
+      gridSetup(enemyEnum['zappa']);
       bindRhythmKeys();
       state = play
 
