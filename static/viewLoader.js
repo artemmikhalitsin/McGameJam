@@ -13,6 +13,7 @@ loadView = () => {
   .add("static/images/mc02.png")
   .add("static/images/mc03.png")
   .add("static/images/mc0D.png")
+  .add("static/images/mc0H.png")
   .add("static/images/MCTV.png")
   .add("static/images/MCTV1.png")
   .add("static/images/background1.png")

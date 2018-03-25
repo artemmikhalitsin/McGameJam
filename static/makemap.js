@@ -123,10 +123,10 @@ function move(direction) {
 }
 
 engage = () => {
-  if (mapData[playerLoc[0]][playerLoc[1]].type = 'treasure'){
+  if (mapData[playerLoc[1]][playerLoc[0]].type == 'treasure'){
     state = preGame;
   }
-  if (mapData[playerLoc[0]][playerLoc[1]].type = 'boss'){
+  if (mapData[playerLoc[1]][playerLoc[0]].type == 'boss'){
     state = preGame;
   }
 }

@@ -26,6 +26,7 @@ class musicManager{
     this.track = PIXI.sound.Sound.from({
       url: trackPath, // 'static/music/Tartini1.midi',
       autoPlay: false,
+      loop: true,
       complete: function() {
           console.log('Track over');
       }
@@ -53,7 +54,10 @@ class musicManager{
       this.allNotes[i].sprite.destroy(true)
     }
     this.allNotes = [];
+    this.trackPlaying = false;
+    MM.track.pause();
     app.ticker.remove(this.f);
+
   }
 
   // Push note by lane
@@ -79,6 +83,17 @@ class musicManager{
       default:
         console.error('Yo your lane does not exist. Relinquish your property!');
         return
+    }
+    // Recycle a note of the same lane
+    for (let i = 0; i < this.active.length; i++){
+      if (!this.active[i] && Math.abs(this.allNotes[i].sprite.x - x) < 1e-1){
+        this.allNotes[i].sprite.x = x;
+        this.allNotes[i].sprite.y = -this.noteTexture.height+ extraY;
+        this.allNotes[i].speed = speed;
+        this.active[i] = true;
+        this.allNotes[i].sprite.visible = true;
+        return;
+      }
     }
     this.allNotes.push(
       new Note (this.noteTexture, x, -this.noteTexture.height + extraY, speed))
@@ -194,17 +209,20 @@ class musicManager{
     // Find first note to collide
     for (let i = 0; i < this.allNotes.length; i++){
       //console.log(this.allNotes[i].sprite.x)
-      if(x_l < this.allNotes[i].sprite.x &&
+      if(this.active[i] &&
+        x_l < this.allNotes[i].sprite.x &&
         this.allNotes[i].sprite.x < x_r &&
         500 < this.allNotes[i].sprite.y &&
         this.allNotes[i].sprite.y < 610){
           // Found hit!
           successHit = true;
-          var successSpark = new sparkExplosion(this.allNotes[i].sprite.x,
+          var successSpark = new sparkExplosion(
+            this.allNotes[i].sprite.x + 0.5*this.allNotes[i].sprite.width,
             this.allNotes[i].sprite.y,
             1.0, colour, 1.0);
           this.allNotes[i].sprite.visible = false;
           this.active[i] = false;
+          break;
       }
     }
 
@@ -218,6 +236,8 @@ class musicManager{
       if (this.allNotes[i].sprite.y > yBoundary &&
         this.active[i]){
           numberEscapedBoundary++;
+          // new beamExplosion(this.allNotes[i].sprite.x +
+          //   0.5* this.allNotes[i].sprite.width, app.screen.height, 10);
           this.allNotes[i].sprite.visible = false;
           this.active[i] = false;
       }
