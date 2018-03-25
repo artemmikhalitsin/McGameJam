@@ -46,7 +46,7 @@
   var charswitch = 0;
   var mainswitch = 0;
   var killswitch = 0;
-  var enemyNumber = enemyEnum['zappa'];
+  var enemyNumber = enemyEnum['hendrix'];
 
   //Add the canvas that Pixi automatically created for you to the HTML document
   document.body.appendChild(app.view);
@@ -143,7 +143,10 @@
       // if(!loader.loading){
       //   state = play;
       //wait for loader
-      gridSetup(enemyEnum['zappa']);
+      if(enemyNumber > 6){
+        enemyNumber = 2
+      }
+      gridSetup(enemyNumber++);
       bindRhythmKeys();
       state = play
 
@@ -165,6 +168,7 @@
       if (life <= 0){
         state = overworldScreen;
         MM.terminate();
+        removeChildren();
       }
     }
 
