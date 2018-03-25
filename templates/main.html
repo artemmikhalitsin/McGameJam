@@ -50,7 +50,7 @@
   var killswitch = 0;
   var angry = 0;
 
-  var monsterMaxLife = 200;
+  var monsterMaxLife = 10;
   var monsterLife = monsterMaxLife; // NOTE Current monster life
   var currentCombo = 0;
   var enemyNumber = enemyEnum['hendrix'];
@@ -240,47 +240,26 @@ function play(delta) {
   //play dodge component
   dodgeNotes();
 
-  if(monsterLife > 0){
+  if(monsterLife > 0 && life > 0){
     //animations
     characterChanger();
     //animations
     mainChanger();
-  }
-  else {
+  } else {
     // Player lose!
     if (life <= 0){
       killChar();
-      // G A M E O V E R
     }
     // Player win!
     else if (monsterLife <= 0){
       killMon();
       mapData[playerLoc[0]][playerLoc[1]] = 1;
     }
-    state = overworldScreen;
     MM.terminate();
-    removeChildren();
-    killswitch = 0;
     unBindPlayerControls();
-    setup = true;
-    state = overworldScreen;
   }
   //checks for runaway notes
   escapeNotes();
-}
-
-function killChar(){
-  if (killswitch < 45){
-    m01.visible = false;
-    m02.visible = false;
-    m03.visible = false;
-    m0D.visible = true;
-    sprites.playerH.x = sprites.player.x;
-    sprites.playerH.y = sprites.player.y;
-    sprites.player.visible = false;
-    sprites.playerH.visible = true;
-    killswitch++;
-  }
 }
 
 function dodgeNotes(){
@@ -355,7 +334,8 @@ function killMon(){
     // state = overworldScreen;
     removeChildren();
     killswitch = 0;
-    state = titleScreen;
+    setup = true;
+    state = overworldScreen;
   }
 }
 
