@@ -78,7 +78,19 @@ function gridSetup(number) {
   var mcD = PIXI.Texture.fromImage('static/images/mc0D.png')
   var mcH = PIXI.Texture.fromImage('static/images/mc0H.png')
   var background1Texture = PIXI.Texture.fromImage('static/images/background1.png')
-
+  
+  var win_tartini1 = PIXI.Texture.fromImage('static/images/win_phase1.png')
+  var instruction = PIXI.Texture.fromImage('static/images/instructions1.png')
+  var game_over = PIXI.Texture.fromImage('static/images/game_over.png')
+  var welcome = PIXI.Texture.fromImage('static/images/welcome_page.png')
+  var victory = PIXI.Texture.fromImage('static/images/win.png')
+  
+  win_phase1 = new PIXI.Sprite(win_tartini1);
+  instruct = new PIXI.Sprite(instruction);
+  g_over = new PIXI.Sprite(game_over);
+  welcome_page = new PIXI.Sprite(welcome);
+  game_won = new PIXI.Sprite(victory);
+  
   background1 = new PIXI.Sprite(background1Texture);
 
   m01 = new PIXI.Sprite(mc1);
