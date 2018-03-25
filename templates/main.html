@@ -150,6 +150,37 @@
       bindRhythmKeys();
       state = play
 
+      var enemyBarBase = new PIXI.Graphics();
+      var enemyBarTop = new PIXI.Graphics();
+      enemyBarBase.lineStyle(1);
+      enemyBarBase.beginFill(0x000000, 1.0)
+      enemyBarBase.drawRoundedRect(725, 350, 200, 20, 10);
+      enemyBarTop.lineStyle(0);
+      enemyBarTop.beginFill(0xFF0000, 1.0)
+      enemyBarTop.drawRoundedRect(725+2.5, 350+2.5, 200-5, 20-5, 10-2.5);
+      app.stage.addChild(enemyBarBase);
+      app.stage.addChild(enemyBarTop);
+
+      var playerBarBase = new PIXI.Graphics();
+      var playerBarTop = new PIXI.Graphics();
+      var playerBarMask = new PIXI.Graphics();
+      playerBarBase.lineStyle(0);
+      playerBarBase.beginFill(0x000000, 1.0)
+      playerBarBase.drawRoundedRect(750, 425, 150, 15, 7.5);
+      playerBarTop.lineStyle(0);
+      playerBarTop.beginFill(0x00FF00, 1.0)
+      playerBarTop.drawRoundedRect(750+2.5, 425+2.5, 150-5, 15-5, 7.5-2.5);
+      playerBarMask.lineStyle(0);
+      playerBarMask.beginFill(0x00FF00, 0.2)
+      playerBarMask.drawRoundedRect(750+2.5, 425+2.5, 150-5, 15-5, 7.5-2.5);
+      playerBarTop.mask = playerBarMask;
+      playerBarTop.addChild(playerBarMask);
+      app.stage.addChild(playerBarBase);
+      app.stage.addChild(playerBarTop);
+
+      app.ticker.add((delta) => {playerBarMask.x = -150 + 150*life/playerlife});
+      // playerBarMask.x -= 50;
+
       // ready = true;
     }
 
