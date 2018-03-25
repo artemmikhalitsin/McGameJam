@@ -38,6 +38,9 @@
     resolution: 1
   });
 
+  mapData = {}
+  setupMap();
+  loadMap();
   var ready = false;
   var playerlife = 20;
   var crashCheck = false;
@@ -109,7 +112,7 @@
     function overworldScreen (delta) {
       if (setup){
         console.log('overworld');
-        setupMap();
+        renderMap();
         bindOverworldKeys();
         setup = false
       }
@@ -142,6 +145,7 @@
         enemyNumber = 2
       }
       gridSetup(enemyNumber++);
+      bindPlayerControls();
       bindRhythmKeys();
       state = play
 
@@ -234,7 +238,9 @@
         MM.terminate();
         removeChildren();
         killswitch = 0;
-        state = titleScreen;
+        unBindPlayerControls();
+        setup = true;
+        state = overworldScreen;
       }
     }
 

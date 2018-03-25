@@ -39,9 +39,15 @@ def generate_map(y_size, x_size, max_rooms):
     grid[start[0]][start[1]] = 2
     grid[end[0]][end[1]] = 3
 
-    grid = grid[1:-1]
-    for i, _ in enumerate(grid):
-        grid[i] = grid[i][1:-1]
+    for _ in range(3):
+        path_rooms = [room for room in rooms if grid[room[0]][room[1]] == 1]
+        num_free = len(path_rooms)
+        chosen = path_rooms[floor(random.random()*num_free)]
+        grid[chosen[0]][chosen[1]] = 4
+
+    #grid = grid[1:-1]
+    #for i, _ in enumerate(grid):
+    #    grid[i] = grid[i][1:-1]
 
     return grid
 

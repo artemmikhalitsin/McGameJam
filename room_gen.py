@@ -10,7 +10,8 @@ def generate_room(value):
     room = {
         "type":"wall",
         "difficulty":0,
-        "completed":False
+        "completed":False,
+        "visible":False,
     }
     if value == RoomType.PATH.value:
         room['type'] = "path"

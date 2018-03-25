@@ -61,7 +61,9 @@ handleOverworldPress = (letter) => {
   if (!['ENTER', 'UP', 'DOWN', 'LEFT', 'RIGHT'].includes(letter)){
     return;
   }
-  state = preGame;
+  if (['UP', 'DOWN', 'LEFT', 'RIGHT'].includes(letter)){
+    move(letter)
+  }
 }
 
 handleOverworldRelease = () => {
@@ -165,5 +167,20 @@ function bindPlayerControls(){
     } else {
       sprites.player.y += 100;
     }
+  };
+}
+
+function unBindPlayerControls(){
+  up.press = () => {
+    handlePress('UP');
+  };
+  down.press = () => {
+    handlePress('DOWN');
+  };
+  left.press = () => {
+    handlePress('LEFT');
+  };
+  right.press = () => {
+    handlePress('RIGHT');
   };
 }
