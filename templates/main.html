@@ -46,7 +46,7 @@
   var crashCheck = false;
   var charswitch = 0;
   var mainswitch = 0;
-  var texturePackName = "tartini";
+  var texturePackName = "hendrix";
 
   //Add the canvas that Pixi automatically created for you to the HTML document
   document.body.appendChild(app.view);
@@ -123,28 +123,28 @@
 
     function mainChanger(){
       if (mainswitch < 30){
-        mainswitch++;}
-        else if (mainswitch < 60){
-          mainswitch++;
-          m01.visible = false;
-          m02.visible = true;
-        }else if (mainswitch < 90){
-          mainswitch++;
-          m02.visible = false;
-          m03.visible = true;
-        }else{
-          mainswitch = 0;
-          m03.visible = false;
-          m01.visible = true;
-        }
+        mainswitch++;
+      }else if (mainswitch < 60){
+        mainswitch++;
+        m01.visible = false;
+        m02.visible = true;
+      }else if (mainswitch < 90){
+        mainswitch++;
+        m02.visible = false;
+        m03.visible = true;
+      }else{
+        mainswitch = 0;
+        m03.visible = false;
+        m01.visible = true;
       }
+    }
 
-      function lifeHit(){
-        life--;
-        //console.log(life);
-      }
+    function lifeHit(){
+      life--;
+      //console.log(life);
+    }
 
 
-      </script>
-    </body>
-    </html>
+    </script>
+  </body>
+  </html>

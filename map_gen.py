@@ -1,7 +1,6 @@
 from math import floor
 import random
 
-
 def generate_map(y_size, x_size, max_rooms):
 
     grid = [[0 for _ in range(x_size+2)] for _ in range(y_size+2)]

@@ -95,50 +95,50 @@ function tartiniSetup() {
   sprites.keyQ.x =130;
   sprites.keyQ.y = 600;
   sprites.keyQ.visible = true;
-  sprites.keyQ.click = false;
+
 
   sprites.keyQPress = new PIXI.Sprite(note1Light);
   sprites.keyQPress.x =130;
   sprites.keyQPress.y = 600;
   sprites.keyQPress.visible = false;
-  sprites.keyQPress.click = false;
+
 
 
   sprites.keyW = new PIXI.Sprite(note2);
   sprites.keyW.x = 250;
   sprites.keyW.y = 600;
   sprites.keyW.visible = true;
-  sprites.keyW.click = false;
+
 
   sprites.keyWPress = new PIXI.Sprite(note2Light);
   sprites.keyWPress.x = 250;
   sprites.keyWPress.y = 600;
   sprites.keyWPress.visible = false;
-  sprites.keyWPress.click = false;
+
 
   sprites.keyE = new PIXI.Sprite(note3);
   sprites.keyE.x = 370;
   sprites.keyE.y = 600;
   sprites.keyE.visible = true;
-  sprites.keyE.click = false;
+
 
   sprites.keyEPress = new PIXI.Sprite(note3Light);
   sprites.keyEPress.x = 370;
   sprites.keyEPress.y = 600;
   sprites.keyEPress.visible = false;
-  sprites.keyEPress.click = false;
+
 
   sprites.keyR = new PIXI.Sprite(note4);
   sprites.keyR.x = 490;
   sprites.keyR.y = 600;
   sprites.keyR.visible = true;
-  sprites.keyR.click = false;
+
 
   sprites.keyRPress = new PIXI.Sprite(note4Light);
   sprites.keyRPress.x = 490;
   sprites.keyRPress.y = 600;
   sprites.keyRPress.visible = false;
-  sprites.keyRPress.click = false;
+
 
   //Player sprite//Grid top row
   sprites.player = new PIXI.Sprite(gridTexture);
